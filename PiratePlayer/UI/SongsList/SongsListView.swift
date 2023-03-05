@@ -57,15 +57,23 @@ struct SongsListView<ViewModel: SongsListViewModelProtocol>: View {
     }
     
     @ViewBuilder
-    func mainContent(songs: [TrackSong], error: Error? = nil) -> some View {
+    func mainContent(songs: [TrackSong]?, error: Error? = nil) -> some View {
         
         VStack(spacing: 16){
             searchBar
-            ScrollView{
-                LazyVStack(alignment: .leading, spacing: 12){
-                    ForEach(songs, id: \.id){ song in
-                        songListRow(song: song)
+            if let songs = songs{
+                if songs.count > 0 {
+                    ScrollView{
+                        LazyVStack(alignment: .leading, spacing: 12){
+                            ForEach(songs, id: \.id){ song in
+                                songListRow(song: song)
+                            }
+                        }
                     }
+                }else{
+                    Text(String.pallete(.noTracksFound))
+                        .font(.subheadline)
+                        .foregroundColor(Color.init(assetsName: .textSecondary))
                 }
             }
             Spacer()
@@ -145,7 +153,7 @@ struct SongsListView_Previews: PreviewProvider {
 
     static var previews: some View {
         Group{
-            SongsListView(viewModel: SongsListViewModel.init(state: .content(TrackSong.mockedSongs, .default), container: .preview, searchResultLimit: 25))
+            SongsListView(viewModel: SongsListViewModel.init(state: .content(nil, .default), container: .preview, searchResultLimit: 25))
          //   SongsListView(viewModel: SongsListViewModel.init(state: .loading, container: .preview))
         }
     }

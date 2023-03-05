@@ -31,6 +31,8 @@ extension String {
         case artistTitle = "artist_title"
         
         case unknown = "unknown"
+        
+        case noTracksFound = "no_tracks_found"
       
     }
 }

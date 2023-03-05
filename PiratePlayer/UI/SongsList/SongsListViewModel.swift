@@ -11,7 +11,7 @@ import Combine
 protocol SongsListViewModelProtocol: ObservableObject{
     
     /// UI state machine
-    var stateMachine: ViewStateMachine<[TrackSong]> { get }
+    var stateMachine: ViewStateMachine<[TrackSong]?> { get }
     
     var searchQuery: String {get set}
     var searching: Bool {get set}
@@ -27,7 +27,7 @@ final class SongsListViewModel: SongsListViewModelProtocol{
     
     private var chachedSongs: [TrackSong] = []
     private let container: DiContainer
-    private(set) var stateMachine: ViewStateMachine<[TrackSong]>
+    private(set) var stateMachine: ViewStateMachine<[TrackSong]?>
     private var stateCancellable: AnyCancellable?
     private var isScenarioStarted = false
     private var cancellableSet = Set<AnyCancellable>()
@@ -50,7 +50,7 @@ final class SongsListViewModel: SongsListViewModelProtocol{
         self.output = output
     }
     
-    init(state: ViewState<[TrackSong]>,
+    init(state: ViewState<[TrackSong]?>,
          container: DiContainer,
          searchResultLimit: Int){
         
@@ -64,7 +64,7 @@ final class SongsListViewModel: SongsListViewModelProtocol{
             debugPrint(state)
             switch state{
             case .content(let songs, _):
-                self?.chachedSongs = songs
+                self?.chachedSongs = songs ?? []
             default:
                 break
             }
