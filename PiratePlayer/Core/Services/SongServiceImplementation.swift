@@ -21,6 +21,9 @@ extension SongServiceImplementation: SongService {
     
     func getSongs(byQuery query: String, limit: Int) -> AnyPublisher<[TrackSong], Error> {
         
+        //API documentation
+        //https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/Searching.html
+        
         let url = self.baseUrl.appending(path: "/search")
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "GET"
@@ -55,6 +58,7 @@ extension SongServiceImplementation: SongService {
     
     func loadRecentSongs() -> AnyPublisher<[TrackSong], Error> {
         
+        //Mock method
         return Just([])
             .setFailureType(to: Error.self)
             .delay(for: 1, scheduler: DispatchQueue.global(qos: .userInitiated))
