@@ -8,22 +8,6 @@
 import Foundation
 import Combine
 
-protocol SongViewModelProtocol: ObservableObject{
-    
-    /// UI state machine
-    var stateMachine: ViewStateMachine<TrackSong> {get}
-    
-    func startScenario()
-    
-    var songTitle: String {get}
-    var artistTitle: String {get}
-    var imageUrl: URL? {get}
-    var songUrl: URL? {get}
-    
-    func closeAction()
-    func playTap()
-}
-
 ///Вью модель экрана песни
 final class SongViewModel: SongViewModelProtocol{
 
