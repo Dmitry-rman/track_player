@@ -11,7 +11,7 @@ import Combine
 #if DEBUG
 class SongsServiceMockImplementation: SongService{
     
-    func getSongs(byQuery query: String) -> AnyPublisher<[TrackSong], Error> {
+    func getSongs(byQuery query: String, limit: Int) -> AnyPublisher<[TrackSong], Error> {
         
         return Just([TrackSong.mockedSongs.first!])
             .setFailureType(to: Error.self)

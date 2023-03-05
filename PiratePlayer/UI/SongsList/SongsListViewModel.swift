@@ -35,17 +35,27 @@ final class SongsListViewModel: SongsListViewModelProtocol{
     private let songService: SongService
     private let analytics: Analytics
     
+    //Limit for API's track results
+    private let searchResultLimit: Int
+    
     private weak var output: SongsListViewModuleOutput?
     
-    convenience init(output: SongsListViewModuleOutput, container: DiContainer){
+    convenience init(output: SongsListViewModuleOutput,
+                     container: DiContainer,
+                     searchResultLimit: Int = 25){
         
-        self.init(state: .empty, container: container)
+        self.init(state: .empty,
+                  container: container,
+                  searchResultLimit: searchResultLimit)
         self.output = output
     }
     
-    init(state: ViewState<[TrackSong]>, container: DiContainer){
+    init(state: ViewState<[TrackSong]>,
+         container: DiContainer,
+         searchResultLimit: Int){
         
         self.container = container
+        self.searchResultLimit = searchResultLimit
         self.songService = container.serviceBuilder.getSongsServie()
         self.analytics = container.serviceBuilder.analytics
         
@@ -68,12 +78,13 @@ final class SongsListViewModel: SongsListViewModelProtocol{
             .removeDuplicates()
             .eraseToAnyPublisher()
             .flatMap { [weak self] query -> AnyPublisher<[TrackSong], Never> in
+                
                 guard let self = self else {
                     return  Empty(completeImmediately: true).eraseToAnyPublisher()
                 }
                 
                 self.searching = true
-                return self.songService.getSongs(byQuery: query)
+                return self.songService.getSongs(byQuery: query, limit: self.searchResultLimit)
                     .catch({[weak self] error -> AnyPublisher<[TrackSong], Never> in
                         debugPrint(error)
                         self?.searching = false
@@ -83,7 +94,9 @@ final class SongsListViewModel: SongsListViewModelProtocol{
                     .eraseToAnyPublisher()
             }
             .sink { [weak self] error in
+                
                 guard let self = self else {return}
+                
                 debugPrint(error)
                 if let error = error as? Error{
                     self.stateMachine.setState(.content((self.chachedSongs), .error(error)))

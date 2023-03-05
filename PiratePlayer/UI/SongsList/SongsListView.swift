@@ -145,7 +145,7 @@ struct SongsListView_Previews: PreviewProvider {
 
     static var previews: some View {
         Group{
-            SongsListView(viewModel: SongsListViewModel.init(state: .content(TrackSong.mockedSongs, .default), container: .preview))
+            SongsListView(viewModel: SongsListViewModel.init(state: .content(TrackSong.mockedSongs, .default), container: .preview, searchResultLimit: 25))
          //   SongsListView(viewModel: SongsListViewModel.init(state: .loading, container: .preview))
         }
     }

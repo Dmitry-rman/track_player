@@ -11,5 +11,5 @@ import Combine
 protocol SongService{
     
     func loadRecentSongs() -> AnyPublisher<[TrackSong], Error>
-    func getSongs(byQuery query: String) -> AnyPublisher<[TrackSong], Error>
+    func getSongs(byQuery query: String, limit: Int) -> AnyPublisher<[TrackSong], Error>
 }

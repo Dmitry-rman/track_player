@@ -19,12 +19,15 @@ class SongServiceImplementation{
 
 extension SongServiceImplementation: SongService {
     
-    func getSongs(byQuery query: String) -> AnyPublisher<[TrackSong], Error> {
+    func getSongs(byQuery query: String, limit: Int) -> AnyPublisher<[TrackSong], Error> {
         
         let url = self.baseUrl.appending(path: "/search")
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "GET"
-        urlRequest.url?.append(queryItems: [.init(name: "term", value: query)])
+        urlRequest.url?.append(queryItems: [
+            .init(name: "term", value: query),
+            .init(name: "limit", value: "\(limit)")
+        ])
   
         return URLSession.shared
             .dataTaskPublisher(for: urlRequest)
