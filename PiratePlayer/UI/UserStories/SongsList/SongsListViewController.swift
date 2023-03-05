@@ -22,7 +22,7 @@ final class SongsListViewController<ViewModel: SongsListViewModelProtocol>: AppH
 extension SongsListViewController: SongsListViewModuleInput{
     
     func playTrack(track: TrackSong, withPlayer player: AVSoundPlayer) {
-        viewModel?.playTrack(track, withPlayer: player)
+        viewModel?.trackDidPlayed(track: track, withPlayer: player)
     }
     
 }

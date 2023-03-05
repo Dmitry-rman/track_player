@@ -22,5 +22,5 @@ protocol SongsListViewModelProtocol: ObservableObject{
     func startScenario()
     func selectTrack(_ song: TrackSong)
     func clearSearch()
-    func playTrack(_ track: TrackSong, withPlayer player: AVSoundPlayer)
+    func trackDidPlayed(track: TrackSong, withPlayer player: AVSoundPlayer)
 }

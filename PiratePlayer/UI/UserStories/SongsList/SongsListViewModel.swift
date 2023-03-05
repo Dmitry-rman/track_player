@@ -145,7 +145,7 @@ final class SongsListViewModel: SongsListViewModelProtocol{
         searchQuery = ""
     }
     
-    func playTrack(_ track: TrackSong, withPlayer player: AVSoundPlayer){
+    func trackDidPlayed(track: TrackSong, withPlayer player: AVSoundPlayer){
         
         self.player = player
         self.playingTrack = track

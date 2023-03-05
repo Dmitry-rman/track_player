@@ -66,7 +66,7 @@ struct SongsListView<ViewModel: SongsListViewModelProtocol>: View {
                     ScrollView{
                         LazyVStack(alignment: .leading, spacing: 12){
                             ForEach(songs, id: \.id){ song in
-                                songListRow(song: song)
+                                trackListRow(track: song)
                             }
                         }
                     }
@@ -143,18 +143,26 @@ struct SongsListView<ViewModel: SongsListViewModelProtocol>: View {
         }
     }
     
-    private func songListRow(song: TrackSong) -> some View{
+    private func trackListRow(track: TrackSong) -> some View{
         
         Button(action: {
-            self.viewModel.selectTrack(song)
+            self.viewModel.selectTrack(track)
         }, label: {
             HStack{
-                Image(sfSymbolName: .waveformCircle)
+                
+                Button {
+                    let player = AVSoundPlayer()
+                    player.playSound(url: track.trackUrl)
+                    viewModel.trackDidPlayed(track: track, withPlayer: player)
+                } label: {
+                    Image(sfSymbolName: .waveformCircle)
+                }
+               
                 VStack(alignment: .leading){
-                    Text(song.trackTitle ?? String.pallete(.unknown))
+                    Text(track.trackTitle ?? String.pallete(.unknown))
                         .font(.title3)
                         .foregroundColor(Color.init(assetsName: .textPrimary))
-                    Text(song.artistTitle ?? String.pallete(.unknown))
+                    Text(track.artistTitle ?? String.pallete(.unknown))
                         .font(.subheadline)
                         .foregroundColor(Color.init(assetsName: .textSecondary))
                 }
