@@ -74,12 +74,14 @@ struct SongsListView<ViewModel: SongsListViewModelProtocol>: View {
                     Text(String.pallete(.noTracksFound))
                         .font(.subheadline)
                         .foregroundColor(Color.init(assetsName: .textSecondary))
-                    Spacer()
                 }
             }
             
-            if let errorString = error?.localizedDescription{
+            if songs?.count ?? 0 == 0 {
                 Spacer()
+            }
+            
+            if let errorString = error?.localizedDescription{
                 Text(errorString)
                     .foregroundColor(Color(assetsName: .inputError))
             }
