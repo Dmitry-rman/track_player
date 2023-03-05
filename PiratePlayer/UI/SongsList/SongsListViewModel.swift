@@ -18,6 +18,7 @@ protocol SongsListViewModelProtocol: ObservableObject{
     
     func startScenario()
     func selectTrack(_ song: TrackSong)
+    func clearSearch()
 }
 
 final class SongsListViewModel: SongsListViewModelProtocol{
@@ -146,5 +147,10 @@ final class SongsListViewModel: SongsListViewModelProtocol{
         }
         
         self.output?.didSelectSong(song: track)
+    }
+    
+    func clearSearch(){
+        
+        searchQuery = ""
     }
 }

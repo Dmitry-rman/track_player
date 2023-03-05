@@ -74,10 +74,12 @@ struct SongsListView<ViewModel: SongsListViewModelProtocol>: View {
                     Text(String.pallete(.noTracksFound))
                         .font(.subheadline)
                         .foregroundColor(Color.init(assetsName: .textSecondary))
+                    Spacer()
                 }
             }
-            Spacer()
+            
             if let errorString = error?.localizedDescription{
+                Spacer()
                 Text(errorString)
                     .foregroundColor(Color(assetsName: .inputError))
             }
@@ -98,6 +100,11 @@ struct SongsListView<ViewModel: SongsListViewModelProtocol>: View {
                           text: $viewModel.searchQuery,
                           prompt: Text(String.pallete(.searchPromt)))
                 
+                Button(action: viewModel.clearSearch) {
+                    Image(sfSymbolName: .closeIcon)
+                }
+                .disabled(viewModel.searchQuery.count == 0)
+                .padding()
             }
             .padding(.leading, 12)
             .foregroundColor(.accentColor)
