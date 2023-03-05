@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-struct SongView<ViewModel: SongViewModelProtocol, Player: SoundPlayer>: View {
+struct SongView<ViewModel: SongViewModelProtocol, Player: AVSoundPlayer>: View {
     
     @StateObject var viewModel: ViewModel
     @StateObject var player: Player
@@ -34,9 +34,6 @@ struct SongView<ViewModel: SongViewModelProtocol, Player: SoundPlayer>: View {
             
         }
         .padding()
-        .onDisappear(){
-            self.player.stop()
-        }
     }
     
     private var songImage: some View {
@@ -70,6 +67,7 @@ struct SongView<ViewModel: SongViewModelProtocol, Player: SoundPlayer>: View {
                     player.pause()
                 }else{
                     player.playSound(url: viewModel.songUrl, fromBegin: false)
+                    viewModel.playTap(player: self.player)
                 }
             }) {
                 Image(sfSymbolName:  player.isPlaying == true ? .pauseCircleFill : .playCircle)

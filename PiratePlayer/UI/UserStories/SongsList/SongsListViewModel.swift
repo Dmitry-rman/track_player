@@ -13,6 +13,9 @@ final class SongsListViewModel: SongsListViewModelProtocol{
     @Published var searchQuery: String = ""
     @Published var searching: Bool = false
     
+    @Published var player: AVSoundPlayer?
+    @Published var playingTrack: TrackSong?
+    
     private var chachedSongs: [TrackSong] = []
     private let container: DiContainer
     private(set) var stateMachine: ViewStateMachine<[TrackSong]?>
@@ -139,5 +142,12 @@ final class SongsListViewModel: SongsListViewModelProtocol{
     func clearSearch(){
         
         searchQuery = ""
+    }
+    
+    func playTrack(_ track: TrackSong, withPlayer player: AVSoundPlayer){
+        
+        self.player = player
+        self.playingTrack = track
+        self.objectWillChange.send()
     }
 }

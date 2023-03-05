@@ -9,6 +9,9 @@ import Foundation
 
 protocol SongsListViewModelProtocol: ObservableObject{
     
+    var player: AVSoundPlayer? {get}
+    var playingTrack: TrackSong? {get}
+    
     /// UI state machine
     var stateMachine: ViewStateMachine<[TrackSong]?> { get }
     
@@ -18,4 +21,5 @@ protocol SongsListViewModelProtocol: ObservableObject{
     func startScenario()
     func selectTrack(_ song: TrackSong)
     func clearSearch()
+    func playTrack(_ track: TrackSong, withPlayer player: AVSoundPlayer)
 }

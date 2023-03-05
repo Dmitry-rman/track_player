@@ -7,6 +7,13 @@
 
 import UIKit
 
+///Input module protocol
+protocol SongsListViewModuleInput: AnyObject{
+    
+    func playTrack(track: TrackSong, withPlayer player: AVSoundPlayer)
+}
+
+///Output module protocol
 protocol SongsListViewModuleOutput: AnyObject{
     
     func didSelectSong(song: TrackSong)
@@ -18,6 +25,10 @@ struct SongsListViewModule: ViewModuleProtocol{
     
     /// Визуальное представление модуля
     var view: UIViewController {
+        viewController
+    }
+    
+    var input: SongsListViewModuleInput{
         viewController
     }
     

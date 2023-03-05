@@ -35,9 +35,9 @@ final class DiContainer {
         return Self.currentServiceBuilder
     }
     
-    lazy var player: AVSoundPlayer = {
-        AVSoundPlayer()
-    }()
+    func createPlayer() -> AVSoundPlayer{
+         AVSoundPlayer()
+    }
     
     /// Текущий закэшированный строитель сервисов
     fileprivate static var currentServiceBuilder: ServiceBuilder!

@@ -9,7 +9,7 @@ import SwiftUI
 import AVFoundation
 import AVFAudio
 
-protocol SoundPlayer: ObservableObject{
+protocol SoundPlayer{
     
     func playSound(url: URL?, fromBegin: Bool)
     func pause()
@@ -20,7 +20,7 @@ protocol SoundPlayer: ObservableObject{
     var isLoaded: Bool {get}
 }
 
-class AVSoundPlayer: SoundPlayer {
+class AVSoundPlayer: SoundPlayer, ObservableObject {
     
     private var audioPlayer: AVPlayer?
     private var soundUrl: URL?
@@ -32,11 +32,12 @@ class AVSoundPlayer: SoundPlayer {
     
     deinit{
         NotificationCenter.default.removeObserver(self)
+        debugPrint("deinit \(Self.self)")
     }
     
     //MARK: - SoundPlayer
     
-    @Published var isPlaying: Bool = false
+    @Published public private(set) var isPlaying: Bool = false
     
     var isLoaded: Bool{
         return self.audioPlayer?.status == .readyToPlay
@@ -82,4 +83,5 @@ class AVSoundPlayer: SoundPlayer {
         self.pause()
         self.soundUrl = nil
     }
+
 }

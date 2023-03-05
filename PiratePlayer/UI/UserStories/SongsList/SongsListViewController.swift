@@ -18,3 +18,11 @@ final class SongsListViewController<ViewModel: SongsListViewModelProtocol>: AppH
         navigationItem.title = String.pallete(.songsListScreenTitle)
     }
 }
+
+extension SongsListViewController: SongsListViewModuleInput{
+    
+    func playTrack(track: TrackSong, withPlayer player: AVSoundPlayer) {
+        viewModel?.playTrack(track, withPlayer: player)
+    }
+    
+}

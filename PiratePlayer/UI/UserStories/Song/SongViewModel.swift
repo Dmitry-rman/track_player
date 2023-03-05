@@ -85,7 +85,6 @@ final class SongViewModel: SongViewModelProtocol{
         isScenarioStarted = true
         
         self.stateMachine.setState(.loading)
-        
     }
     
     func closeAction(){
@@ -94,18 +93,21 @@ final class SongViewModel: SongViewModelProtocol{
         self.output?.songViewDidClosed()
     }
     
-    func playTap(){
+    func playTap(player: AVSoundPlayer){
         
-        var selectedTrackName: String?
+        var selectedTrack: TrackSong?
+        
         switch stateMachine.state{
         case .content(let track, _):
-            selectedTrackName = track.trackTitle
+            selectedTrack = track
+            self.output?.playerDidPlay(track: track, withPlayer: player)
         default:
             break
         }
         
-        //send analytics
-        if let trackName = selectedTrackName {
+        //MARK: - Analytics
+        //Send analytics
+        if let trackName = selectedTrack?.trackTitle {
             self.analytics.logEvent(AppEventAnalytics.select_track,
                                     properties: ["name" : trackName])
         }else{

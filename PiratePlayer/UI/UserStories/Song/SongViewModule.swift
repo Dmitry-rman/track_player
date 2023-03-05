@@ -10,6 +10,7 @@ import UIKit
 protocol SongViewModuleOutput: AnyObject{
     
     func songViewDidClosed()
+    func playerDidPlay(track: TrackSong, withPlayer player: AVSoundPlayer)
 }
 
 struct SongViewModule: ViewModuleProtocol {
@@ -21,10 +22,11 @@ struct SongViewModule: ViewModuleProtocol {
         viewController
     }
     
-    init(song: TrackSong, player: AVSoundPlayer, output: SongViewModuleOutput, container: DiContainer) {
+    init(song: TrackSong, output: SongViewModuleOutput, container: DiContainer) {
         
         let viewModel = Self.createViewModel(song: song, output: output, container: container)
         
+        let player = container.createPlayer()
         viewController = SongViewController(rootView: SongView(viewModel: viewModel, player: player))
         viewController.viewModel = viewModel
     }

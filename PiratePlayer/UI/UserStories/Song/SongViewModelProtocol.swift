@@ -20,5 +20,5 @@ protocol SongViewModelProtocol: ObservableObject{
     var songUrl: URL? {get}
     
     func closeAction()
-    func playTap()
+    func playTap(player: AVSoundPlayer)
 }

@@ -11,7 +11,9 @@ import SwiftUI
 final class ApplicationCoordinator: NavigationCoordinator {
     
     private let diContainer: DiContainer
-    private let player: AVSoundPlayer = AVSoundPlayer()
+    private weak var mainPlayer: AVSoundPlayer?
+    
+    private weak var songListViewInput: SongsListViewModuleInput?
 
     init(diContainer: DiContainer, container: NavigationContainer) {
         
@@ -24,6 +26,7 @@ final class ApplicationCoordinator: NavigationCoordinator {
         
         let module =  SongsListViewModule(output: self, container: diContainer)
         container?.pushViewController(module.view, animated: animated)
+        songListViewInput = module.input
         
         return module.view
     }
@@ -33,9 +36,8 @@ extension ApplicationCoordinator: SongsListViewModuleOutput{
     
     func didSelectSong(song: TrackSong) {
         
-        player.stop()
         debugPrint("select song \(song)")
-        let module = SongViewModule(song: song, player: player, output: self, container: self.diContainer)
+        let module = SongViewModule(song: song, output: self, container: self.diContainer)
         container?.pushViewController(module.view, animated: true)
     }
     
@@ -46,5 +48,12 @@ extension ApplicationCoordinator: SongViewModuleOutput{
     func songViewDidClosed() {
         
         container?.popViewController(animated: true)
+    }
+    
+    func playerDidPlay(track: TrackSong, withPlayer player: AVSoundPlayer) {
+        
+        self.mainPlayer?.stop()
+        self.mainPlayer = player
+        self.songListViewInput?.playTrack(track: track, withPlayer: player)
     }
 }
