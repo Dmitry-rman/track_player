@@ -367,8 +367,7 @@
 				0A0C1BF429B39636007D24DC /* NavigationCoordinator.swift */,
 				0A0C1BFC29B39CA2007D24DC /* CoordinatorContainerLinks.swift */,
 				0A0C1BF629B39662007D24DC /* Coordinator.swift */,
-				0A4ECABE29B51C8E007999A6 /* PlayerView.swift */,
-				0A4ECAC229B523E1007999A6 /* PlayerViewModel.swift */,
+				0A4ECAC429B533FF007999A6 /* PlayerView */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -380,6 +379,15 @@
 				0A0C1BB829B330AF007D24DC /* Song */,
 			);
 			path = UserStories;
+			sourceTree = "<group>";
+		};
+		0A4ECAC429B533FF007999A6 /* PlayerView */ = {
+			isa = PBXGroup;
+			children = (
+				0A4ECABE29B51C8E007999A6 /* PlayerView.swift */,
+				0A4ECAC229B523E1007999A6 /* PlayerViewModel.swift */,
+			);
+			path = PlayerView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

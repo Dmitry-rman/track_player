@@ -15,6 +15,7 @@ final class SongsListViewModel: SongsListViewModelProtocol{
     
     @Published var player: AVSoundPlayer?
     @Published var playingTrack: TrackSong?
+    @Published var isPlayerClosed: Bool = false
     
     private var chachedSongs: [TrackSong] = []
     private let container: DiContainer
@@ -148,6 +149,7 @@ final class SongsListViewModel: SongsListViewModelProtocol{
         
         self.player = player
         self.playingTrack = track
+        self.isPlayerClosed = false
         self.objectWillChange.send()
     }
 }

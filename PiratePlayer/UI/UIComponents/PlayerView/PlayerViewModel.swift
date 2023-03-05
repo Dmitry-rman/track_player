@@ -28,4 +28,8 @@ class PlayerViewModel: ObservableObject{
     init(track: TrackSong?) {
         self.track = track
     }
+    
+    deinit{
+        debugPrint("deinit \(Self.self)")
+    }
 }

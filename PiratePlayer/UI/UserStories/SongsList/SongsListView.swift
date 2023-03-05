@@ -85,11 +85,13 @@ struct SongsListView<ViewModel: SongsListViewModelProtocol>: View {
                 Text(errorString)
                     .foregroundColor(Color(assetsName: .inputError))
             }
-
-
-            Divider()
-            PlayerView(player: viewModel.player ?? .init(),
-                       viewModel: .init(track: viewModel.playingTrack))
+           
+            if viewModel.isPlayerClosed == false {
+                Divider()
+                PlayerView(player: viewModel.player ?? .init(),
+                           viewModel: .init(track: viewModel.playingTrack),
+                           isClosed: $viewModel.isPlayerClosed)
+            }
             
         }
         .padding()
