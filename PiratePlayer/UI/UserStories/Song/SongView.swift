@@ -45,7 +45,7 @@ struct SongView<ViewModel: SongViewModelProtocol, Player: AVSoundPlayer>: View {
             } else if phase.error != nil {
                 VStack{
                     Spacer()
-                    Text("Error occured on loading image..")
+                    Text(String.pallete(.imageLoadingError))
                         .foregroundColor(Color.init(assetsName: .inputError))
                     Spacer()
                 }

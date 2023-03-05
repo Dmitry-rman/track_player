@@ -33,6 +33,8 @@ extension String {
         case unknown = "unknown"
         
         case noTracksFound = "no_tracks_found"
+        
+        case imageLoadingError = "image_loading_error"
       
     }
 }
