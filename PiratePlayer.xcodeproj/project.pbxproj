@@ -61,6 +61,7 @@
 		0A4ECABD29B51049007999A6 /* SongViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4ECABC29B51049007999A6 /* SongViewModelProtocol.swift */; };
 		0A4ECABF29B51C8E007999A6 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4ECABE29B51C8E007999A6 /* PlayerView.swift */; };
 		0A4ECAC329B523E1007999A6 /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4ECAC229B523E1007999A6 /* PlayerViewModel.swift */; };
+		0AB0E33D29B7D91100424C6A /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB0E33C29B7D91100424C6A /* AudioEngine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +140,7 @@
 		0A4ECABC29B51049007999A6 /* SongViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongViewModelProtocol.swift; sourceTree = "<group>"; };
 		0A4ECABE29B51C8E007999A6 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		0A4ECAC229B523E1007999A6 /* PlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
+		0AB0E33C29B7D91100424C6A /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +234,7 @@
 				0A0C1BA629B32C95007D24DC /* Services */,
 				0A0C1BD429B33994007D24DC /* Constants.swift */,
 				0A0C1C0729B47704007D24DC /* SoundPlayer.swift */,
+				0AB0E33C29B7D91100424C6A /* AudioEngine.swift */,
 				0A0C1C1229B4E57E007D24DC /* UserPreferences.swift */,
 			);
 			path = Core;
@@ -569,6 +572,7 @@
 				0A0C1C0F29B4DDE0007D24DC /* FailedDecodable.swift in Sources */,
 				0A0C1BB729B330A9007D24DC /* SongViewModel.swift in Sources */,
 				0A4ECABD29B51049007999A6 /* SongViewModelProtocol.swift in Sources */,
+				0AB0E33D29B7D91100424C6A /* AudioEngine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

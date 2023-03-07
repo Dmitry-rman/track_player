@@ -8,28 +8,23 @@
 import Foundation
 
 
-class ServiceBuilderProd: ServiceBuilder{
-    
-    let shouldLogNetworkRequests: Bool
-    
-    init(shouldLogNetworkRequests: Bool) {
-        self.shouldLogNetworkRequests = shouldLogNetworkRequests
-    }
+class ServiceBuilderProd: ServiceBuilderDebug{
+   
     
     //MARK: - ServiceBuilder
     
-    var baseUrl: URL {
+    override var baseUrl: URL {
         return URL.init(string: Constants.Web.hostBaseProdURLString)!
     }
     
-    func getSongsServie() -> SongService {
-        SongServiceImplementation(baseUrl: self.baseUrl)
-    }
-    
-    lazy var analytics: Analytics = {
+    override var analytics: Analytics {
         
-        //Here we can put array of analytics.
-        //For example, debug, amplitude implamentation, firebase, e.t.c
-        return HubAnalytics(analytics: [DebugAnalytic()])
-    }()
+        if _analytics == nil {
+            //Here we can put array of analytics.
+            //For example, debug, amplitude implamentation, firebase, e.t.c
+            _analytics = HubAnalytics(analytics: [DebugAnalytic()])
+        }
+        
+        return _analytics
+    }
 }

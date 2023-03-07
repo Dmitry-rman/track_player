@@ -25,7 +25,23 @@ class ServiceBuilderDebug: ServiceBuilder{
         SongServiceImplementation(baseUrl: self.baseUrl)
     }
     
-    lazy var analytics: Analytics = {
-        return DebugAnalytic()
+    lazy var audioEngine: AudioEngineProtocol = {
+        
+        let engine = AudioEngine()
+        
+        do{
+            try engine.initAudioSession()
+        } catch let error as NSError {
+            debugPrint(error.localizedDescription)
+        }
+        return engine
     }()
+    
+    internal var _analytics: Analytics!
+    var analytics: Analytics{
+        if _analytics == nil {
+            _analytics = DebugAnalytic()
+        }
+        return _analytics
+    }
 }

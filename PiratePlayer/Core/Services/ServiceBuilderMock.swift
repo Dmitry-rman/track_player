@@ -10,6 +10,10 @@ import Foundation
 #if DEBUG
 class ServiceBuilderMock: ServiceBuilder{
     
+    var audioEngine: AudioEngineProtocol{
+        return AudioEngine()
+    }
+    
     var baseUrl: URL {
         return URL.init(string: "https://google.com")!
     }

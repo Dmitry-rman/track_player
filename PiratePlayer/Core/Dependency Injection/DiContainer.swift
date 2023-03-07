@@ -35,10 +35,6 @@ final class DiContainer {
         return Self.currentServiceBuilder
     }
     
-    func createPlayer() -> AVSoundPlayer{
-         AVSoundPlayer()
-    }
-    
     /// Текущий закэшированный строитель сервисов
     fileprivate static var currentServiceBuilder: ServiceBuilder!
     
