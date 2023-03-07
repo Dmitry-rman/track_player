@@ -10,6 +10,7 @@ import SwiftUI
 struct SongsListView<ViewModel: SongsListViewModelProtocol>: View {
     
     @StateObject var viewModel: ViewModel
+    @FocusState private var queryIsFocused: Bool
     
     private let contentBackgroundColor = Color(assetsName: .backgroundBasic)
     
@@ -109,6 +110,7 @@ struct SongsListView<ViewModel: SongsListViewModelProtocol>: View {
                 TextField(String.pallete(.searchTitle),
                           text: $viewModel.searchQuery,
                           prompt: Text(String.pallete(.searchPromt)))
+                .focused($queryIsFocused)
                 
                 Button(action: viewModel.clearSearch) {
                     Image(sfSymbolName: .closeIcon)
@@ -146,6 +148,7 @@ struct SongsListView<ViewModel: SongsListViewModelProtocol>: View {
     private func trackListRow(track: TrackSong) -> some View{
         
         Button(action: {
+            self.queryIsFocused = false
             self.viewModel.selectTrack(track)
         }, label: {
             HStack{
@@ -153,6 +156,7 @@ struct SongsListView<ViewModel: SongsListViewModelProtocol>: View {
                 Button {
                     let player = AVSoundPlayer()
                     player.playSound(url: track.trackUrl)
+                    self.queryIsFocused = false
                     viewModel.trackDidPlayed(track: track, withPlayer: player)
                 } label: {
                     Image(sfSymbolName: .waveformCircle)
