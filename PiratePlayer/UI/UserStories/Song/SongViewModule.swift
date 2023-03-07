@@ -26,7 +26,7 @@ struct SongViewModule: ViewModuleProtocol {
         
         let viewModel = Self.createViewModel(song: song, output: output, container: container)
         
-        let player = container.serviceBuilder.audioEngine.createPlayer()
+        let player = container.serviceBuilder.getAudioEngine().createPlayer()
         viewController = SongViewController(rootView: SongView(viewModel: viewModel, player: player))
         viewController.viewModel = viewModel
     }

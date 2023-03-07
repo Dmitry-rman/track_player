@@ -10,7 +10,7 @@ import Foundation
 #if DEBUG
 class ServiceBuilderMock: ServiceBuilder{
     
-    var audioEngine: AudioEngineProtocol{
+    func getAudioEngine() ->  AudioEngineProtocol{
         return AudioEngine()
     }
     

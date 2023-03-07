@@ -17,7 +17,7 @@ protocol ServiceBuilder {
     func getSongsServie() -> SongService
     
     /// Audio Engine service
-    var audioEngine: AudioEngineProtocol {get}
+    func getAudioEngine() -> AudioEngineProtocol
     
     /// Get analytics
     var analytics: Analytics { get }

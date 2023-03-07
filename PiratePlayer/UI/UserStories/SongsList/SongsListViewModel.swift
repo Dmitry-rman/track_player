@@ -125,6 +125,12 @@ final class SongsListViewModel: SongsListViewModelProtocol{
                 self.stateMachine.setState(.content((songs), .default))
             }
             .store(in: &cancellableSet)
+        
+        do{
+            try self.container.serviceBuilder.getAudioEngine().initAudioSession()
+        }catch{
+            self.stateMachine.setState(.content((self.chachedSongs), .error(error)))
+        }
     }
     
     func selectTrack(_ track: TrackSong) {

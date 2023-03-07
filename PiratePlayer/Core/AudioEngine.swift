@@ -14,7 +14,9 @@ protocol AudioEngineProtocol{
     func initAudioSession() throws
 }
 
-struct AudioEngine: AudioEngineProtocol{
+class AudioEngine: AudioEngineProtocol{
+    
+    private var _isAudioSessionInitialized: Bool = false
     
     func createPlayer() -> AVSoundPlayer{
          AVSoundPlayer()
@@ -22,10 +24,16 @@ struct AudioEngine: AudioEngineProtocol{
     
     func initAudioSession() throws{
         
+        if  _isAudioSessionInitialized == true{
+            return
+        }
+        
         try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
         debugPrint("AVAudioSession Category Playback OK")
         
         try AVAudioSession.sharedInstance().setActive(true)
         debugPrint("AVAudioSession is Active")
+        
+        _isAudioSessionInitialized = true
     }
 }
