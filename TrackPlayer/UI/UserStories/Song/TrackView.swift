@@ -12,7 +12,7 @@ struct TrackView<ViewModel: TrackViewModelProtocol, Player: AVSoundPlayer>: View
     
     @StateObject var viewModel: ViewModel
     @StateObject var player: Player
-
+    
     var body: some View {
         
         VStack(alignment: .center, spacing: 8){
@@ -30,7 +30,7 @@ struct TrackView<ViewModel: TrackViewModelProtocol, Player: AVSoundPlayer>: View
             Text(viewModel.artistTitle)
                 .multilineTextAlignment(.center)
                 .font(.subheadline)
-                .foregroundColor(Color.secondary)
+                .foregroundColor(Color.init(assetsName: .textSecondary))
             Spacer()
             playPanel
             
@@ -65,22 +65,43 @@ struct TrackView<ViewModel: TrackViewModelProtocol, Player: AVSoundPlayer>: View
     private var playPanel: some View{
         
         HStack{
-            Button(action: {
-                if player.isPlaying == true {
-                    player.pause()
-                }else{
-                    player.playSound(url: viewModel.songUrl, fromBegin: false)
-                    viewModel.playTap(player: self.player)
+                timeView(title: viewModel.timeString(player: player),
+                         subtitle: String.pallete(.currentTime))
+                Spacer()
+                Button(action: {
+                    if player.isPlaying == true {
+                        player.pause()
+                    }else{
+                        player.playSound(url: viewModel.songUrl, fromBegin: false)
+                        viewModel.playTap(player: self.player)
+                    }
+                }) {
+                    Image(sfSymbolName:  player.isPlaying == true ? .pauseCircleFill : .playCircle)
+                        .resizable()
+                        .foregroundColor(player.isPlaying == false ? Color.init(assetsName: .accent) : Color.init(assetsName: .iconBasic))
                 }
-            }) {
-                Image(sfSymbolName:  player.isPlaying == true ? .pauseCircleFill : .playCircle)
-                    .resizable()
-                    .foregroundColor(player.isPlaying == false ? Color.init(assetsName: .accent) : Color.init(assetsName: .iconBasic))
-            }
-            .frame(width: 44, height: 44)
+                .frame(width: 44, height: 44)
+                Spacer()
+                timeView(title: viewModel.leftTimeString(player: player),
+                         subtitle: String.pallete(.leftTime) )
         }
     }
+    
+    private func timeView(title: String, subtitle: String) -> some View{
+      
+        VStack{
+            Text(title)
+                .font(.headline)
+                .foregroundColor(Color.init(assetsName: .textPrimary))
+            Text(subtitle)
+                .font(.subheadline)
+                .foregroundColor(Color.init(assetsName: .textSecondary))
+        }
+        .frame(width: 120)
+    }
 }
+    
+    
 
 #if DEBUG
 struct SongView_Previews: PreviewProvider {

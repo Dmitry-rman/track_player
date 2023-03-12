@@ -19,6 +19,8 @@ protocol TrackViewModelProtocol: ObservableObject{
     var imageUrl: URL? {get}
     var songUrl: URL? {get}
     
+    func timeString(player: AVSoundPlayer) -> String
+    func leftTimeString(player: AVSoundPlayer) -> String
     func closeAction()
     func playTap(player: AVSoundPlayer)
 }

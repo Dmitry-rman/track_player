@@ -20,6 +20,8 @@ protocol SoundPlayer{
     
     var isPlaying: Bool {get}
     var isLoaded: Bool {get}
+    var duration: Int? {get}
+    var time: Int {get}
     
     var volume: Float {get set}
 }
@@ -31,6 +33,20 @@ class AVSoundPlayer: SoundPlayer, ObservableObject {
     private var cancellableSet = Set<AnyCancellable>()
     
     @Published public var volume: Float = UserPreferences.volume
+    
+    var duration: Int?{
+        if let item =  self.audioPlayer?.currentItem{
+            if item.duration != .indefinite {
+                return Int(item.duration.seconds)
+            }else{
+                return nil
+            }
+        }else{
+            return nil
+        }
+    }
+    
+    @Published var time: Int = 0
     
     init() {
         
@@ -78,6 +94,18 @@ class AVSoundPlayer: SoundPlayer, ObservableObject {
                                                        object: item)
                 self.audioPlayer = AVPlayer(playerItem: item)
                 self.audioPlayer?.volume = self.volume * 0.01
+                self.audioPlayer?.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(1, preferredTimescale: 1),
+                                                          queue: DispatchQueue.main,
+                                                          using: {[weak self] (time) in
+                    guard let player = self?.audioPlayer else {return}
+                    
+                    if player.currentItem?.status == .readyToPlay {
+                        let currentTime = CMTimeGetSeconds(player.currentTime())
+                        let secs = Int(currentTime)
+                        self?.time = secs
+                    }
+                  }
+                )
                 self.soundUrl = url
                 resume()
             }

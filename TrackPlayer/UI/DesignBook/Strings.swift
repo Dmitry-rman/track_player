@@ -37,6 +37,10 @@ extension String {
         case imageLoadingError = "image_loading_error"
         
         case volume = "volume"
+        
+        case currentTime = "current_time"
+        
+        case leftTime = "left_time"
       
     }
 }

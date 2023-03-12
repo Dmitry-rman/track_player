@@ -62,14 +62,18 @@ struct PlayerView<ViewModel: PlayerViewModel>: View {
     private var titleView: some View {
         
         if viewModel.trackExist {
-            VStack(alignment: .leading){
-                Text(viewModel.songTitle)
-                    .multilineTextAlignment(.leading)
-                    .font(.callout)
-                Text(viewModel.artistTitle)
-                    .multilineTextAlignment(.leading)
-                    .font(.subheadline)
-                    .foregroundColor(Color.secondary)
+            HStack{
+                VStack(alignment: .leading){
+                    Text(viewModel.songTitle)
+                        .multilineTextAlignment(.leading)
+                        .font(.callout)
+                    Text(viewModel.artistTitle)
+                        .multilineTextAlignment(.leading)
+                        .font(.subheadline)
+                        .foregroundColor(Color.secondary)
+                }
+                Spacer()
+                Text(viewModel.timeString(player: player))
             }
         }else{
             Text(viewModel.songTitle)

@@ -38,3 +38,9 @@
 
 /* No comment provided by engineer. */
 "volume" = "Volume";
+
+/* No comment provided by engineer. */
+"left_time" = "Left time";
+
+/* No comment provided by engineer. */
+"current_time" = "Current time";
