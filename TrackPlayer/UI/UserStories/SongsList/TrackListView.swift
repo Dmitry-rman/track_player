@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SongsListView<ViewModel: SongsListViewModelProtocol>: View {
+struct TrackListView<ViewModel: TrackListViewModelProtocol>: View {
     
     @StateObject var viewModel: ViewModel
     @FocusState private var queryIsFocused: Bool
@@ -164,7 +164,6 @@ struct SongsListView<ViewModel: SongsListViewModelProtocol>: View {
                     if isPlaying == true {
                         viewModel.stopPlayer()
                     }else{
-
                         self.queryIsFocused = false
                         viewModel.trackDidPlayed(track: track)
                     }
@@ -198,7 +197,7 @@ struct SongsListView_Previews: PreviewProvider {
 
     static var previews: some View {
         Group{
-            SongsListView(viewModel: SongsListViewModel.init(state: .content(nil, .default), container: .preview, searchResultLimit: 25))
+            TrackListView(viewModel: TrackListViewModel.init(state: .content(nil, .default), container: .preview, searchResultLimit: 25))
          //   SongsListView(viewModel: SongsListViewModel.init(state: .loading, container: .preview))
         }
     }

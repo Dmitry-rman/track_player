@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-struct SongView<ViewModel: SongViewModelProtocol, Player: AVSoundPlayer>: View {
+struct TrackView<ViewModel: TrackViewModelProtocol, Player: AVSoundPlayer>: View {
     
     @StateObject var viewModel: ViewModel
     @StateObject var player: Player
@@ -23,7 +23,7 @@ struct SongView<ViewModel: SongViewModelProtocol, Player: AVSoundPlayer>: View {
             Spacer()
             songImage
                 .aspectRatio(1.0, contentMode: .fit)
-            Text(viewModel.songTitle)
+            Text(viewModel.trackTitle)
                 .multilineTextAlignment(.center)
                 .font(.title)
                 .padding(.top, 20)
@@ -85,7 +85,7 @@ struct SongView<ViewModel: SongViewModelProtocol, Player: AVSoundPlayer>: View {
 #if DEBUG
 struct SongView_Previews: PreviewProvider {
     static var previews: some View {
-        SongView(viewModel: SongViewModel.init(state: .content((TrackSong.mocked), .default), container: DiContainer.preview), player: AVSoundPlayer())
+        TrackView(viewModel: TrackViewModel.init(state: .content((TrackSong.mocked), .default), container: DiContainer.preview), player: AVSoundPlayer())
     }
 }
 #endif

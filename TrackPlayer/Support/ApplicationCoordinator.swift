@@ -11,9 +11,8 @@ import SwiftUI
 final class ApplicationCoordinator: NavigationCoordinator {
     
     private let diContainer: DiContainer
-    private weak var mainPlayer: AVSoundPlayer?
     
-    private weak var songListViewInput: SongsListViewModuleInput?
+    private weak var songListViewInput: TrackListViewModuleInput?
 
     init(diContainer: DiContainer, container: NavigationContainer) {
         
@@ -24,7 +23,7 @@ final class ApplicationCoordinator: NavigationCoordinator {
     @discardableResult
     override func start(animated: Bool) -> UIViewController {
         
-        let module =  SongsListViewModule(output: self, container: diContainer)
+        let module =  TrackListViewModule(output: self, container: diContainer)
         container?.pushViewController(module.view, animated: animated)
         songListViewInput = module.input
         
@@ -32,12 +31,24 @@ final class ApplicationCoordinator: NavigationCoordinator {
     }
 }
 
-extension ApplicationCoordinator: SongsListViewModuleOutput{
+extension ApplicationCoordinator: TrackListViewModuleOutput{
     
     func didSelectSong(song: TrackSong) {
         
         debugPrint("select song \(song)")
-        let module = SongViewModule(song: song, output: self, container: self.diContainer)
+        
+        let player: AVSoundPlayer
+        if let mainPlayer = self.songListViewInput?.player,
+           mainPlayer.soundUrl == song.trackUrl {
+            player = mainPlayer
+        }else{
+            player = diContainer.serviceBuilder.getAudioEngine().createPlayer()
+        }
+        
+        let module = TrackViewModule(song: song,
+                                    player: player,
+                                    output: self,
+                                    container: self.diContainer)
         container?.isNavigationBarHidden = true
         container?.pushViewController(module.view, animated: true)
     }
@@ -53,8 +64,6 @@ extension ApplicationCoordinator: SongViewModuleOutput{
     
     func playerDidPlay(track: TrackSong, withPlayer player: AVSoundPlayer) {
         
-        self.mainPlayer?.stop()
-        self.mainPlayer = player
         self.songListViewInput?.playTrack(track: track, withPlayer: player)
     }
 }

@@ -11,6 +11,7 @@ import AVFAudio
 
 protocol SoundPlayer{
     
+    var soundUrl: URL? {get}
     func playSound(url: URL?, fromBegin: Bool)
     func pause()
     func resume()
@@ -23,7 +24,7 @@ protocol SoundPlayer{
 class AVSoundPlayer: SoundPlayer, ObservableObject {
     
     private var audioPlayer: AVPlayer?
-    private var soundUrl: URL?
+    private(set) var soundUrl: URL?
     
     @objc private func playerDidFinishPlaying(note: NSNotification) {
         soundUrl = nil

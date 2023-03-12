@@ -7,14 +7,14 @@
 
 import Foundation
 
-protocol SongViewModelProtocol: ObservableObject{
+protocol TrackViewModelProtocol: ObservableObject{
     
     /// UI state machine
     var stateMachine: ViewStateMachine<TrackSong> {get}
     
     func startScenario()
     
-    var songTitle: String {get}
+    var trackTitle: String {get}
     var artistTitle: String {get}
     var imageUrl: URL? {get}
     var songUrl: URL? {get}

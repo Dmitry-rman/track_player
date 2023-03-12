@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-final class SongsListViewController<ViewModel: SongsListViewModelProtocol>: AppHostingController<SongsListView<ViewModel>> {
+final class TrackListViewController<ViewModel: TrackListViewModelProtocol>: AppHostingController<TrackListView<ViewModel>> {
     
     var viewModel: ViewModel?
     
@@ -19,7 +19,11 @@ final class SongsListViewController<ViewModel: SongsListViewModelProtocol>: AppH
     }
 }
 
-extension SongsListViewController: SongsListViewModuleInput{
+extension TrackListViewController: TrackListViewModuleInput{
+    
+    var player: AVSoundPlayer? {
+        viewModel?.player
+    }
     
     func playTrack(track: TrackSong, withPlayer player: AVSoundPlayer) {
         viewModel?.trackDidPlayed(track: track, withPlayer: player)

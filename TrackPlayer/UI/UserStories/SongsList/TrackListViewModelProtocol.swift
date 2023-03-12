@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol SongsListViewModelProtocol: ObservableObject{
+protocol TrackListViewModelProtocol: ObservableObject{
     
     var player: AVSoundPlayer? {get}
     var playingTrack: TrackSong? {get}
@@ -27,7 +27,7 @@ protocol SongsListViewModelProtocol: ObservableObject{
     func errorMessage(error: Error?) -> String?
 }
 
-extension SongsListViewModelProtocol {
+extension TrackListViewModelProtocol {
     
     func trackDidPlayed(track: TrackSong){
         trackDidPlayed(track: track, withPlayer: nil)

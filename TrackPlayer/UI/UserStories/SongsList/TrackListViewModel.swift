@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class SongsListViewModel: SongsListViewModelProtocol{
+final class TrackListViewModel: TrackListViewModelProtocol{
 
     @Published var searchQuery: String = ""
     @Published var searching: Bool = false
@@ -30,9 +30,9 @@ final class SongsListViewModel: SongsListViewModelProtocol{
     //Limit for API's track results
     private let searchResultLimit: Int
     
-    private weak var output: SongsListViewModuleOutput?
+    private weak var output: TrackListViewModuleOutput?
     
-    convenience init(output: SongsListViewModuleOutput,
+    convenience init(output: TrackListViewModuleOutput,
                      container: DiContainer,
                      searchResultLimit: Int = 25){
         
@@ -66,7 +66,6 @@ final class SongsListViewModel: SongsListViewModelProtocol{
         
         $searchQuery
             .filter{ $0.count >= 3}//3 simbols or more to search
-            //.debounce(for: .seconds(1.0), scheduler: RunLoop.main)
             .throttle(for: .seconds(0.5), scheduler: RunLoop.main, latest: true)
             .removeDuplicates()
             .eraseToAnyPublisher()
@@ -146,16 +145,11 @@ final class SongsListViewModel: SongsListViewModelProtocol{
         
         self.output?.didSelectSong(song: track)
     }
-    
-    func clearSearch(){
-        
-        searchQuery = ""
-    }
    
-    func trackDidPlayed(track: TrackSong, withPlayer player: AVSoundPlayer?){
+    func trackDidPlayed(track: TrackSong, withPlayer player: AVSoundPlayer?) {
         
         if player == nil {
-            let newPlayer = AVSoundPlayer()
+            let newPlayer = container.serviceBuilder.getAudioEngine().createPlayer()
             newPlayer.playSound(url: track.trackUrl)
             self.player = newPlayer
         }else{
@@ -166,6 +160,11 @@ final class SongsListViewModel: SongsListViewModelProtocol{
         self.isPlayerClosed = false
         
         self.objectWillChange.send()
+    }
+    
+    func clearSearch() {
+        
+        searchQuery = ""
     }
     
     func errorMessage(error: Error?) -> String?{

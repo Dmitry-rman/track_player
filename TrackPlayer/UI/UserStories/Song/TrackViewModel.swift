@@ -9,9 +9,9 @@ import Foundation
 import Combine
 
 ///Вью модель экрана песни
-final class SongViewModel: SongViewModelProtocol{
+final class TrackViewModel: TrackViewModelProtocol{
 
-    var songTitle: String {
+    var trackTitle: String {
         
         switch stateMachine.state{
         case .content(let track, _):
