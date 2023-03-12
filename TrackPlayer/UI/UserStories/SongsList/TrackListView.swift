@@ -10,15 +10,22 @@ import SwiftUI
 struct TrackListView<ViewModel: TrackListViewModelProtocol>: View {
     
     @StateObject var viewModel: ViewModel
+    @State var isPlayerClosed: Bool = false
     @FocusState private var queryIsFocused: Bool
     
     private let contentBackgroundColor = Color(assetsName: .backgroundBasic)
+    private let playerPopupAnimation: Animation = .easeInOut(duration: 0.2)
     
     var body: some View {
         
         self.currentContent
             .onAppear(perform: {
                 viewModel.startScenario()
+                viewModel.onShowPlayer = { isShowed in
+                    withAnimation(playerPopupAnimation){
+                        self.isPlayerClosed = !isShowed
+                    }
+                }
             })
     }
     
@@ -93,12 +100,17 @@ struct TrackListView<ViewModel: TrackListViewModelProtocol>: View {
                 Spacer()
             }
            
-            if viewModel.isPlayerClosed == false {
-                Divider()
-                PlayerView(player: viewModel.player ?? .init(),
-                           viewModel: .init(track: viewModel.playingTrack),
-                           isClosed: $viewModel.isPlayerClosed)
-                .padding()
+            if isPlayerClosed == false {
+                VStack(spacing: 0){
+                    Divider()
+                    PlayerView(player: viewModel.player ?? .init(),
+                               viewModel: .init(track: viewModel.playingTrack), closeAnimation: playerPopupAnimation,
+                               isClosed: $isPlayerClosed)
+                    .padding()
+                }
+                .background(Color(assetsName: .backgroundCard))
+                .transition(.move(edge: .bottom))
+                .zIndex(1)
             }
         }
     }

@@ -11,7 +11,7 @@ protocol TrackListViewModelProtocol: ObservableObject{
     
     var player: AVSoundPlayer? {get}
     var playingTrack: TrackSong? {get}
-    var isPlayerClosed: Bool {get set}
+    var onShowPlayer: ((_ isShowed: Bool)->())? {get set}
     
     /// UI state machine
     var stateMachine: ViewStateMachine<[TrackSong]?> { get }

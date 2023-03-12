@@ -12,6 +12,7 @@ struct PlayerView<ViewModel: PlayerViewModel>: View {
     ///Here we should use ObservedObject instead StateObject to update PlayerView from outside
     @ObservedObject var player: AVSoundPlayer
     @ObservedObject var viewModel: ViewModel
+    let closeAnimation: Animation?
     
     @Binding var isClosed: Bool
     
@@ -30,9 +31,10 @@ struct PlayerView<ViewModel: PlayerViewModel>: View {
             Slider(value: $player.volume, in: 0...100){
                 Text(String.pallete(.volume))
             } minimumValueLabel: {
-                Text("0%")
+                Text("")
             } maximumValueLabel: {
-                Text("100%")
+                let textVolume = String(format: "%.f%%", player.volume)
+                return Text(textVolume)
             }
             .disabled(!viewModel.trackExist)
             
@@ -77,16 +79,23 @@ struct PlayerView<ViewModel: PlayerViewModel>: View {
         }
     }
     
-    private var closeButton: some View{
+    private var closeButton: some View {
+        
         Button {
             self.player.stop()
-            self.isClosed = true
+            if let closeAnimation = closeAnimation{
+                withAnimation(closeAnimation){
+                    self.isClosed = true
+                }
+            }else{
+                self.isClosed = true
+            }
         } label: {
             Image(sfSymbolName: .closeIcon)
         }
     }
     
-    private var buttonColor: Color{
+    private var buttonColor: Color {
         
         if viewModel.trackExist == true{
             return  player.isPlaying == false ? Color.init(assetsName: .accent) : Color.init(assetsName: .iconBasic)
@@ -100,9 +109,11 @@ struct PlayerView<ViewModel: PlayerViewModel>: View {
 #if DEBUG
 struct PlayerView_Previews: PreviewProvider {
     static var previews: some View {
-        PlayerView(player: .init(), viewModel: .init(track: nil), isClosed: .constant(false))
+        PlayerView(player: .init(), viewModel: .init(track: nil),
+                   closeAnimation: nil,
+                   isClosed: .constant(false))
             .padding()
-            .background(Color.gray).opacity(0.1)
+            .background(Color.init(assetsName: .backgroundCard))
     }
 }
 #endif

@@ -15,7 +15,8 @@ final class TrackListViewModel: TrackListViewModelProtocol{
     
     @Published var player: AVSoundPlayer?
     @Published var playingTrack: TrackSong?
-    @Published var isPlayerClosed: Bool = false
+    
+    var onShowPlayer: ((_ isShowed: Bool)->())?
     
     private var chachedSongs: [TrackSong]?
     private let container: DiContainer
@@ -53,15 +54,16 @@ final class TrackListViewModel: TrackListViewModelProtocol{
         
         self.stateMachine = ViewStateMachine(state)
         stateCancellable = stateMachine.$state.sink { [weak self] state in
+            guard let self = self else {return}
             debugPrint(state)
             switch state{
             case .content(let songs, _):
-                self?.chachedSongs = songs ?? []
-                self?.isPlayerClosed = false
+                self.chachedSongs = songs ?? []
+                self.onShowPlayer?(self.playingTrack != nil)
             default:
                 break
             }
-            self?.objectWillChange.send()
+            self.objectWillChange.send()
         }
         
         $searchQuery
@@ -157,8 +159,8 @@ final class TrackListViewModel: TrackListViewModelProtocol{
         }
 
         self.playingTrack = track
-        self.isPlayerClosed = false
-        
+        self.onShowPlayer?(true)
+
         self.objectWillChange.send()
     }
     
