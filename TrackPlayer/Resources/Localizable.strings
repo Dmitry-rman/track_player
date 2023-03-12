@@ -35,3 +35,6 @@
 
 /* No comment provided by engineer. */
 "image_loading_error" = "Error occured on loading image..";
+
+/* No comment provided by engineer. */
+"volume" = "Volume";

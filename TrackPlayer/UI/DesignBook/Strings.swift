@@ -35,6 +35,8 @@ extension String {
         case noTracksFound = "no_tracks_found"
         
         case imageLoadingError = "image_loading_error"
+        
+        case volume = "volume"
       
     }
 }

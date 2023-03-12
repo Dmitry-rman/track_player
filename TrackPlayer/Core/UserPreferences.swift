@@ -22,4 +22,5 @@ struct UserDefault<T> {
 
 enum UserPreferences {
     @UserDefault(key: "isFirstAppStart", initialValue: true) static var isFirstAppStart: Bool
+    @UserDefault(key: "volume", initialValue: 100.0) static var volume: Float
 }

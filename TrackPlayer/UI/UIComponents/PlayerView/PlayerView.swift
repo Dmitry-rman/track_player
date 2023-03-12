@@ -17,48 +17,73 @@ struct PlayerView<ViewModel: PlayerViewModel>: View {
     
     var body: some View {
         
-        HStack(alignment: .top){
+        VStack{
             
-            Button(action: {
-                if player.isPlaying == true {
-                    player.pause()
-                }else{
-                    player.playSound(url: viewModel.track?.trackUrl)
-                }
-            }) {
-                Image(sfSymbolName:  player.isPlaying == true ? .pauseCircleFill : .playCircle)
-                    .resizable()
-                    .foregroundColor(buttonColor)
+            HStack(alignment: .top){
+                playButton
+                    .frame(width: 44, height: 44)
+                titleView
+                Spacer()
+                closeButton
+            }
+            
+            Slider(value: $player.volume, in: 0...100){
+                Text(String.pallete(.volume))
+            } minimumValueLabel: {
+                Text("0%")
+            } maximumValueLabel: {
+                Text("100%")
             }
             .disabled(!viewModel.trackExist)
-            .frame(width: 44, height: 44)
             
-            if viewModel.trackExist {
-                VStack(alignment: .leading){
-                    Text(viewModel.songTitle)
-                        .multilineTextAlignment(.leading)
-                        .font(.callout)
-                    Text(viewModel.artistTitle)
-                        .multilineTextAlignment(.leading)
-                        .font(.subheadline)
-                        .foregroundColor(Color.secondary)
-                }
-            }else{
-                Text(viewModel.songTitle)
-                    .font(.callout)
-                    .foregroundColor(Color.init(assetsName: .textSecondary))
-                    .frame(maxHeight: .infinity)
-            }
-            Spacer()
-            
-            Button {
-                self.player.stop()
-                self.isClosed = true
-            } label: {
-                Image(sfSymbolName: .closeIcon)
-            }
         }
-        .frame(height: 44)
+        .frame(height: 72)
+    }
+    
+    private var playButton: some View{
+        
+        Button(action: {
+            if player.isPlaying == true {
+                player.pause()
+            }else{
+                player.playSound(url: viewModel.track?.trackUrl)
+            }
+        }) {
+            Image(sfSymbolName:  player.isPlaying == true ? .pauseCircleFill : .playCircle)
+                .resizable()
+                .foregroundColor(buttonColor)
+        }
+        .disabled(!viewModel.trackExist)
+    }
+    
+    @ViewBuilder
+    private var titleView: some View {
+        
+        if viewModel.trackExist {
+            VStack(alignment: .leading){
+                Text(viewModel.songTitle)
+                    .multilineTextAlignment(.leading)
+                    .font(.callout)
+                Text(viewModel.artistTitle)
+                    .multilineTextAlignment(.leading)
+                    .font(.subheadline)
+                    .foregroundColor(Color.secondary)
+            }
+        }else{
+            Text(viewModel.songTitle)
+                .font(.callout)
+                .foregroundColor(Color.init(assetsName: .textSecondary))
+                .frame(maxHeight: .infinity)
+        }
+    }
+    
+    private var closeButton: some View{
+        Button {
+            self.player.stop()
+            self.isClosed = true
+        } label: {
+            Image(sfSymbolName: .closeIcon)
+        }
     }
     
     private var buttonColor: Color{
@@ -72,9 +97,12 @@ struct PlayerView<ViewModel: PlayerViewModel>: View {
     }
 }
 
+#if DEBUG
 struct PlayerView_Previews: PreviewProvider {
     static var previews: some View {
         PlayerView(player: .init(), viewModel: .init(track: nil), isClosed: .constant(false))
-        .padding()
+            .padding()
+            .background(Color.gray).opacity(0.1)
     }
 }
+#endif

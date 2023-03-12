@@ -8,6 +8,7 @@
 import SwiftUI
 import AVFoundation
 import AVFAudio
+import Combine
 
 protocol SoundPlayer{
     
@@ -19,12 +20,28 @@ protocol SoundPlayer{
     
     var isPlaying: Bool {get}
     var isLoaded: Bool {get}
+    
+    var volume: Float {get set}
 }
 
 class AVSoundPlayer: SoundPlayer, ObservableObject {
     
     private var audioPlayer: AVPlayer?
     private(set) var soundUrl: URL?
+    private var cancellableSet = Set<AnyCancellable>()
+    
+    @Published public var volume: Float = UserPreferences.volume
+    
+    init() {
+        
+        $volume
+            .sink { [weak self] value in
+                UserPreferences.volume = value
+                self?.audioPlayer?.volume = value * 0.01
+            }
+            .store(in: &cancellableSet)
+            
+    }
     
     @objc private func playerDidFinishPlaying(note: NSNotification) {
         soundUrl = nil
@@ -60,6 +77,7 @@ class AVSoundPlayer: SoundPlayer, ObservableObject {
                                                        name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
                                                        object: item)
                 self.audioPlayer = AVPlayer(playerItem: item)
+                self.audioPlayer?.volume = self.volume * 0.01
                 self.soundUrl = url
                 resume()
             }
