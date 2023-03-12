@@ -32,6 +32,8 @@ struct TrackView<ViewModel: TrackViewModelProtocol, Player: AVSoundPlayer>: View
                 .font(.subheadline)
                 .foregroundColor(Color.init(assetsName: .textSecondary))
             Spacer()
+            favoriteButton
+            Spacer()
             playPanel
             
         }
@@ -60,6 +62,17 @@ struct TrackView<ViewModel: TrackViewModelProtocol, Player: AVSoundPlayer>: View
                 }
             }
         }
+    }
+    
+    private var favoriteButton: some View {
+        
+        Button {
+            viewModel.isFavorited.toggle()
+        } label: {
+            Image(sfSymbolName: viewModel.isFavorited == true ? .favoriteOn : .favoriteOff)
+        }
+        .font(.title)
+        .foregroundColor(Color(assetsName: .accent))
     }
     
     private var playPanel: some View{
@@ -106,7 +119,9 @@ struct TrackView<ViewModel: TrackViewModelProtocol, Player: AVSoundPlayer>: View
 #if DEBUG
 struct SongView_Previews: PreviewProvider {
     static var previews: some View {
-        TrackView(viewModel: TrackViewModel.init(state: .content((TrackSong.mocked), .default), container: DiContainer.preview), player: AVSoundPlayer())
+        TrackView(viewModel: TrackViewModel.init(state: .content((TrackSong.mocked), .default),
+                                                 container: DiContainer.preview),
+                  player: AVSoundPlayer())
     }
 }
 #endif

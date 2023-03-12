@@ -115,6 +115,19 @@ final class TrackListViewModel: TrackListViewModelProtocol{
         
         self.stateMachine.setState(.loading)
         
+        //loadRecent()
+        
+        do{
+            try self.container.serviceBuilder.getAudioEngine().initAudioSession()
+        }catch{
+            self.stateMachine.setState(.content((self.chachedSongs), .error(error)))
+        }
+        
+        searchQuery = "Abba"
+    }
+    
+    private func loadRecent() {
+        
         self.songService
             .loadRecentSongs()
             .sink { [weak self] error in
@@ -128,12 +141,6 @@ final class TrackListViewModel: TrackListViewModelProtocol{
                 self.stateMachine.setState(.content((songs.count > 0 ? songs : nil), .default))
             }
             .store(in: &cancellableSet)
-        
-        do{
-            try self.container.serviceBuilder.getAudioEngine().initAudioSession()
-        }catch{
-            self.stateMachine.setState(.content((self.chachedSongs), .error(error)))
-        }
     }
     
     func selectTrack(_ track: TrackSong) {

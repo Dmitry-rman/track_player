@@ -10,6 +10,7 @@ import Foundation
 class PlayerViewModel: ObservableObject{
     
     let track: TrackSong?
+    @Published var isFavorited: Bool = false
     
     var trackExist: Bool{
         return track != nil
@@ -27,7 +28,7 @@ class PlayerViewModel: ObservableObject{
     
     func timeString(player: AVSoundPlayer) -> String{
         
-        guard let duration = player.duration else {return ""}
+        guard let duration = player.duration else {return " 00:00"}
         
         let seconds = duration - player.time
         return String(format: "-%02d:%02d", seconds/60, seconds%60) as String//"\(secs/60):\(secs%60)"

@@ -26,6 +26,8 @@ enum SFSymbolsName: String {
     case waveformCircle = "waveform.circle"
     case playCircle = "play.circle"
     case pauseCircleFill = "pause.circle.fill"
+    case favoriteOff = "heart"
+    case favoriteOn = "heart.fill"
     
     // здесь можно для некоторых символов переопределить названия, если они разные в разных системах
     fileprivate var systemName: String {

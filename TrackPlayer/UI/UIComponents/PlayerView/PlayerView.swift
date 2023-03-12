@@ -16,25 +16,29 @@ struct PlayerView<ViewModel: PlayerViewModel>: View {
     
     @Binding var isClosed: Bool
     
+   // @ViewBuilder
     var body: some View {
         
         VStack{
             
-            HStack(alignment: .top){
+            HStack(alignment: .center){
+                favoriteButton
+                    .frame(width: 33, height: 33)
                 playButton
-                    .frame(width: 44, height: 44)
+                    .frame(width: 33, height: 33)
                 titleView
                 Spacer()
-                closeButton
+                closeButton.alignmentGuide(VerticalAlignment.center) { _ in 16 }
             }
             
             Slider(value: $player.volume, in: 0...100){
                 Text(String.pallete(.volume))
             } minimumValueLabel: {
-                Text("")
+                let text = viewModel.timeString(player: player)
+                return Text(text)
             } maximumValueLabel: {
                 let textVolume = String(format: "%.f%%", player.volume)
-                return Text(textVolume)
+                Text(textVolume)
             }
             .disabled(!viewModel.trackExist)
             
@@ -72,8 +76,6 @@ struct PlayerView<ViewModel: PlayerViewModel>: View {
                         .font(.subheadline)
                         .foregroundColor(Color.secondary)
                 }
-                Spacer()
-                Text(viewModel.timeString(player: player))
             }
         }else{
             Text(viewModel.songTitle)
@@ -99,10 +101,32 @@ struct PlayerView<ViewModel: PlayerViewModel>: View {
         }
     }
     
+    private var favoriteButton: some View {
+        
+        Button {
+            viewModel.isFavorited.toggle()
+        } label: {
+            Image(sfSymbolName: viewModel.isFavorited == true ? .favoriteOn : .favoriteOff)
+        }
+        .font(.title)
+        .foregroundColor(favoriteColor)
+        .disabled(!viewModel.trackExist)
+    }
+    
     private var buttonColor: Color {
         
         if viewModel.trackExist == true{
             return  player.isPlaying == false ? Color.init(assetsName: .accent) : Color.init(assetsName: .iconBasic)
+        }
+        else{
+            return Color.init(assetsName: .buttonPrimaryBackgroundDisabled)
+        }
+    }
+    
+    private var favoriteColor: Color {
+        
+        if viewModel.trackExist == true{
+            return  viewModel.isFavorited == false ? Color.init(assetsName: .accent) : Color.init(assetsName: .iconBasic)
         }
         else{
             return Color.init(assetsName: .buttonPrimaryBackgroundDisabled)

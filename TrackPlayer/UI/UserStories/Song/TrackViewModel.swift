@@ -10,6 +10,8 @@ import Combine
 
 ///Вью модель экрана песни
 final class TrackViewModel: TrackViewModelProtocol{
+    
+    @Published var isFavorited: Bool = false
 
     var trackTitle: String {
         
