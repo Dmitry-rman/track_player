@@ -15,6 +15,7 @@ final class TrackListViewModel: TrackListViewModelProtocol{
     
     @Published var player: AVSoundPlayer?
     @Published var playingTrack: TrackSong?
+    @Published var isPlayerPlayed: Bool = false
     
     var onShowPlayer: ((_ isShowed: Bool)->())?
     
@@ -160,6 +161,12 @@ final class TrackListViewModel: TrackListViewModelProtocol{
 
         self.playingTrack = track
         self.onShowPlayer?(true)
+        
+        self.player?.$isPlaying
+            .sink(receiveValue: { [weak self] value in
+                self?.isPlayerPlayed = value
+            })
+            .store(in: &cancellableSet)
 
         self.objectWillChange.send()
     }

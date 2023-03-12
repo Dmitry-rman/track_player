@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct TrackListView<ViewModel: TrackListViewModelProtocol>: View {
     
@@ -164,7 +165,7 @@ struct TrackListView<ViewModel: TrackListViewModelProtocol>: View {
     
     private func trackListRow(track: TrackSong) -> some View{
         
-        let isPlaying = (track == viewModel.playingTrack) && viewModel.player?.isPlaying ?? false
+        let isPlaying = viewModel.isPlayerPlayed && (track == viewModel.playingTrack)
         
         return Button(action: {
             self.queryIsFocused = false

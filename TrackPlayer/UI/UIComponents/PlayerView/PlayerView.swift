@@ -109,7 +109,8 @@ struct PlayerView<ViewModel: PlayerViewModel>: View {
 #if DEBUG
 struct PlayerView_Previews: PreviewProvider {
     static var previews: some View {
-        PlayerView(player: .init(), viewModel: .init(track: nil),
+        PlayerView(player: .init(),
+                   viewModel: .init(track: nil),
                    closeAnimation: nil,
                    isClosed: .constant(false))
             .padding()
