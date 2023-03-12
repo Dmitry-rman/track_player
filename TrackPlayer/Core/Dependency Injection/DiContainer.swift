@@ -35,6 +35,8 @@ final class DiContainer {
         return Self.currentServiceBuilder
     }
     
+    let appState: Store<AppState> = Store(AppState())
+    
     /// Текущий закэшированный строитель сервисов
     fileprivate static var currentServiceBuilder: ServiceBuilder!
     

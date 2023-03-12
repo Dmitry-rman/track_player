@@ -9,6 +9,8 @@ import Foundation
 
 protocol TrackListViewModelProtocol: ObservableObject{
     
+    var container: DiContainer {get}
+    
     var player: AVSoundPlayer? {get}
     var playingTrack: TrackSong? {get}
     var onShowPlayer: ((_ isShowed: Bool)->())? {get set}

@@ -105,7 +105,9 @@ struct TrackListView<ViewModel: TrackListViewModelProtocol>: View {
                 VStack(spacing: 0){
                     Divider()
                     PlayerView(player: viewModel.player ?? .init(),
-                               viewModel: .init(track: viewModel.playingTrack), closeAnimation: playerPopupAnimation,
+                               viewModel: .init(diContainer: self.viewModel.container,
+                                                track: viewModel.playingTrack),
+                               closeAnimation: playerPopupAnimation,
                                isClosed: $isPlayerClosed)
                     .padding()
                 }

@@ -67,12 +67,18 @@ struct TrackView<ViewModel: TrackViewModelProtocol, Player: AVSoundPlayer>: View
     private var favoriteButton: some View {
         
         Button {
-            viewModel.isFavorited.toggle()
+            viewModel.toggleFavorite()
         } label: {
             Image(sfSymbolName: viewModel.isFavorited == true ? .favoriteOn : .favoriteOff)
         }
         .font(.title)
-        .foregroundColor(Color(assetsName: .accent))
+        .foregroundColor(favoriteColor)
+    }
+    
+    private var favoriteColor: Color {
+        
+        return  viewModel.isFavorited == false ? Color.init(assetsName: .accent) : Color.init(assetsName: .iconBasic)
+    
     }
     
     private var playPanel: some View{

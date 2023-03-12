@@ -104,7 +104,7 @@ struct PlayerView<ViewModel: PlayerViewModel>: View {
     private var favoriteButton: some View {
         
         Button {
-            viewModel.isFavorited.toggle()
+            viewModel.toggleFavorite()
         } label: {
             Image(sfSymbolName: viewModel.isFavorited == true ? .favoriteOn : .favoriteOff)
         }
@@ -138,7 +138,7 @@ struct PlayerView<ViewModel: PlayerViewModel>: View {
 struct PlayerView_Previews: PreviewProvider {
     static var previews: some View {
         PlayerView(player: .init(),
-                   viewModel: .init(track: nil),
+                   viewModel: .init(diContainer: .preview, track: nil),
                    closeAnimation: nil,
                    isClosed: .constant(false))
             .padding()

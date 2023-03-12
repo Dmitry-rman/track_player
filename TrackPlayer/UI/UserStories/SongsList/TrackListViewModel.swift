@@ -19,10 +19,10 @@ final class TrackListViewModel: TrackListViewModelProtocol{
     
     var onShowPlayer: ((_ isShowed: Bool)->())?
     
+    let container: DiContainer
+    
     private var chachedSongs: [TrackSong]?
-    private let container: DiContainer
     private(set) var stateMachine: ViewStateMachine<[TrackSong]?>
-    private var stateCancellable: AnyCancellable?
     private var isScenarioStarted = false
     private var cancellableSet = Set<AnyCancellable>()
     
@@ -54,7 +54,7 @@ final class TrackListViewModel: TrackListViewModelProtocol{
         self.analytics = container.serviceBuilder.analytics
         
         self.stateMachine = ViewStateMachine(state)
-        stateCancellable = stateMachine.$state.sink { [weak self] state in
+        stateMachine.$state.sink { [weak self] state in
             guard let self = self else {return}
             debugPrint(state)
             switch state{
@@ -66,6 +66,7 @@ final class TrackListViewModel: TrackListViewModelProtocol{
             }
             self.objectWillChange.send()
         }
+        .store(in: &cancellableSet)
         
         $searchQuery
             .filter{ $0.count >= 3}//3 simbols or more to search

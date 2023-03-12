@@ -63,6 +63,9 @@
 		0A4ECAC329B523E1007999A6 /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4ECAC229B523E1007999A6 /* PlayerViewModel.swift */; };
 		0AB0E33D29B7D91100424C6A /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB0E33C29B7D91100424C6A /* AudioEngine.swift */; };
 		0AB0E33F29B8534900424C6A /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB0E33E29B8534900424C6A /* AppError.swift */; };
+		0AB0E34529BE656C00424C6A /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB0E34429BE656C00424C6A /* AppState.swift */; };
+		0AB0E34729BE667E00424C6A /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB0E34629BE667E00424C6A /* Store.swift */; };
+		0AB0E34A29BE73CB00424C6A /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB0E34929BE73CB00424C6A /* UserData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,6 +146,9 @@
 		0A4ECAC229B523E1007999A6 /* PlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
 		0AB0E33C29B7D91100424C6A /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
 		0AB0E33E29B8534900424C6A /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		0AB0E34429BE656C00424C6A /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		0AB0E34629BE667E00424C6A /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		0AB0E34929BE73CB00424C6A /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,10 +240,12 @@
 				0A0C1BC229B3333C007D24DC /* Dependency Injection */,
 				0A0C1BA929B32CE5007D24DC /* Model */,
 				0A0C1BA629B32C95007D24DC /* Services */,
+				0AB0E34829BE669500424C6A /* Utilites */,
 				0A0C1BD429B33994007D24DC /* Constants.swift */,
+				0AB0E34429BE656C00424C6A /* AppState.swift */,
+				0AB0E34929BE73CB00424C6A /* UserData.swift */,
 				0A0C1C0729B47704007D24DC /* SoundPlayer.swift */,
 				0AB0E33C29B7D91100424C6A /* AudioEngine.swift */,
-				0A0C1C1229B4E57E007D24DC /* UserPreferences.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -396,6 +404,15 @@
 			path = PlayerView;
 			sourceTree = "<group>";
 		};
+		0AB0E34829BE669500424C6A /* Utilites */ = {
+			isa = PBXGroup;
+			children = (
+				0A0C1C1229B4E57E007D24DC /* UserPreferences.swift */,
+				0AB0E34629BE667E00424C6A /* Store.swift */,
+			);
+			path = Utilites;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -533,6 +550,8 @@
 				0A0C1C0829B47704007D24DC /* SoundPlayer.swift in Sources */,
 				0A0C1BC029B332CA007D24DC /* ViewState.swift in Sources */,
 				0A0C1BC829B33429007D24DC /* ServiceBilder.swift in Sources */,
+				0AB0E34529BE656C00424C6A /* AppState.swift in Sources */,
+				0AB0E34729BE667E00424C6A /* Store.swift in Sources */,
 				0A0C1BE029B36613007D24DC /* ApplicationCoordinator.swift in Sources */,
 				0A0C1BAB29B32CF6007D24DC /* TrackSong.swift in Sources */,
 				0A0C1BFB29B3982D007D24DC /* TrackListViewController.swift in Sources */,
@@ -566,6 +585,7 @@
 				0A0C1BD129B337E5007D24DC /* HubAnalytics.swift in Sources */,
 				0A0C1BED29B388FC007D24DC /* LoadingIndicator.swift in Sources */,
 				0A0C1BD729B33A0D007D24DC /* SerrviceBuilderProd.swift in Sources */,
+				0AB0E34A29BE73CB00424C6A /* UserData.swift in Sources */,
 				0A0C1BAF29B32E04007D24DC /* Mocks.swift in Sources */,
 				0A0C1BC429B33354007D24DC /* DiContainer.swift in Sources */,
 				0A0C1BB329B33085007D24DC /* TrackListView.swift in Sources */,

@@ -11,8 +11,11 @@ import Combine
 ///Вью модель экрана песни
 final class TrackViewModel: TrackViewModelProtocol{
     
-    @Published var isFavorited: Bool = false
-
+    @Published private(set) var isFavorited: Bool = false
+    
+    private var cancellableSet = Set<AnyCancellable>()
+    private let container: DiContainer
+    
     var trackTitle: String {
         
         switch stateMachine.state{
@@ -73,12 +76,33 @@ final class TrackViewModel: TrackViewModelProtocol{
         
         self.songService = container.serviceBuilder.getSongsServie()
         self.analytics = container.serviceBuilder.analytics
+        self.container = container
         
         self.stateMachine = ViewStateMachine(state)
         stateCancellable = stateMachine.$state.sink { [weak self] state in
-
+            
             self?.objectWillChange.send()
         }
+        
+        self.container.appState
+            .map({ [weak self] value in
+                return value.userData.favorites.contains{
+                    
+                    var trackID: String?
+                    switch self?.stateMachine.state{
+                    case .content(let track, _):
+                        trackID = track.id
+                    default:
+                        break
+                    }
+                    
+                    return $0 == trackID
+                }
+            })
+            .sink(receiveValue: { [weak self] value in
+                self?.isFavorited = value
+            })
+            .store(in: &cancellableSet)
         
     }
     
@@ -130,6 +154,21 @@ final class TrackViewModel: TrackViewModelProtocol{
         
         let seconds = player.time
         return String(format: "%02d:%02d", seconds/60, seconds%60) as String//"\(secs/60):\(secs%60)"
+    }
+    
+    func toggleFavorite() {
+        
+        switch self.stateMachine.state{
+        case .content(let track, _):
+            if isFavorited {
+                container.appState.value.userData.removeTrackFromFavorites(track)
+            }else{
+                container.appState.value.userData.addTrackToFavorits(track)
+            }
+        default:
+            break
+        }
+  
     }
     
     deinit{
