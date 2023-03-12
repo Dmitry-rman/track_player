@@ -16,7 +16,7 @@ class PlayerViewModel: ObservableObject{
     }
     
     var songTitle: String {
-        guard let track else {return "No track"}
+        guard let track else {return String.pallete(.noTrack)}
         return  "\(track.trackTitle  ?? String.pallete(.unknown))"
     }
     

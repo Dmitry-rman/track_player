@@ -41,6 +41,8 @@ extension String {
         case currentTime = "current_time"
         
         case leftTime = "left_time"
+        
+        case noTrack = "no_track"
       
     }
 }
