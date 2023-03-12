@@ -36,10 +36,10 @@ struct TrackListViewModule: ViewModuleProtocol{
     
     init(output: TrackListViewModuleOutput, container: DiContainer) {
         
-        let viewModel = Self.createViewModel(output: output, container: container)
-        
-        viewController = TrackListViewController(rootView: TrackListView(viewModel: viewModel))
-        viewController.viewModel = viewModel
+        let viewModel = Self.createViewModel(output: output,
+                                             container: container)
+        viewController = TrackListViewController(viewModel: viewModel,
+                                                 rootView: TrackListView(viewModel: viewModel))
     }
     
     private static func createViewModel(output: TrackListViewModuleOutput, container: DiContainer) ->  TrackListViewModel{

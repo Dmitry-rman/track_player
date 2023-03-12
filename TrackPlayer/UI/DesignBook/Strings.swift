@@ -43,6 +43,8 @@ extension String {
         case leftTime = "left_time"
         
         case noTrack = "no_track"
+        
+        case favorites = "favorites"
       
     }
 }
