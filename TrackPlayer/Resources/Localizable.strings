@@ -1,0 +1,37 @@
+/* 
+  Localizable.strings
+  TrackPlayer
+
+  Created by Dmitry on 04.03.2023.
+  
+*/
+
+/* No comment provided by engineer. */
+"songs_list_title" = "iTunes tracks";
+
+/* No comment provided by engineer. */
+"search_title" = "Search song";
+
+/* No comment provided by engineer. */
+"search_promt" = "Enter name to search a song";
+
+/* No comment provided by engineer. */
+"start_loading" = "Loading, please wait";
+
+/* No comment provided by engineer. */
+"close_song_button" = "Back to list";
+
+/* No comment provided by engineer. */
+"song_title" = "Title:";
+
+/* No comment provided by engineer. */
+"artist_title" = "Artist:";
+
+/* No comment provided by engineer. */
+"unknown" = "unknown";
+
+/* No comment provided by engineer. */
+"no_tracks_found" = "No tracks found with this query";
+
+/* No comment provided by engineer. */
+"image_loading_error" = "Error occured on loading image..";
