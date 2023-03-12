@@ -11,7 +11,6 @@ import SwiftUI
 final class ApplicationCoordinator: NavigationCoordinator {
     
     private let diContainer: DiContainer
-    
     private weak var songListViewInput: TrackListViewModuleInput?
 
     init(diContainer: DiContainer, container: NavigationContainer) {
@@ -64,6 +63,12 @@ extension ApplicationCoordinator: SongViewModuleOutput{
     
     func playerDidPlay(track: TrackSong, withPlayer player: AVSoundPlayer) {
         
+        if let mainPlayer = self.songListViewInput?.player,
+           mainPlayer.soundUrl == track.trackUrl {
+            
+        }else{
+            self.songListViewInput?.player?.stop()
+        }
         self.songListViewInput?.playTrack(track: track, withPlayer: player)
     }
 }
