@@ -8,29 +8,40 @@
 import SwiftUI
 import Combine
 
-struct TrackView<ViewModel: TrackViewModelProtocol, Player: AVSoundPlayer>: View {
+struct TrackView<ViewModel: TrackViewModelProtocol>: View {
     
     @StateObject var viewModel: ViewModel
-    @StateObject var player: Player
     
     var body: some View {
         
         VStack(alignment: .center, spacing: 8){
             
-            Button(String.pallete(.closeSongButtonTitle)) {
-                self.viewModel.closeAction()
+            HStack(alignment: .center){
+                Spacer()
+                    .frame(width: 33)
+                Spacer()
+                Text(viewModel.trackTitle)
+                    .multilineTextAlignment(.center)
+                    .font(.title)
+                Spacer()
+                Button(action: viewModel.closeAction) {
+                    Image(sfSymbolName: .closeIcon)
+                        .font(.title2)
+                        .padding(.all, 4)
+                        .frame(width: 33)
+                }
+                .padding(.all, 8)
             }
+            
             Spacer()
             songImage
                 .aspectRatio(1.0, contentMode: .fit)
-            Text(viewModel.trackTitle)
-                .multilineTextAlignment(.center)
-                .font(.title)
-                .padding(.top, 20)
+
             Text(viewModel.artistTitle)
                 .multilineTextAlignment(.center)
                 .font(.subheadline)
                 .foregroundColor(Color.init(assetsName: .textSecondary))
+                .padding(.top, 20)
             Spacer()
             favoriteButton
             Spacer()
@@ -38,7 +49,11 @@ struct TrackView<ViewModel: TrackViewModelProtocol, Player: AVSoundPlayer>: View
             
         }
         .padding()
+        .background(Color(assetsName: .backgroundPrimary))
         .navigationBarHidden(true)
+        .onAppear(){
+            viewModel.startScenario()
+        }
     }
     
     private var songImage: some View {
@@ -84,24 +99,23 @@ struct TrackView<ViewModel: TrackViewModelProtocol, Player: AVSoundPlayer>: View
     private var playPanel: some View{
         
         HStack{
-                timeView(title: viewModel.timeString(player: player),
+                timeView(title: viewModel.timeString,
                          subtitle: String.pallete(.currentTime))
                 Spacer()
                 Button(action: {
-                    if player.isPlaying == true {
-                        player.pause()
+                    if viewModel.player.isPlaying == true {
+                        viewModel.player.pause()
                     }else{
-                        player.playSound(url: viewModel.songUrl, fromBegin: false)
-                        viewModel.playTap(player: self.player)
+                        viewModel.playTap()
                     }
                 }) {
-                    Image(sfSymbolName:  player.isPlaying == true ? .pauseCircleFill : .playCircle)
+                    Image(sfSymbolName: viewModel.player.isPlaying == true ? .pauseCircleFill : .playCircle)
                         .resizable()
-                        .foregroundColor(player.isPlaying == false ? Color.init(assetsName: .accent) : Color.init(assetsName: .iconBasic))
+                        .foregroundColor(viewModel.player.isPlaying == false ? Color.init(assetsName: .accent) : Color.init(assetsName: .iconBasic))
                 }
                 .frame(width: 44, height: 44)
                 Spacer()
-                timeView(title: viewModel.leftTimeString(player: player),
+                timeView(title: viewModel.leftTimeString,
                          subtitle: String.pallete(.leftTime) )
         }
     }
@@ -125,9 +139,8 @@ struct TrackView<ViewModel: TrackViewModelProtocol, Player: AVSoundPlayer>: View
 #if DEBUG
 struct SongView_Previews: PreviewProvider {
     static var previews: some View {
-        TrackView(viewModel: TrackViewModel.init(state: .content((TrackSong.mocked), .default),
-                                                 container: DiContainer.preview),
-                  player: AVSoundPlayer())
+        TrackView(viewModel: TrackViewModel.init(state: .content((TrackSong.mocked), .default), player: .preview,
+                                                 container: DiContainer.preview))
     }
 }
 #endif

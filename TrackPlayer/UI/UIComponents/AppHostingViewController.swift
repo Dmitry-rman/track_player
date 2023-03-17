@@ -40,7 +40,7 @@ class AppHostingController<Content: View> : UIHostingController<Content> {
             NSAttributedString.Key.foregroundColor: UIColor(assetsName: .headerTitle) ?? UIColor.label,
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17.0),
         ]
-        appearance?.backgroundColor = UIColor(assetsName: .backgroundBasic)
+        appearance?.backgroundColor = UIColor(assetsName: .backgroundPrimary)
         appearance?.shadowImage = nil
         appearance?.shadowColor = UIColor.clear
 

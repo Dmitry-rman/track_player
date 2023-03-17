@@ -9,9 +9,9 @@ import SwiftUI
 
 struct PlayerView<ViewModel: PlayerViewModel>: View {
     
-    ///Here we should use ObservedObject instead StateObject to update PlayerView from outside
-    @ObservedObject var player: AVSoundPlayer
-    @ObservedObject var viewModel: ViewModel
+    /// Here we should use StateObject to reduce flashing favorite button on updating view
+    @StateObject var viewModel: ViewModel
+    //@ObservedObject var viewModel: ViewModel
     let closeAnimation: Animation?
     
     @Binding var isClosed: Bool
@@ -31,14 +31,13 @@ struct PlayerView<ViewModel: PlayerViewModel>: View {
                 closeButton.alignmentGuide(VerticalAlignment.center) { _ in 16 }
             }
             
-            Slider(value: $player.volume, in: 0...100){
+            Slider(value: $viewModel.player.volume, in: 0...100){
                 Text(String.pallete(.volume))
             } minimumValueLabel: {
-                let text = viewModel.timeString(player: player)
+                let text = viewModel.timeString()
                 return Text(text)
             } maximumValueLabel: {
-                let textVolume = String(format: "%.f%%", player.volume)
-                Text(textVolume)
+                Text(viewModel.volume)
             }
             .disabled(!viewModel.trackExist)
             
@@ -49,13 +48,9 @@ struct PlayerView<ViewModel: PlayerViewModel>: View {
     private var playButton: some View{
         
         Button(action: {
-            if player.isPlaying == true {
-                player.pause()
-            }else{
-                player.playSound(url: viewModel.track?.trackUrl)
-            }
+            viewModel.playTap()
         }) {
-            Image(sfSymbolName:  player.isPlaying == true ? .pauseCircleFill : .playCircle)
+            Image(sfSymbolName:  viewModel.player.isPlaying == true ? .pauseCircleFill : .playCircle)
                 .resizable()
                 .foregroundColor(buttonColor)
         }
@@ -88,7 +83,7 @@ struct PlayerView<ViewModel: PlayerViewModel>: View {
     private var closeButton: some View {
         
         Button {
-            self.player.stop()
+            viewModel.player.stop()
             if let closeAnimation = closeAnimation{
                 withAnimation(closeAnimation){
                     self.isClosed = true
@@ -116,7 +111,7 @@ struct PlayerView<ViewModel: PlayerViewModel>: View {
     private var buttonColor: Color {
         
         if viewModel.trackExist == true{
-            return  player.isPlaying == false ? Color.init(assetsName: .accent) : Color.init(assetsName: .iconBasic)
+            return  viewModel.player.isPlaying == false ? Color.init(assetsName: .accent) : Color.init(assetsName: .iconBasic)
         }
         else{
             return Color.init(assetsName: .buttonPrimaryBackgroundDisabled)
@@ -137,8 +132,7 @@ struct PlayerView<ViewModel: PlayerViewModel>: View {
 #if DEBUG
 struct PlayerView_Previews: PreviewProvider {
     static var previews: some View {
-        PlayerView(player: .init(),
-                   viewModel: .init(diContainer: .preview, track: nil),
+        PlayerView(viewModel: .init(diContainer: .preview),
                    closeAnimation: nil,
                    isClosed: .constant(false))
             .padding()

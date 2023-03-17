@@ -7,7 +7,7 @@
 
 import Combine
 
-/// Songs service protocol
+/// Tracks service protocol
 protocol SongService{
     
     func loadRecentSongs() -> AnyPublisher<[TrackSong], Error>

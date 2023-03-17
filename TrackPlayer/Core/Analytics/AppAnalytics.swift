@@ -25,6 +25,7 @@ public enum AppEventAnalytics: String, CustomStringConvertible{
     case recovery_started = "Recover Account"
     
     case main_screen_visited = "Main Screen Visited"
+    case favorites_screen_visited = "Favorites screen visited"
     case notifications_allowed = "Notifications Allowed"
     
     case select_track = "Select track"

@@ -7,6 +7,9 @@
 */
 
 /* No comment provided by engineer. */
+"about_button_title" = "About";
+
+/* No comment provided by engineer. */
 "songs_list_title" = "iTunes tracks";
 
 /* No comment provided by engineer. */
@@ -50,3 +53,15 @@
 
 /* No comment provided by engineer. */
 "favorites" = "Favorites";
+
+/* No comment provided by engineer. */
+"app_description" = "This application showcases how to search for tracks in iTunes, view the track attributes, add them to favorites, and play them. The app includes a popup player and can play music in the background. It uses SwiftUI, Combine, and MVVM + UIKit based Coordinator architecture. If desired, it is easy to customize the localization and color theme.";
+
+/* No comment provided by engineer. */
+"close_button" = "Close";
+
+/* No comment provided by engineer. */
+"no_favorites_found" = "No favorite tracks";
+
+/* No comment provided by engineer. */
+"refresh_title" = "Pull to refresh";

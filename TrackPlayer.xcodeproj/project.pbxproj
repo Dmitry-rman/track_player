@@ -61,11 +61,24 @@
 		0A4ECABD29B51049007999A6 /* TrackViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4ECABC29B51049007999A6 /* TrackViewModelProtocol.swift */; };
 		0A4ECABF29B51C8E007999A6 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4ECABE29B51C8E007999A6 /* PlayerView.swift */; };
 		0A4ECAC329B523E1007999A6 /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4ECAC229B523E1007999A6 /* PlayerViewModel.swift */; };
+		0AA1632829C20D1B000120C9 /* TrackPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1632729C20D1B000120C9 /* TrackPlayer.swift */; };
+		0AA1632B29C302B0000120C9 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1632A29C302B0000120C9 /* UserData.swift */; };
+		0AA1633129C365B3000120C9 /* Publisher+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1633029C365B3000120C9 /* Publisher+.swift */; };
 		0AB0E33D29B7D91100424C6A /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB0E33C29B7D91100424C6A /* AudioEngine.swift */; };
 		0AB0E33F29B8534900424C6A /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB0E33E29B8534900424C6A /* AppError.swift */; };
 		0AB0E34529BE656C00424C6A /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB0E34429BE656C00424C6A /* AppState.swift */; };
 		0AB0E34729BE667E00424C6A /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB0E34629BE667E00424C6A /* Store.swift */; };
-		0AB0E34A29BE73CB00424C6A /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB0E34929BE73CB00424C6A /* UserData.swift */; };
+		0AB0E34A29BE73CB00424C6A /* FavoritesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB0E34929BE73CB00424C6A /* FavoritesStore.swift */; };
+		0AD26BCA29BF5AEC005222FA /* FaforitesStoreImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD26BC929BF5AEC005222FA /* FaforitesStoreImplementation.swift */; };
+		0AF49AE529BF6EC2008D39E5 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49AE429BF6EC2008D39E5 /* AboutView.swift */; };
+		0AF49AE729BF72F5008D39E5 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49AE629BF72F5008D39E5 /* AboutViewController.swift */; };
+		0AF49AE929BF73CF008D39E5 /* AboutViewModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49AE829BF73CF008D39E5 /* AboutViewModule.swift */; };
+		0AF49AEC29BF7978008D39E5 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49AEB29BF7978008D39E5 /* FavoritesView.swift */; };
+		0AF49AEE29BF7981008D39E5 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49AED29BF7981008D39E5 /* FavoritesViewModel.swift */; };
+		0AF49AF029BF79F7008D39E5 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49AEF29BF79F7008D39E5 /* FavoritesViewController.swift */; };
+		0AF49AF229BF7A8F008D39E5 /* FavoritesViewModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49AF129BF7A8F008D39E5 /* FavoritesViewModule.swift */; };
+		0AF49AF629BF9590008D39E5 /* TrackListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49AF529BF9590008D39E5 /* TrackListRow.swift */; };
+		0AF49AF829BF9719008D39E5 /* BaseTrackListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49AF729BF9719008D39E5 /* BaseTrackListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,11 +157,24 @@
 		0A4ECABC29B51049007999A6 /* TrackViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackViewModelProtocol.swift; sourceTree = "<group>"; };
 		0A4ECABE29B51C8E007999A6 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		0A4ECAC229B523E1007999A6 /* PlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
+		0AA1632729C20D1B000120C9 /* TrackPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackPlayer.swift; sourceTree = "<group>"; };
+		0AA1632A29C302B0000120C9 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		0AA1633029C365B3000120C9 /* Publisher+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+.swift"; sourceTree = "<group>"; };
 		0AB0E33C29B7D91100424C6A /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
 		0AB0E33E29B8534900424C6A /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		0AB0E34429BE656C00424C6A /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		0AB0E34629BE667E00424C6A /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
-		0AB0E34929BE73CB00424C6A /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		0AB0E34929BE73CB00424C6A /* FavoritesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesStore.swift; sourceTree = "<group>"; };
+		0AD26BC929BF5AEC005222FA /* FaforitesStoreImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaforitesStoreImplementation.swift; sourceTree = "<group>"; };
+		0AF49AE429BF6EC2008D39E5 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		0AF49AE629BF72F5008D39E5 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		0AF49AE829BF73CF008D39E5 /* AboutViewModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewModule.swift; sourceTree = "<group>"; };
+		0AF49AEB29BF7978008D39E5 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
+		0AF49AED29BF7981008D39E5 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
+		0AF49AEF29BF79F7008D39E5 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		0AF49AF129BF7A8F008D39E5 /* FavoritesViewModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModule.swift; sourceTree = "<group>"; };
+		0AF49AF529BF9590008D39E5 /* TrackListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListRow.swift; sourceTree = "<group>"; };
+		0AF49AF729BF9719008D39E5 /* BaseTrackListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTrackListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,11 +267,9 @@
 				0A0C1BA929B32CE5007D24DC /* Model */,
 				0A0C1BA629B32C95007D24DC /* Services */,
 				0AB0E34829BE669500424C6A /* Utilites */,
+				0AA1632929C21880000120C9 /* Audio */,
 				0A0C1BD429B33994007D24DC /* Constants.swift */,
-				0AB0E34429BE656C00424C6A /* AppState.swift */,
-				0AB0E34929BE73CB00424C6A /* UserData.swift */,
-				0A0C1C0729B47704007D24DC /* SoundPlayer.swift */,
-				0AB0E33C29B7D91100424C6A /* AudioEngine.swift */,
+				0AA1633029C365B3000120C9 /* Publisher+.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -274,13 +298,12 @@
 		0A0C1BA629B32C95007D24DC /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				0AA1632D29C30750000120C9 /* Tracks */,
+				0AA1632C29C30745000120C9 /* Favorites */,
 				0A0C1BC729B33429007D24DC /* ServiceBilder.swift */,
 				0A0C1BC929B33516007D24DC /* ServiceBuilderMock.swift */,
 				0A0C1BCB29B335BD007D24DC /* ServiceBuilderDebug.swift */,
 				0A0C1BD629B33A0D007D24DC /* SerrviceBuilderProd.swift */,
-				0A0C1BA729B32CB8007D24DC /* SongsService.swift */,
-				0A0C1BAC29B32DD7007D24DC /* SongsServiceMockImplementation.swift */,
-				0A0C1BB029B32FC3007D24DC /* SongServiceImplementation.swift */,
 				0AB0E33E29B8534900424C6A /* AppError.swift */,
 			);
 			path = Services;
@@ -297,7 +320,7 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		0A0C1BB829B330AF007D24DC /* Song */ = {
+		0A0C1BB829B330AF007D24DC /* TrackView */ = {
 			isa = PBXGroup;
 			children = (
 				0A0C1BB429B33094007D24DC /* TrackView.swift */,
@@ -306,7 +329,7 @@
 				0A0C1C0329B3E77C007D24DC /* TrackViewModule.swift */,
 				0A0C1C0529B3E81E007D24DC /* TrackViewController.swift */,
 			);
-			path = Song;
+			path = TrackView;
 			sourceTree = "<group>";
 		};
 		0A0C1BBB29B332CA007D24DC /* UI state machine */ = {
@@ -323,7 +346,9 @@
 		0A0C1BC229B3333C007D24DC /* Dependency Injection */ = {
 			isa = PBXGroup;
 			children = (
+				0AD26BCB29BF5B20005222FA /* UserData */,
 				0A0C1BC329B33354007D24DC /* DiContainer.swift */,
+				0AB0E34429BE656C00424C6A /* AppState.swift */,
 			);
 			path = "Dependency Injection";
 			sourceTree = "<group>";
@@ -389,8 +414,12 @@
 		0A4ECAB929B51004007999A6 /* UserStories */ = {
 			isa = PBXGroup;
 			children = (
+				0AF49AE329BF6EB0008D39E5 /* About */,
+				0A0C1BB829B330AF007D24DC /* TrackView */,
+				0AF49AEA29BF7965008D39E5 /* Favorites */,
 				0A0C1BDC29B36279007D24DC /* SongsList */,
-				0A0C1BB829B330AF007D24DC /* Song */,
+				0AF49AF729BF9719008D39E5 /* BaseTrackListViewModel.swift */,
+				0AF49AF529BF9590008D39E5 /* TrackListRow.swift */,
 			);
 			path = UserStories;
 			sourceTree = "<group>";
@@ -404,6 +433,35 @@
 			path = PlayerView;
 			sourceTree = "<group>";
 		};
+		0AA1632929C21880000120C9 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				0A0C1C0729B47704007D24DC /* SoundPlayer.swift */,
+				0AA1632729C20D1B000120C9 /* TrackPlayer.swift */,
+				0AB0E33C29B7D91100424C6A /* AudioEngine.swift */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		0AA1632C29C30745000120C9 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				0AB0E34929BE73CB00424C6A /* FavoritesStore.swift */,
+				0AD26BC929BF5AEC005222FA /* FaforitesStoreImplementation.swift */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
+		0AA1632D29C30750000120C9 /* Tracks */ = {
+			isa = PBXGroup;
+			children = (
+				0A0C1BA729B32CB8007D24DC /* SongsService.swift */,
+				0A0C1BAC29B32DD7007D24DC /* SongsServiceMockImplementation.swift */,
+				0A0C1BB029B32FC3007D24DC /* SongServiceImplementation.swift */,
+			);
+			path = Tracks;
+			sourceTree = "<group>";
+		};
 		0AB0E34829BE669500424C6A /* Utilites */ = {
 			isa = PBXGroup;
 			children = (
@@ -411,6 +469,35 @@
 				0AB0E34629BE667E00424C6A /* Store.swift */,
 			);
 			path = Utilites;
+			sourceTree = "<group>";
+		};
+		0AD26BCB29BF5B20005222FA /* UserData */ = {
+			isa = PBXGroup;
+			children = (
+				0AA1632A29C302B0000120C9 /* UserData.swift */,
+			);
+			path = UserData;
+			sourceTree = "<group>";
+		};
+		0AF49AE329BF6EB0008D39E5 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				0AF49AE429BF6EC2008D39E5 /* AboutView.swift */,
+				0AF49AE629BF72F5008D39E5 /* AboutViewController.swift */,
+				0AF49AE829BF73CF008D39E5 /* AboutViewModule.swift */,
+			);
+			path = About;
+			sourceTree = "<group>";
+		};
+		0AF49AEA29BF7965008D39E5 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				0AF49AEB29BF7978008D39E5 /* FavoritesView.swift */,
+				0AF49AEF29BF79F7008D39E5 /* FavoritesViewController.swift */,
+				0AF49AF129BF7A8F008D39E5 /* FavoritesViewModule.swift */,
+				0AF49AED29BF7981008D39E5 /* FavoritesViewModel.swift */,
+			);
+			path = Favorites;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -548,6 +635,7 @@
 				0A0C1BDE29B3638A007D24DC /* Localized.swift in Sources */,
 				0A0C1BBF29B332CA007D24DC /* ViewStateChangeCondition.swift in Sources */,
 				0A0C1C0829B47704007D24DC /* SoundPlayer.swift in Sources */,
+				0AD26BCA29BF5AEC005222FA /* FaforitesStoreImplementation.swift in Sources */,
 				0A0C1BC029B332CA007D24DC /* ViewState.swift in Sources */,
 				0A0C1BC829B33429007D24DC /* ServiceBilder.swift in Sources */,
 				0AB0E34529BE656C00424C6A /* AppState.swift in Sources */,
@@ -556,17 +644,23 @@
 				0A0C1BAB29B32CF6007D24DC /* TrackSong.swift in Sources */,
 				0A0C1BFB29B3982D007D24DC /* TrackListViewController.swift in Sources */,
 				0A4ECAC329B523E1007999A6 /* PlayerViewModel.swift in Sources */,
+				0AA1632B29C302B0000120C9 /* UserData.swift in Sources */,
 				0A0C1BA829B32CB8007D24DC /* SongsService.swift in Sources */,
 				0A0C1C0629B3E81E007D24DC /* TrackViewController.swift in Sources */,
+				0AF49AF829BF9719008D39E5 /* BaseTrackListViewModel.swift in Sources */,
 				0A4ECABF29B51C8E007999A6 /* PlayerView.swift in Sources */,
+				0AF49AF229BF7A8F008D39E5 /* FavoritesViewModule.swift in Sources */,
 				0A0C1BD329B33832007D24DC /* DebugAnalytic.swift in Sources */,
 				0A0C1BFD29B39CA2007D24DC /* CoordinatorContainerLinks.swift in Sources */,
+				0AF49AE929BF73CF008D39E5 /* AboutViewModule.swift in Sources */,
 				0A0C1BAD29B32DD7007D24DC /* SongsServiceMockImplementation.swift in Sources */,
 				0A0C1BF529B39636007D24DC /* NavigationCoordinator.swift in Sources */,
 				0A0C1C0A29B48C2C007D24DC /* TrackSerachResponse.swift in Sources */,
+				0AF49AEE29BF7981008D39E5 /* FavoritesViewModel.swift in Sources */,
 				0A0C1C0129B3DF8A007D24DC /* AppDelegate.swift in Sources */,
 				0A0C1BE429B36A3D007D24DC /* Strings.swift in Sources */,
 				0A0C1BCF29B337BE007D24DC /* Analytics.swift in Sources */,
+				0AF49AE529BF6EC2008D39E5 /* AboutView.swift in Sources */,
 				0A0C1BCC29B335BD007D24DC /* ServiceBuilderDebug.swift in Sources */,
 				0A0C1BDB29B3626C007D24DC /* TrackListViewModel.swift in Sources */,
 				0A0C1C1329B4E57E007D24DC /* UserPreferences.swift in Sources */,
@@ -580,22 +674,28 @@
 				0A0C1BEA29B38825007D24DC /* Colors.swift in Sources */,
 				0A0C1BB129B32FC3007D24DC /* SongServiceImplementation.swift in Sources */,
 				0A0C1BF929B39795007D24DC /* AppHostingViewController.swift in Sources */,
+				0AF49AE729BF72F5008D39E5 /* AboutViewController.swift in Sources */,
 				0A0C1BFF29B39DEE007D24DC /* SceneDelegate.swift in Sources */,
 				0A0C1BE229B36933007D24DC /* Images.swift in Sources */,
 				0A0C1BD129B337E5007D24DC /* HubAnalytics.swift in Sources */,
 				0A0C1BED29B388FC007D24DC /* LoadingIndicator.swift in Sources */,
+				0AA1633129C365B3000120C9 /* Publisher+.swift in Sources */,
+				0AF49AEC29BF7978008D39E5 /* FavoritesView.swift in Sources */,
 				0A0C1BD729B33A0D007D24DC /* SerrviceBuilderProd.swift in Sources */,
-				0AB0E34A29BE73CB00424C6A /* UserData.swift in Sources */,
+				0AB0E34A29BE73CB00424C6A /* FavoritesStore.swift in Sources */,
+				0AA1632829C20D1B000120C9 /* TrackPlayer.swift in Sources */,
 				0A0C1BAF29B32E04007D24DC /* Mocks.swift in Sources */,
 				0A0C1BC429B33354007D24DC /* DiContainer.swift in Sources */,
 				0A0C1BB329B33085007D24DC /* TrackListView.swift in Sources */,
 				0A0C1BF129B3913F007D24DC /* ViewModuleProtocol.swift in Sources */,
 				0A0C1BEF29B390F6007D24DC /* TrackListViewModule.swift in Sources */,
+				0AF49AF629BF9590008D39E5 /* TrackListRow.swift in Sources */,
 				0A0C1BD929B35CF8007D24DC /* DelayedWorkPerformer.swift in Sources */,
 				0A4ECABB29B51026007999A6 /* TrackListViewModelProtocol.swift in Sources */,
 				0A0C1C0F29B4DDE0007D24DC /* FailedDecodable.swift in Sources */,
 				0A0C1BB729B330A9007D24DC /* TrackViewModel.swift in Sources */,
 				0A4ECABD29B51049007999A6 /* TrackViewModelProtocol.swift in Sources */,
+				0AF49AF029BF79F7008D39E5 /* FavoritesViewController.swift in Sources */,
 				0AB0E33D29B7D91100424C6A /* AudioEngine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

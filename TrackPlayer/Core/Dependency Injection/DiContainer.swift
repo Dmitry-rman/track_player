@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 /// Контейнер для dependency injection
 final class DiContainer {
@@ -24,6 +25,7 @@ final class DiContainer {
     let buildConfiguration: BuildConfiguration
     
     init(buildConfiguration: BuildConfiguration) {
+        
         self.buildConfiguration = buildConfiguration
     }
     
@@ -35,7 +37,9 @@ final class DiContainer {
         return Self.currentServiceBuilder
     }
     
-    let appState: Store<AppState> = Store(AppState())
+    lazy var appState: Store<AppState> = {
+        return Store(AppState(userData: UserData.init()))
+    }()
     
     /// Текущий закэшированный строитель сервисов
     fileprivate static var currentServiceBuilder: ServiceBuilder!
@@ -47,9 +51,9 @@ final class DiContainer {
         case .testing:
             return ServiceBuilderMock()
         case .prod:
-            return ServiceBuilderProd(shouldLogNetworkRequests: false)
+            return ServiceBuilderProd(shouldLogNetworkRequests: false, stateChanger: self)
         default:
-            return ServiceBuilderDebug(shouldLogNetworkRequests: true)
+            return ServiceBuilderDebug(shouldLogNetworkRequests: true, stateChanger: self)
         }
     }
     
@@ -62,7 +66,20 @@ final class DiContainer {
             return
         }
     }
+    
+    lazy var player: TrackPlayer = {
+        self.serviceBuilder.createPlayer()
+    }()
+}
 
+extension DiContainer: StateChangeProtocol{
+    
+    func favoritsChanged(_ value: Int) {
+        
+        appState.bulkUpdate({ state in
+            state.userData.favoritsCount = value
+        })
+    }
 }
 
 #if DEBUG

@@ -16,6 +16,10 @@ extension String {
     /// Палитра текстов в приложении
     enum StringsPalette: String {
         
+        case aboutButtonTitle = "about_button_title"
+        
+        case appDescription = "app_description"
+        
         case songsListScreenTitle = "songs_list_title"
         
         case searchTitle = "search_song"
@@ -34,6 +38,8 @@ extension String {
         
         case noTracksFound = "no_tracks_found"
         
+        case noFavoritesFound = "no_favorites_found"
+        
         case imageLoadingError = "image_loading_error"
         
         case volume = "volume"
@@ -45,6 +51,10 @@ extension String {
         case noTrack = "no_track"
         
         case favorites = "favorites"
+        
+        case closeButton = "close_button"
+        
+        case pullToRefeshTitle = "refresh_title"
       
     }
 }

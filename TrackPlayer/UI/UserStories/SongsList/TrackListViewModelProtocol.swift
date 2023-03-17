@@ -7,32 +7,13 @@
 
 import Foundation
 
-protocol TrackListViewModelProtocol: ObservableObject{
+protocol TrackListViewModelProtocol: BaseTrackListViewModelProtocol{
     
-    var container: DiContainer {get}
-    
-    var player: AVSoundPlayer? {get}
-    var playingTrack: TrackSong? {get}
     var onShowPlayer: ((_ isShowed: Bool)->())? {get set}
-    var isPlayerPlayed: Bool  {get set}
-    
-    /// UI state machine
-    var stateMachine: ViewStateMachine<[TrackSong]?> { get }
-    
+   
     var searchQuery: String {get set}
     var searching: Bool {get set}
+    var output: TrackListViewModuleOutput? {get}
     
-    func startScenario()
-    func selectTrack(_ song: TrackSong)
     func clearSearch()
-    func stopPlayer()
-    func trackDidPlayed(track: TrackSong, withPlayer player: AVSoundPlayer?)
-    func errorMessage(error: Error?) -> String?
-}
-
-extension TrackListViewModelProtocol {
-    
-    func trackDidPlayed(track: TrackSong){
-        trackDidPlayed(track: track, withPlayer: nil)
-    }
 }

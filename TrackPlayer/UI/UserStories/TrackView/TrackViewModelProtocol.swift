@@ -19,10 +19,12 @@ protocol TrackViewModelProtocol: ObservableObject{
     var imageUrl: URL? {get}
     var songUrl: URL? {get}
     var isFavorited: Bool {get}
+    var player: TrackPlayer {get}
     
     func toggleFavorite() 
-    func timeString(player: AVSoundPlayer) -> String
-    func leftTimeString(player: AVSoundPlayer) -> String
+    var timeString: String {get}
+    var leftTimeString: String {get}
+    func playTap()
     func closeAction()
-    func playTap(player: AVSoundPlayer)
+    
 }

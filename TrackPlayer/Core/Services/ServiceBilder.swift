@@ -16,9 +16,14 @@ protocol ServiceBuilder {
     /// Get songs service
     func getSongsServie() -> SongService
     
+    /// Create app player
+    func createPlayer() -> TrackPlayer
+    
     /// Audio Engine service
     func getAudioEngine() -> AudioEngineProtocol
     
     /// Get analytics
     var analytics: Analytics { get }
+    
+    func getFavoritesService() ->  any FavoritesStore
 }

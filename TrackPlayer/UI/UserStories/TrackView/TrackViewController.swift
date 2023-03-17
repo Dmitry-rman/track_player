@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class TrackViewController<ViewModel: TrackViewModelProtocol, Player: AVSoundPlayer>: AppHostingController<TrackView<ViewModel, Player>> {
+final class TrackViewController<ViewModel: TrackViewModelProtocol>: AppHostingController<TrackView<ViewModel>> {
   
     var viewModel: ViewModel?
     

@@ -9,10 +9,14 @@ import Foundation
 
 class ServiceBuilderDebug: ServiceBuilder{
     
+    private unowned var stateChanger: StateChangeProtocol?
+    
     let shouldLogNetworkRequests: Bool
     
-    init(shouldLogNetworkRequests: Bool) {
+    init(shouldLogNetworkRequests: Bool, stateChanger: StateChangeProtocol) {
+        
         self.shouldLogNetworkRequests = shouldLogNetworkRequests
+        self.stateChanger = stateChanger
     }
     
     //MARK: - ServiceBuilder
@@ -40,5 +44,20 @@ class ServiceBuilderDebug: ServiceBuilder{
             _analytics = DebugAnalytic()
         }
         return _analytics
+    }
+    
+    private var _favoriteStore: FavoritesStore!
+    func getFavoritesService() ->  any FavoritesStore{
+        
+        if let favoriteStore = _favoriteStore {
+            return favoriteStore
+        }else{
+          _favoriteStore = FaforitesStoreImplementation(stateChanger: stateChanger)
+            return _favoriteStore
+        }
+    }
+    
+    func createPlayer() -> TrackPlayer {
+        return TrackPlayer(player: AVSoundPlayer())
     }
 }

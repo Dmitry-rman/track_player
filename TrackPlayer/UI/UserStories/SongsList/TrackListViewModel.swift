@@ -8,31 +8,17 @@
 import Foundation
 import Combine
 
-final class TrackListViewModel: TrackListViewModelProtocol{
+final class TrackListViewModel: BaseTrackListViewModel, TrackListViewModelProtocol{
 
     @Published var searchQuery: String = ""
     @Published var searching: Bool = false
     
-    @Published var player: AVSoundPlayer?
-    @Published var playingTrack: TrackSong?
-    @Published var isPlayerPlayed: Bool = false
-    
     var onShowPlayer: ((_ isShowed: Bool)->())?
-    
-    let container: DiContainer
-    
-    private var chachedSongs: [TrackSong]?
-    private(set) var stateMachine: ViewStateMachine<[TrackSong]?>
-    private var isScenarioStarted = false
-    private var cancellableSet = Set<AnyCancellable>()
-    
-    private let songService: SongService
-    private let analytics: Analytics
     
     //Limit for API's track results
     private let searchResultLimit: Int
     
-    private weak var output: TrackListViewModuleOutput?
+    private(set) weak var output: TrackListViewModuleOutput?
     
     convenience init(output: TrackListViewModuleOutput,
                      container: DiContainer,
@@ -48,19 +34,24 @@ final class TrackListViewModel: TrackListViewModelProtocol{
          container: DiContainer,
          searchResultLimit: Int){
         
-        self.container = container
         self.searchResultLimit = searchResultLimit
-        self.songService = container.serviceBuilder.getSongsServie()
-        self.analytics = container.serviceBuilder.analytics
+        super.init(state: state, container: container)
         
-        self.stateMachine = ViewStateMachine(state)
+        switch state{
+        case .content(let list, _):
+            if let list = list{
+                self.tracks = list
+            }
+        default:
+            break
+        }
+        
         stateMachine.$state.sink { [weak self] state in
             guard let self = self else {return}
-            debugPrint(state)
+ 
             switch state{
-            case .content(let songs, _):
-                self.chachedSongs = songs ?? []
-                self.onShowPlayer?(self.playingTrack != nil)
+            case .content( _, _):
+                self.onShowPlayer?(container.player.playingTrack != nil)
             default:
                 break
             }
@@ -69,7 +60,7 @@ final class TrackListViewModel: TrackListViewModelProtocol{
         .store(in: &cancellableSet)
         
         $searchQuery
-            .filter{ $0.count >= 3}//3 simbols or more to search
+            .filter{ $0.count >= 3}//3 symbols or more to search
             .throttle(for: .seconds(0.5), scheduler: RunLoop.main, latest: true)
             .removeDuplicates()
             .eraseToAnyPublisher()
@@ -95,7 +86,7 @@ final class TrackListViewModel: TrackListViewModelProtocol{
                 
                 debugPrint(error)
                 if let error = error as? Error{
-                    self.stateMachine.setState(.content((self.chachedSongs), .error(error)))
+                    self.stateMachine.setState(.content((self.tracks), .error(error)))
                 }
             } receiveValue: { [weak self] songs in
                 self?.stateMachine.setState(.content(songs, .default))
@@ -103,28 +94,29 @@ final class TrackListViewModel: TrackListViewModelProtocol{
             }
             .store(in: &cancellableSet)
         
+        container.player.$isPlaying
+            .sink { [weak self] playing in
+                self?.onShowPlayer?(true)
+            }
+            .store(in: &cancellableSet)
+        
     }
     
     //MARK: - SongsListViewModelProtocol
     
-    func startScenario(){
+    override func startScenario(){
         
         guard !isScenarioStarted else { return }
         isScenarioStarted = true
         
+        super.startScenario()
+        
         self.analytics.logEvent(AppEventAnalytics.main_screen_visited)
         
         self.stateMachine.setState(.loading)
+        loadRecent()
         
-        //loadRecent()
-        
-        do{
-            try self.container.serviceBuilder.getAudioEngine().initAudioSession()
-        }catch{
-            self.stateMachine.setState(.content((self.chachedSongs), .error(error)))
-        }
-        
-        searchQuery = "Abba"
+       // searchQuery = "Abba"
     }
     
     private func loadRecent() {
@@ -135,7 +127,7 @@ final class TrackListViewModel: TrackListViewModelProtocol{
                 guard let self = self else {return}
                 debugPrint(error)
                 if let error = error as? Error{
-                    self.stateMachine.setState(.content((self.chachedSongs), .error(error)))
+                    self.stateMachine.setState(.content((self.tracks), .error(error)))
                 }
             } receiveValue: {  [weak self] songs in
                 guard let self = self else {return}
@@ -144,39 +136,10 @@ final class TrackListViewModel: TrackListViewModelProtocol{
             .store(in: &cancellableSet)
     }
     
-    func selectTrack(_ track: TrackSong) {
+    override func selectTrack(_ track: TrackSong) {
         
-        //send analytics
-        if let trackName = track.trackTitle {
-            self.analytics.logEvent(AppEventAnalytics.select_track,
-                                    properties: ["name" : trackName])
-        }else{
-            self.analytics.logEvent(AppEventAnalytics.select_track)
-        }
-        
-        self.output?.didSelectSong(song: track)
-    }
-   
-    func trackDidPlayed(track: TrackSong, withPlayer player: AVSoundPlayer?) {
-        
-        if player == nil {
-            let newPlayer = container.serviceBuilder.getAudioEngine().createPlayer()
-            newPlayer.playSound(url: track.trackUrl)
-            self.player = newPlayer
-        }else{
-            self.player = player
-        }
-
-        self.playingTrack = track
-        self.onShowPlayer?(true)
-        
-        self.player?.$isPlaying
-            .sink(receiveValue: { [weak self] value in
-                self?.isPlayerPlayed = value
-            })
-            .store(in: &cancellableSet)
-
-        self.objectWillChange.send()
+        super.selectTrack(track) 
+        self.output?.searchListDidSelectTrack(track)
     }
     
     func clearSearch() {
@@ -184,17 +147,4 @@ final class TrackListViewModel: TrackListViewModelProtocol{
         searchQuery = ""
     }
     
-    func errorMessage(error: Error?) -> String?{
-        
-        if let error = error as? AppError{
-            return "API Error: \(error.localizedDescription)"
-        }else{
-            return error?.localizedDescription
-        }
-    }
-    
-    func stopPlayer(){
-        player?.stop()
-        self.objectWillChange.send()
-    }
 }

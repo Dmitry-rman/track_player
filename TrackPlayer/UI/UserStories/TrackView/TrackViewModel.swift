@@ -12,6 +12,11 @@ import Combine
 final class TrackViewModel: TrackViewModelProtocol{
     
     @Published private(set) var isFavorited: Bool = false
+    @Published private(set) var player: TrackPlayer{
+        didSet{
+            subscribeToPlayerChanges()
+        }
+    }
     
     private var cancellableSet = Set<AnyCancellable>()
     private let container: DiContainer
@@ -20,7 +25,7 @@ final class TrackViewModel: TrackViewModelProtocol{
         
         switch stateMachine.state{
         case .content(let track, _):
-            return "\(String.pallete(.songTitle)) \(track.trackTitle  ?? String.pallete(.unknown))"
+            return (track.trackTitle  ?? String.pallete(.unknown))
         default:
             return ""
         }
@@ -56,7 +61,6 @@ final class TrackViewModel: TrackViewModelProtocol{
         }
     }
     
-    
     private(set) var stateMachine: ViewStateMachine<TrackSong>
     private var stateCancellable: AnyCancellable?
     private var isScenarioStarted = false
@@ -66,44 +70,55 @@ final class TrackViewModel: TrackViewModelProtocol{
     
     private weak var output: SongViewModuleOutput?
     
-    convenience init(song: TrackSong, output: SongViewModuleOutput, container: DiContainer){
+    convenience init(song: TrackSong, output: SongViewModuleOutput, player: TrackPlayer, container: DiContainer){
         
-        self.init(state: .content(song, .default), container: container)
+        self.init(state: .content(song, .default), player: player, container: container)
         self.output = output
+       
     }
     
-    init(state: ViewState<TrackSong>, container: DiContainer){
+    init(state: ViewState<TrackSong>, player: TrackPlayer, container: DiContainer){
         
         self.songService = container.serviceBuilder.getSongsServie()
         self.analytics = container.serviceBuilder.analytics
         self.container = container
-        
+        self.player = player
         self.stateMachine = ViewStateMachine(state)
+        
         stateCancellable = stateMachine.$state.sink { [weak self] state in
             
             self?.objectWillChange.send()
         }
         
-        self.container.appState
-            .map({ [weak self] value in
-                return value.userData.favorites.contains{
-                    
-                    var trackID: String?
-                    switch self?.stateMachine.state{
-                    case .content(let track, _):
-                        trackID = track.id
-                    default:
-                        break
-                    }
-                    
-                    return $0 == trackID
-                }
-            })
-            .sink(receiveValue: { [weak self] value in
-                self?.isFavorited = value
-            })
-            .store(in: &cancellableSet)
+    }
+    
+    private func subscribeToPlayerChanges(){
         
+        self.container.appState
+            .flatMap { [weak self] state -> AnyPublisher<Bool, Never> in
+                
+                guard let self = self else {
+                    return Empty(completeImmediately: true).eraseToAnyPublisher()
+                }
+                
+                switch self.stateMachine.state{
+                case .content(let track, _):
+                    return self.container.serviceBuilder.getFavoritesService()
+                        .isTrackFavorited(track)
+                        .eraseToAnyPublisher()
+                default:
+                    return Empty(completeImmediately: true).eraseToAnyPublisher()
+                }
+
+            }
+            .assign(to: &$isFavorited)
+        
+        self.player.$time
+            .map{ [weak self] value in
+                self?.objectWillChange.send()
+                return value
+            }
+            .sinkStore(in: &cancellableSet)
     }
     
     func startScenario(){
@@ -111,7 +126,7 @@ final class TrackViewModel: TrackViewModelProtocol{
         guard !isScenarioStarted else { return }
         isScenarioStarted = true
         
-        self.stateMachine.setState(.loading)
+        subscribeToPlayerChanges()
     }
     
     func closeAction(){
@@ -120,14 +135,17 @@ final class TrackViewModel: TrackViewModelProtocol{
         self.output?.songViewDidClosed()
     }
     
-    func playTap(player: AVSoundPlayer){
+    func playTap(){
         
         var selectedTrack: TrackSong?
         
         switch stateMachine.state{
         case .content(let track, _):
             selectedTrack = track
-            self.output?.playerDidPlay(track: track, withPlayer: player)
+            if player !== container.player{
+               player = container.player
+            }
+            player.playTrack(track)
         default:
             break
         }
@@ -142,7 +160,7 @@ final class TrackViewModel: TrackViewModelProtocol{
         }
     }
     
-    func leftTimeString(player: AVSoundPlayer) -> String {
+    var leftTimeString: String {
         
         guard let duration = player.duration else {return ""}
         
@@ -150,7 +168,7 @@ final class TrackViewModel: TrackViewModelProtocol{
         return String(format: "-%02d:%02d", seconds/60, seconds%60) as String//"\(secs/60):\(secs%60)"
     }
     
-    func timeString(player: AVSoundPlayer) -> String {
+    var timeString: String {
         
         let seconds = player.time
         return String(format: "%02d:%02d", seconds/60, seconds%60) as String//"\(secs/60):\(secs%60)"
@@ -161,9 +179,13 @@ final class TrackViewModel: TrackViewModelProtocol{
         switch self.stateMachine.state{
         case .content(let track, _):
             if isFavorited {
-                container.appState.value.userData.removeTrackFromFavorites(track)
+                container.serviceBuilder.getFavoritesService()
+                    .removeTracksFromFavorites([track])
+                    .sinkStore(in: &cancellableSet)
             }else{
-                container.appState.value.userData.addTrackToFavorits(track)
+                container.serviceBuilder.getFavoritesService()
+                    .addTrackToFavorits(track)
+                    .sinkStore(in: &cancellableSet)
             }
         default:
             break

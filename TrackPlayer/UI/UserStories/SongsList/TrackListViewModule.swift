@@ -8,17 +8,16 @@
 import UIKit
 
 ///Input module protocol
-protocol TrackListViewModuleInput: AnyObject{
+protocol TrackListViewModuleInput: BaseTrackListViewOutput{
     
-    func playTrack(track: TrackSong, withPlayer player: AVSoundPlayer)
-    
-    var player: AVSoundPlayer? {get}
 }
 
 ///Output module protocol
 protocol TrackListViewModuleOutput: AnyObject{
     
-    func didSelectSong(song: TrackSong)
+    func searchListDidSelectTrack(_ track: TrackSong)
+    func showAbout()
+    func showFavorites()
 }
 
 struct TrackListViewModule: ViewModuleProtocol{

@@ -28,10 +28,14 @@ final class TrackListViewController<ViewModel: TrackListViewModelProtocol>: AppH
         navigationItem.setRightBarButton(rightButton, animated: false)
         self.rightButton = rightButton
         
+        let leftButton = UIBarButtonItem(title: String.pallete(.aboutButtonTitle),
+                                         style: .plain,
+                                         target: self,
+                                          action: #selector(leftButtonTap(_:)))
+        navigationItem.setLeftBarButton(leftButton, animated: false)
+        
         self.viewModel.container.appState
-            .map{
-                $0.userData.favorites.count
-            }
+            .map{ $0.userData.favoritsCount}
             .sink(receiveValue: {[weak self] count in
                 self?.rightButton?.title = count == 0 ? String.pallete(.favorites) : String.pallete(.favorites) + "(\(count))"
             })
@@ -39,9 +43,15 @@ final class TrackListViewController<ViewModel: TrackListViewModelProtocol>: AppH
     }
     
     @objc
+    private func leftButtonTap(_ sender: Any) {
+        
+        viewModel.output?.showAbout()
+    }
+    
+    @objc
     private func rightButtonTap(_ sender: Any) {
         
-        debugPrint("rightButtonTap")
+        viewModel.output?.showFavorites()
     }
     
     init(viewModel: ViewModel, rootView: TrackListView<ViewModel>) {
@@ -58,12 +68,5 @@ final class TrackListViewController<ViewModel: TrackListViewModelProtocol>: AppH
 
 extension TrackListViewController: TrackListViewModuleInput{
     
-    var player: AVSoundPlayer? {
-        viewModel.player
-    }
-    
-    func playTrack(track: TrackSong, withPlayer player: AVSoundPlayer) {
-        viewModel.trackDidPlayed(track: track, withPlayer: player)
-    }
     
 }

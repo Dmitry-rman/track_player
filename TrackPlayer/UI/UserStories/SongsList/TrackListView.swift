@@ -14,20 +14,27 @@ struct TrackListView<ViewModel: TrackListViewModelProtocol>: View {
     @State var isPlayerClosed: Bool = false
     @FocusState private var queryIsFocused: Bool
     
-    private let contentBackgroundColor = Color(assetsName: .backgroundBasic)
+    private let contentBackgroundColor = Color(assetsName: .backgroundPrimary)
     private let playerPopupAnimation: Animation = .easeInOut(duration: 0.2)
     
     var body: some View {
         
         self.currentContent
-            .onAppear(perform: {
+            .onAppear{
                 viewModel.startScenario()
                 viewModel.onShowPlayer = { isShowed in
+                    
+                    if isShowed == true && isPlayerClosed == false{
+                        return
+                    }
+                    
                     withAnimation(playerPopupAnimation){
                         self.isPlayerClosed = !isShowed
                     }
+                    
                 }
-            })
+            }
+            .background(self.contentBackgroundColor)
     }
     
     @ViewBuilder
@@ -71,16 +78,44 @@ struct TrackListView<ViewModel: TrackListViewModelProtocol>: View {
         VStack(spacing: 0){
             
             searchBar
-                .padding(.horizontal)
+                .padding()
             
-            if let songs = songs{
-                if songs.count > 0 {
+            if let tracks = songs{
+                
+                if tracks.count > 0 {
+                    
                     ScrollView{
-                        LazyVStack(alignment: .leading, spacing: 12){
-                            ForEach(songs, id: \.id){ song in
-                                trackListRow(track: song)
+                        
+                        LazyVStack(alignment: .leading, spacing: 0){
+                            ForEach(tracks, id: \.id){ track in
+                                
+                                let isPlaying = viewModel.isPlayerPlayed && (track == viewModel.playingTrack)
+                                
+                                VStack(spacing: 0){
+                                    TrackListRow(track: track,
+                                                 isPlaying: isPlaying) {
+                                        self.queryIsFocused = false
+                                        self.viewModel.selectTrack(track)
+                                    } playAction: {
+                                        
+                                        if isPlaying == true {
+                                            viewModel.stopPlayer()
+                                        }else{
+                                            self.queryIsFocused = false
+                                            viewModel.playTrack(track)
+                                        }
+                                    }
                                     .padding(.horizontal)
+                                    .padding(.vertical, 8)
+                                    
+                                    if tracks.last != track {
+                                        Divider()
+                                            .padding(.leading, 60)
+                                    }
+                                }
+                                .background(Color(assetsName: .backgroundBasic))
                             }
+                            .listStyle(.plain)
                         }
                         .padding(.vertical)
                     }
@@ -100,13 +135,11 @@ struct TrackListView<ViewModel: TrackListViewModelProtocol>: View {
             if songs?.count ?? 0 == 0 {
                 Spacer()
             }
-           
+            
             if isPlayerClosed == false {
                 VStack(spacing: 0){
                     Divider()
-                    PlayerView(player: viewModel.player ?? .init(),
-                               viewModel: .init(diContainer: self.viewModel.container,
-                                                track: viewModel.playingTrack),
+                    PlayerView(viewModel: .init(diContainer: viewModel.container),
                                closeAnimation: playerPopupAnimation,
                                isClosed: $isPlayerClosed)
                     .padding()
@@ -117,7 +150,6 @@ struct TrackListView<ViewModel: TrackListViewModelProtocol>: View {
             }
         }
     }
-    
     
     @ViewBuilder
     private var searchBar: some View{
@@ -165,56 +197,18 @@ struct TrackListView<ViewModel: TrackListViewModelProtocol>: View {
         }
     }
     
-    private func trackListRow(track: TrackSong) -> some View{
-        
-        let isPlaying = viewModel.isPlayerPlayed && (track == viewModel.playingTrack)
-        
-        return Button(action: {
-            self.queryIsFocused = false
-            self.viewModel.selectTrack(track)
-        }, label: {
-            
-            HStack{
-                Button {
-                    if isPlaying == true {
-                        viewModel.stopPlayer()
-                    }else{
-                        self.queryIsFocused = false
-                        viewModel.trackDidPlayed(track: track)
-                    }
-                } label: {
-                    Image(sfSymbolName: isPlaying ? .pauseCircleFill : .playCircle)
-                        .font(.system(size: 23))
-                        .imageScale( isPlaying ? .large : .medium)
-                }
-                .frame(width: 33)
-               
-                VStack(alignment: .leading){
-                    Text(track.trackTitle ?? String.pallete(.unknown))
-                        .multilineTextAlignment(.leading)
-                        .font(isPlaying ? .title3.bold() : .title3)
-                        .foregroundColor(Color.init(assetsName: .textPrimary))
-                    Text(track.artistTitle ?? String.pallete(.unknown))
-                        .multilineTextAlignment(.leading)
-                        .font(isPlaying ? .subheadline.bold() : .subheadline)
-                        .foregroundColor(Color.init(assetsName: .textSecondary))
-                }
-                Spacer()
-                Image(sfSymbolName: .chevronRight)
-                    .font(isPlaying ? .title2.bold() : .title2)
-            }
-        })
-    }
 }
 
 #if DEBUG
 struct SongsListView_Previews: PreviewProvider {
-
+    
     static var previews: some View {
-        Group{
-            TrackListView(viewModel: TrackListViewModel.init(state: .content(nil, .default), container: .preview, searchResultLimit: 25))
-         //   SongsListView(viewModel: SongsListViewModel.init(state: .loading, container: .preview))
+        NavigationView{
+            TrackListView(viewModel: TrackListViewModel.init(state: .content(TrackSong.mockedSongs, .default), container: .preview, searchResultLimit: 25))
+            //.environment(\.colorScheme, .dark)
+            //   SongsListView(viewModel: SongsListViewModel.init(state: .loading, container: .preview))
         }
+        .navigationTitle(String.pallete(.songsListScreenTitle))
     }
 }
 #endif

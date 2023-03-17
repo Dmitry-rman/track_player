@@ -8,7 +8,7 @@
 import Foundation
 
 /// Track song model
-struct TrackSong: Identifiable, Equatable{
+struct TrackSong: Identifiable, Equatable, Hashable{
     
     var id: String{
         return trackUrlString
