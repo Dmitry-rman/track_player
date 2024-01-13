@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-protocol FavoritesViewModelProtocol: BaseTrackListViewModelProtocol{
+protocol FavoritesViewModelProtocol: IBaseTrackListViewModel{
     
     func removeTrack(at offsets: IndexSet)
     func reloadFavorites()

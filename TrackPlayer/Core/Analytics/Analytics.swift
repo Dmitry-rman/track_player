@@ -11,7 +11,6 @@ import Foundation
 
 /// Analytycs system protocol
 public protocol Analytics {
-    
     func setUserId(_ userId: String?)
     func setUserProperty(_ value: String, forName name: String)
     func logEvent(_ event: CustomStringConvertible, properties: [String: Any]?)
@@ -19,7 +18,6 @@ public protocol Analytics {
 }
 
 extension Analytics{
-    
     public func logEvent(_ event: CustomStringConvertible){
       logEvent(event, properties: nil)
     }

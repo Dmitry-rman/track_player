@@ -9,12 +9,11 @@ import Foundation
 
 #if DEBUG
 class ServiceBuilderMock: ServiceBuilder{
-    
     func getFavoritesService() ->  any FavoritesStore{
         FaforitesStoreImplementation(stateChanger: nil)
     }
     
-    func getAudioEngine() ->  AudioEngineProtocol{
+    func getAudioEngine() ->  IAudioEngine {
         return AudioEngine()
     }
     
@@ -33,6 +32,5 @@ class ServiceBuilderMock: ServiceBuilder{
     lazy var analytics: Analytics = {
         DebugAnalytic()
     }()
-    
 }
 #endif

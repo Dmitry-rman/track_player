@@ -8,23 +8,21 @@
 import SwiftUI
 
 class AppHostingController<Content: View> : UIHostingController<Content> {
-    
     internal var isInitialized = false
     
     override var shouldAutorotate: Bool {
-        return true
+         true
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
+         .portrait
     }
     
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
-        return .portrait
+         .portrait
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
         super.viewWillAppear(animated)
         
         guard !isInitialized else { return }
@@ -34,7 +32,6 @@ class AppHostingController<Content: View> : UIHostingController<Content> {
     }
     
     internal func setupController() {
-        
         let appearance = navigationController?.navigationBar.standardAppearance
         appearance?.titleTextAttributes = [
             NSAttributedString.Key.foregroundColor: UIColor(assetsName: .headerTitle) ?? UIColor.label,

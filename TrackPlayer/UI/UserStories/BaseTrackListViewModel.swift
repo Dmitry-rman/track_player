@@ -7,37 +7,7 @@
 
 import Combine
 
-
-protocol BaseTrackListViewOutput: AnyObject{
-    
-}
-
-protocol BaseTrackListViewModelProtocol: ObservableObject{
-    
-    var container: DiContainer {get}
-    
-    /// UI state machine
-    var stateMachine: ViewStateMachine<[TrackSong]?> { get }
-    
-    func startScenario()
-    
-    var playingTrack: TrackSong? {get}
-    var isPlayerPlayed: Bool  {get set}
-    var tracks: [TrackSong] {get}
-    
-    func selectTrack(_ track: TrackSong)
-    func stopPlayer()
-    func playTrack(_ track: TrackSong)
-    func errorMessage(error: Error?) -> String?
-}
-
-
-extension BaseTrackListViewModelProtocol {
-    
-}
-
-class BaseTrackListViewModel: BaseTrackListViewModelProtocol{
-    
+class BaseTrackListViewModel: IBaseTrackListViewModel {
     @Published var tracks: [TrackSong] = []
     @Published var isPlayerPlayed: Bool = false
     @Published var playingTrack: TrackSong?
@@ -53,8 +23,7 @@ class BaseTrackListViewModel: BaseTrackListViewModelProtocol{
     
     @Published private var player: TrackPlayer
     
-    init(state: ViewState<[TrackSong]?>, container: DiContainer){
-        
+    init(state: ViewState<[TrackSong]?>, container: DiContainer) {
         self.container = container
         self.songService = container.serviceBuilder.getSongsServie()
         self.analytics = container.serviceBuilder.analytics
@@ -84,7 +53,6 @@ class BaseTrackListViewModel: BaseTrackListViewModelProtocol{
     }
     
     func startScenario() {
-       
         do{
             try self.container.serviceBuilder.getAudioEngine().initAudioSession()
         }catch{
@@ -93,7 +61,6 @@ class BaseTrackListViewModel: BaseTrackListViewModelProtocol{
     }
     
     func selectTrack(_ track: TrackSong) {
-        
         //send analytics
         if let trackName = track.trackTitle {
             self.analytics.logEvent(AppEventAnalytics.select_track,
@@ -103,8 +70,7 @@ class BaseTrackListViewModel: BaseTrackListViewModelProtocol{
         }
     }
     
-    func errorMessage(error: Error?) -> String?{
-        
+    func errorMessage(error: Error?) -> String? {
         if let error = error as? AppError{
             return "API Error: \(error.localizedDescription)"
         }else{

@@ -8,7 +8,6 @@
 import Foundation
 
 struct FailableDecodable<Base : Decodable> : Decodable {
-
     let base: Base?
 
     init(from decoder: Decoder) throws {

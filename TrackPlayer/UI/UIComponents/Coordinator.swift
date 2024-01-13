@@ -7,7 +7,6 @@ import UIKit
 
 /// Контейнер, в котором координатор отображает модули
 protocol CoordinatorContainer: AnyObject {
-    
     /// Связать lifecycle координатора с lifecycle контейнера
     /// - Parameters:
     ///   - coordinator: координатор
@@ -22,7 +21,6 @@ protocol CoordinatorContainer: AnyObject {
 
 /// Базовый интерфейс, которому должны следовать все координаторы
 protocol Coordinator: AnyObject {
-    
     /// Блок обработки завершения работы координатора, входящий параметр - сам координатор
     typealias CoordinatorCompletionHandler = ((Coordinator) -> ())
     
@@ -42,7 +40,6 @@ protocol Coordinator: AnyObject {
 
 /// Базовая реализация координатора (абстрактный класс)
 class BaseCoordinator<Container: CoordinatorContainer>: NSObject, Coordinator {
-    
     /// Контейнер, в котором координатор отображает модули
     private(set) weak var container: Container?
     

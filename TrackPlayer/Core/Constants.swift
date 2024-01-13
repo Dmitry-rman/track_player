@@ -7,11 +7,8 @@
 
 import Foundation
 
-
-struct Constants{
-    
-    struct Web{
-        
+struct Constants {
+    struct Web {
         static let hostBaseProdURLString =  "https://itunes.apple.com"
         static let hostBaseDebugURLString =  "https://itunes.apple.com"
     }

@@ -7,8 +7,7 @@
 
 import Foundation
 
-public enum AppEventAnalytics: String, CustomStringConvertible{
-    
+public enum AppEventAnalytics: String, CustomStringConvertible {
     case app_close = "App Close"
     case launch_first_time = "Launch First Time"
     case launch_other_time = "Launch Other Time"

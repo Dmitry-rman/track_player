@@ -8,9 +8,7 @@
 import Combine
 
 public extension Publisher {
-    
-    func sinkIgnoringAll() -> AnyCancellable {
-        
+    func sinkIgnoringAll() -> AnyCancellable { 
         return sink(receiveCompletion: { result in
   
         }, receiveValue: { value in

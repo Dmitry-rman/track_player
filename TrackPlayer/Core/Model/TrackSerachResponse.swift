@@ -7,8 +7,7 @@
 
 import Foundation
 
-struct TrackSerachResponse: Decodable{
-    
+struct TrackSerachResponse: Decodable {
     let results: [TrackSong]
     let resultCount: Int
     

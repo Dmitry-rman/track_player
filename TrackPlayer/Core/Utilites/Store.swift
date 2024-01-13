@@ -13,7 +13,6 @@ import Combine
 typealias Store<State> = CurrentValueSubject<State, Never>
 
 extension Store {
-    
     subscript<T>(keyPath: WritableKeyPath<Output, T>) -> T where T: Equatable {
         get { value[keyPath: keyPath] }
         set {
@@ -38,17 +37,6 @@ extension Store {
 }
 
 // MARK: -
-
-//extension ObservableObject {
-//    func loadableSubject<Value>(_ keyPath: WritableKeyPath<Self, Loadable<Value>>) -> LoadableSubject<Value> {
-//        let defaultValue = self[keyPath: keyPath]
-//        return .init(get: { [weak self] in
-//            self?[keyPath: keyPath] ?? defaultValue
-//        }, set: { [weak self] in
-//            self?[keyPath: keyPath] = $0
-//        })
-//    }
-//}
 
 extension Binding where Value: Equatable {
     func dispatched<State>(to state: Store<State>,

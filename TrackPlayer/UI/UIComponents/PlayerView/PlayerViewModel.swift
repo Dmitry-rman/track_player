@@ -9,19 +9,17 @@ import Foundation
 import Combine
 
 class PlayerViewModel: ObservableObject{
-    
     @Published var player: TrackPlayer
-    
     @Published private(set) var isFavorited: Bool = false
     
     private var cancellableSet = Set<AnyCancellable>()
     let container: DiContainer
     
-    var trackExist: Bool{
+    var trackExist: Bool {
         return player.playingTrack != nil
     }
     
-    var volume: String{
+    var volume: String {
         String(format: "%.f%%", player.volume)
     }
     
@@ -36,7 +34,6 @@ class PlayerViewModel: ObservableObject{
     }
     
     func timeString() -> String{
-        
         guard let duration = player.duration else {return " 00:00"}
         
         let seconds = duration - player.time
@@ -44,7 +41,6 @@ class PlayerViewModel: ObservableObject{
     }
     
     init(diContainer: DiContainer) {
-        
         self.container = diContainer
         self.player = diContainer.player
         
@@ -70,7 +66,6 @@ class PlayerViewModel: ObservableObject{
         
         container.player.$playingTrack
             .flatMap {  [weak self] track -> AnyPublisher<Bool, Never> in
-                
                 guard let self = self, let track = track else {
                     return Empty(completeImmediately: true).eraseToAnyPublisher()
                 }
@@ -83,23 +78,22 @@ class PlayerViewModel: ObservableObject{
     }
     
     func toggleFavorite() {
-        
         let service = container.serviceBuilder.getFavoritesService()
+        
         if isFavorited {
-            if let track = player.playingTrack{
+            if let track = player.playingTrack {
                 service.removeTracksFromFavorites([track])
                     .sinkStore(in: &cancellableSet)
             }
-        }else{
-            if let track = player.playingTrack{
+        } else {
+            if let track = player.playingTrack {
                 service.addTrackToFavorits(track)
                     .sinkStore(in: &cancellableSet)
             }
         }
     }
     
-    func playTap(){
-        
+    func playTap() {
         if player.isPlaying == true {
             player.pause()
         }else if let track = player.playingTrack{

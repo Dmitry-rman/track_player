@@ -9,7 +9,6 @@ import Foundation
 import Combine
 
 protocol FavoritesStore{
-    
     func getFavoritesCount() -> AnyPublisher<Int, Error>
     
     func addTrackToFavorits(_ track: TrackSong) -> AnyPublisher<Bool, Error>
@@ -18,4 +17,3 @@ protocol FavoritesStore{
     func isTrackFavorited(_ track: TrackSong) -> AnyPublisher<Bool, Never>
     func getFavorites() -> AnyPublisher<[TrackSong], Error>
 }
-

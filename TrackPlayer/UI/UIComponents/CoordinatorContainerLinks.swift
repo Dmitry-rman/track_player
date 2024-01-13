@@ -10,7 +10,6 @@ import UIKit
 
 /// Менеджер хранения ссылок на координаторы, используемый в контейнерах, чтобы связать lifecycle координаторов с lifecycle конкретных UIViewController
 final class CoordinatorContainerLinks {
-    
     /// Класс-хелпер для создания ключа со слабой ссылкой на конкретный UIViewController
     private final class ViewWeakLink: Hashable {
         
@@ -46,7 +45,6 @@ final class CoordinatorContainerLinks {
     ///   - coordinator: координатор
     ///   - view: конкретный UIViewController
     func link(coordinator: Coordinator, to view: UIViewController?) {
-        
         guard let view = view else { return }
 
         linksSerializationQueue.async { [weak self] in
@@ -60,7 +58,6 @@ final class CoordinatorContainerLinks {
     
     /// Очистить ссылки на координаторы, чьи UIViewController уже "умерли"
     func clearDeadLinks() {
-        
         guard !links.isEmpty else { return }
         
         linksSerializationQueue.async { [weak self] in

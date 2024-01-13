@@ -8,20 +8,18 @@
 import UIKit
 
 ///Input module protocol
-protocol TrackListViewModuleInput: BaseTrackListViewOutput{
+protocol TrackListViewModuleInput: BaseTrackListViewOutput {
     
 }
 
 ///Output module protocol
 protocol TrackListViewModuleOutput: AnyObject{
-    
     func searchListDidSelectTrack(_ track: TrackSong)
     func showAbout()
     func showFavorites()
 }
 
-struct TrackListViewModule: ViewModuleProtocol{
-    
+struct TrackListViewModule: ViewModuleProtocol {
     private var viewController: TrackListViewController<TrackListViewModel>
     
     /// Visual representation of module
@@ -34,14 +32,15 @@ struct TrackListViewModule: ViewModuleProtocol{
     }
     
     init(output: TrackListViewModuleOutput, container: DiContainer) {
-        
         let viewModel = Self.createViewModel(output: output,
                                              container: container)
+        
         viewController = TrackListViewController(viewModel: viewModel,
                                                  rootView: TrackListView(viewModel: viewModel))
     }
     
-    private static func createViewModel(output: TrackListViewModuleOutput, container: DiContainer) ->  TrackListViewModel{
-        return TrackListViewModel(output: output, container: container)
+    private static func createViewModel(output: TrackListViewModuleOutput, container: DiContainer) -> TrackListViewModel
+    {
+        TrackListViewModel(output: output, container: container)
     }
 }

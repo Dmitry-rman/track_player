@@ -9,9 +9,8 @@ import Foundation
 
 /// Builder of app services
 protocol ServiceBuilder {
-    
     /// Base url for server
-    var baseUrl: URL { get }
+    var baseUrl: URL {get}
     
     /// Get songs service
     func getSongsServie() -> SongService
@@ -20,10 +19,10 @@ protocol ServiceBuilder {
     func createPlayer() -> TrackPlayer
     
     /// Audio Engine service
-    func getAudioEngine() -> AudioEngineProtocol
+    func getAudioEngine() -> IAudioEngine
     
     /// Get analytics
-    var analytics: Analytics { get }
+    var analytics: Analytics {get}
     
     func getFavoritesService() ->  any FavoritesStore
 }

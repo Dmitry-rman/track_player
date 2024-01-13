@@ -8,8 +8,7 @@
 import Foundation
 
 ///Hub analytics contains other analytocs as array
-final public class HubAnalytics: Analytics{
-
+final public class HubAnalytics: Analytics {
     let _analytics: [Analytics]!
     
     public init(analytics: [Analytics]){
@@ -42,10 +41,7 @@ final public class HubAnalytics: Analytics{
 }
 
 final public class StubHubAnalytics: Analytics {
-    
-    public init(){
-        
-    }
+    public init() {}
     
     public func logEvent(_ event: CustomStringConvertible, properties: [String : Any]?) {
         print("logEvent " + event.description + " \(properties ?? [:])")

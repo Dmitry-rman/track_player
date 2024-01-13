@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0A0C1B7E29B32BFA007D24DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A0C1B7D29B32BFA007D24DC /* Assets.xcassets */; };
-		0A0C1B8129B32BFA007D24DC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A0C1B8029B32BFA007D24DC /* Preview Assets.xcassets */; };
 		0A0C1B8B29B32BFA007D24DC /* TrackPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0C1B8A29B32BFA007D24DC /* TrackPlayerTests.swift */; };
 		0A0C1B9529B32BFA007D24DC /* TrackPlayerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0C1B9429B32BFA007D24DC /* TrackPlayerUITests.swift */; };
 		0A0C1B9729B32BFA007D24DC /* TrackPlayerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0C1B9629B32BFA007D24DC /* TrackPlayerUITestsLaunchTests.swift */; };
@@ -70,6 +69,10 @@
 		0AB0E34729BE667E00424C6A /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB0E34629BE667E00424C6A /* Store.swift */; };
 		0AB0E34A29BE73CB00424C6A /* FavoritesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB0E34929BE73CB00424C6A /* FavoritesStore.swift */; };
 		0AD26BCA29BF5AEC005222FA /* FaforitesStoreImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD26BC929BF5AEC005222FA /* FaforitesStoreImplementation.swift */; };
+		0AF47D8B2B524EDB001606D1 /* String+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF47D8A2B524EDB001606D1 /* String+Error.swift */; };
+		0AF47D8D2B52516D001606D1 /* IStateChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF47D8C2B52516D001606D1 /* IStateChange.swift */; };
+		0AF47D8F2B525190001606D1 /* DiContainer+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF47D8E2B525190001606D1 /* DiContainer+Preview.swift */; };
+		0AF47D932B52553C001606D1 /* IBaseTrackListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF47D922B52553C001606D1 /* IBaseTrackListViewModel.swift */; };
 		0AF49AE529BF6EC2008D39E5 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49AE429BF6EC2008D39E5 /* AboutView.swift */; };
 		0AF49AE729BF72F5008D39E5 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49AE629BF72F5008D39E5 /* AboutViewController.swift */; };
 		0AF49AE929BF73CF008D39E5 /* AboutViewModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49AE829BF73CF008D39E5 /* AboutViewModule.swift */; };
@@ -101,7 +104,6 @@
 /* Begin PBXFileReference section */
 		0A0C1B7629B32BF8007D24DC /* TrackPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrackPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A0C1B7D29B32BFA007D24DC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0A0C1B8029B32BFA007D24DC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0A0C1B8629B32BFA007D24DC /* TrackPlayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrackPlayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A0C1B8A29B32BFA007D24DC /* TrackPlayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackPlayerTests.swift; sourceTree = "<group>"; };
 		0A0C1B9029B32BFA007D24DC /* TrackPlayerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrackPlayerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -166,6 +168,10 @@
 		0AB0E34629BE667E00424C6A /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		0AB0E34929BE73CB00424C6A /* FavoritesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesStore.swift; sourceTree = "<group>"; };
 		0AD26BC929BF5AEC005222FA /* FaforitesStoreImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaforitesStoreImplementation.swift; sourceTree = "<group>"; };
+		0AF47D8A2B524EDB001606D1 /* String+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Error.swift"; sourceTree = "<group>"; };
+		0AF47D8C2B52516D001606D1 /* IStateChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IStateChange.swift; sourceTree = "<group>"; };
+		0AF47D8E2B525190001606D1 /* DiContainer+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiContainer+Preview.swift"; sourceTree = "<group>"; };
+		0AF47D922B52553C001606D1 /* IBaseTrackListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBaseTrackListViewModel.swift; sourceTree = "<group>"; };
 		0AF49AE429BF6EC2008D39E5 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		0AF49AE629BF72F5008D39E5 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		0AF49AE829BF73CF008D39E5 /* AboutViewModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewModule.swift; sourceTree = "<group>"; };
@@ -234,14 +240,6 @@
 			path = TrackPlayer;
 			sourceTree = "<group>";
 		};
-		0A0C1B7F29B32BFA007D24DC /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				0A0C1B8029B32BFA007D24DC /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
 		0A0C1B8929B32BFA007D24DC /* TrackPlayerTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -262,6 +260,7 @@
 		0A0C1BA329B32C2D007D24DC /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				0AF47D892B524ECE001606D1 /* Extensions */,
 				0A0C1BCD29B337B0007D24DC /* Analytics */,
 				0A0C1BC229B3333C007D24DC /* Dependency Injection */,
 				0A0C1BA929B32CE5007D24DC /* Model */,
@@ -269,7 +268,6 @@
 				0AB0E34829BE669500424C6A /* Utilites */,
 				0AA1632929C21880000120C9 /* Audio */,
 				0A0C1BD429B33994007D24DC /* Constants.swift */,
-				0AA1633029C365B3000120C9 /* Publisher+.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -289,7 +287,6 @@
 			isa = PBXGroup;
 			children = (
 				0A0C1B7D29B32BFA007D24DC /* Assets.xcassets */,
-				0A0C1B7F29B32BFA007D24DC /* Preview Content */,
 				0A0C1BE729B36B5D007D24DC /* Localizable.strings */,
 			);
 			path = Resources;
@@ -348,7 +345,9 @@
 			children = (
 				0AD26BCB29BF5B20005222FA /* UserData */,
 				0A0C1BC329B33354007D24DC /* DiContainer.swift */,
+				0AF47D8E2B525190001606D1 /* DiContainer+Preview.swift */,
 				0AB0E34429BE656C00424C6A /* AppState.swift */,
+				0AF47D8C2B52516D001606D1 /* IStateChange.swift */,
 			);
 			path = "Dependency Injection";
 			sourceTree = "<group>";
@@ -419,6 +418,7 @@
 				0AF49AEA29BF7965008D39E5 /* Favorites */,
 				0A0C1BDC29B36279007D24DC /* SongsList */,
 				0AF49AF729BF9719008D39E5 /* BaseTrackListViewModel.swift */,
+				0AF47D922B52553C001606D1 /* IBaseTrackListViewModel.swift */,
 				0AF49AF529BF9590008D39E5 /* TrackListRow.swift */,
 			);
 			path = UserStories;
@@ -477,6 +477,15 @@
 				0AA1632A29C302B0000120C9 /* UserData.swift */,
 			);
 			path = UserData;
+			sourceTree = "<group>";
+		};
+		0AF47D892B524ECE001606D1 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0AA1633029C365B3000120C9 /* Publisher+.swift */,
+				0AF47D8A2B524EDB001606D1 /* String+Error.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		0AF49AE329BF6EB0008D39E5 /* About */ = {
@@ -604,7 +613,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A0C1B8129B32BFA007D24DC /* Preview Assets.xcassets in Resources */,
 				0A0C1BE829B36B5D007D24DC /* Localizable.strings in Resources */,
 				0A0C1B7E29B32BFA007D24DC /* Assets.xcassets in Resources */,
 			);
@@ -633,6 +641,7 @@
 			files = (
 				0A0C1BB529B33094007D24DC /* TrackView.swift in Sources */,
 				0A0C1BDE29B3638A007D24DC /* Localized.swift in Sources */,
+				0AF47D8B2B524EDB001606D1 /* String+Error.swift in Sources */,
 				0A0C1BBF29B332CA007D24DC /* ViewStateChangeCondition.swift in Sources */,
 				0A0C1C0829B47704007D24DC /* SoundPlayer.swift in Sources */,
 				0AD26BCA29BF5AEC005222FA /* FaforitesStoreImplementation.swift in Sources */,
@@ -672,8 +681,10 @@
 				0A0C1BF729B39662007D24DC /* Coordinator.swift in Sources */,
 				0A0C1BCA29B33516007D24DC /* ServiceBuilderMock.swift in Sources */,
 				0A0C1BEA29B38825007D24DC /* Colors.swift in Sources */,
+				0AF47D932B52553C001606D1 /* IBaseTrackListViewModel.swift in Sources */,
 				0A0C1BB129B32FC3007D24DC /* SongServiceImplementation.swift in Sources */,
 				0A0C1BF929B39795007D24DC /* AppHostingViewController.swift in Sources */,
+				0AF47D8F2B525190001606D1 /* DiContainer+Preview.swift in Sources */,
 				0AF49AE729BF72F5008D39E5 /* AboutViewController.swift in Sources */,
 				0A0C1BFF29B39DEE007D24DC /* SceneDelegate.swift in Sources */,
 				0A0C1BE229B36933007D24DC /* Images.swift in Sources */,
@@ -683,6 +694,7 @@
 				0AF49AEC29BF7978008D39E5 /* FavoritesView.swift in Sources */,
 				0A0C1BD729B33A0D007D24DC /* SerrviceBuilderProd.swift in Sources */,
 				0AB0E34A29BE73CB00424C6A /* FavoritesStore.swift in Sources */,
+				0AF47D8D2B52516D001606D1 /* IStateChange.swift in Sources */,
 				0AA1632829C20D1B000120C9 /* TrackPlayer.swift in Sources */,
 				0A0C1BAF29B32E04007D24DC /* Mocks.swift in Sources */,
 				0A0C1BC429B33354007D24DC /* DiContainer.swift in Sources */,

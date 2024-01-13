@@ -7,7 +7,6 @@ import UIKit
 
 /// UINavigationController, который можно применять в качестве контейнера в координаторах
 final class NavigationContainer: UINavigationController, CoordinatorContainer, UINavigationControllerDelegate {
-    
     private lazy var containerLinks = CoordinatorContainerLinks()
     private var isPushingController = false
     private weak var proxyDelegate: UINavigationControllerDelegate?
@@ -57,69 +56,73 @@ final class NavigationContainer: UINavigationController, CoordinatorContainer, U
     // MARK: - Передача управления текущей ориентацией, видом статус бара итд самому верхнему контроллеру в стеке
     
     override var shouldAutorotate: Bool {
-        return topViewController?.shouldAutorotate ?? super.shouldAutorotate
+        topViewController?.shouldAutorotate ?? super.shouldAutorotate
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return topViewController?.supportedInterfaceOrientations ?? super.supportedInterfaceOrientations
+        topViewController?.supportedInterfaceOrientations ?? super.supportedInterfaceOrientations
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return topViewController?.preferredStatusBarStyle ?? super.preferredStatusBarStyle
+        topViewController?.preferredStatusBarStyle ?? super.preferredStatusBarStyle
     }
     
     override var prefersStatusBarHidden: Bool {
-        return topViewController?.prefersStatusBarHidden ?? super.prefersStatusBarHidden
+        topViewController?.prefersStatusBarHidden ?? super.prefersStatusBarHidden
     }
     
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
-        return topViewController?.preferredInterfaceOrientationForPresentation ?? super.preferredInterfaceOrientationForPresentation
+        topViewController?.preferredInterfaceOrientationForPresentation ?? super.preferredInterfaceOrientationForPresentation
     }
     
     override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
-        return topViewController?.preferredStatusBarUpdateAnimation ?? super.preferredStatusBarUpdateAnimation
+        topViewController?.preferredStatusBarUpdateAnimation ?? super.preferredStatusBarUpdateAnimation
     }
     
     override var childForHomeIndicatorAutoHidden: UIViewController? {
-        return topViewController
+        topViewController
     }
     
     override var childForScreenEdgesDeferringSystemGestures: UIViewController? {
-        return topViewController
+        topViewController
     }
     
     // MARK: - UINavigationControllerDelegate
     
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) 
+    {
         proxyDelegate?.navigationController?(navigationController, willShow: viewController, animated: animated)
     }
     
-    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool)
+    {
         if isPushingController {
             isPushingController = false
-        }
-        else {
+        } else {
             containerLinks.clearDeadLinks()
         }
         
         proxyDelegate?.navigationController?(navigationController, didShow: viewController, animated: animated)
     }
     
-    func navigationControllerSupportedInterfaceOrientations(_ navigationController: UINavigationController) -> UIInterfaceOrientationMask {
-        return proxyDelegate?.navigationControllerSupportedInterfaceOrientations?(navigationController) ?? .portrait
+    func navigationControllerSupportedInterfaceOrientations(_ navigationController: UINavigationController) -> UIInterfaceOrientationMask 
+    {
+        proxyDelegate?.navigationControllerSupportedInterfaceOrientations?(navigationController) ?? .portrait
     }
     
-    func navigationControllerPreferredInterfaceOrientationForPresentation(_ navigationController: UINavigationController) -> UIInterfaceOrientation {
-        return proxyDelegate?.navigationControllerPreferredInterfaceOrientationForPresentation?(navigationController) ?? .portrait
+    func navigationControllerPreferredInterfaceOrientationForPresentation(_ navigationController: UINavigationController) -> UIInterfaceOrientation
+    {
+        proxyDelegate?.navigationControllerPreferredInterfaceOrientationForPresentation?(navigationController) ?? .portrait
     }
     
-    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return proxyDelegate?.navigationController?(navigationController, interactionControllerFor: animationController)
+    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? 
+    {
+        proxyDelegate?.navigationController?(navigationController, interactionControllerFor: animationController)
     }
     
-    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return proxyDelegate?.navigationController?(navigationController, animationControllerFor: operation, from: fromVC, to: toVC)
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?
+    {
+        proxyDelegate?.navigationController?(navigationController, animationControllerFor: operation, from: fromVC, to: toVC)
     }
 }
 

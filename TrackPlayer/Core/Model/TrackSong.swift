@@ -8,8 +8,7 @@
 import Foundation
 
 /// Track song model
-struct TrackSong: Identifiable, Equatable, Hashable{
-    
+struct TrackSong: Identifiable, Equatable, Hashable {
     var id: String{
         return trackUrlString
     }
@@ -22,19 +21,18 @@ struct TrackSong: Identifiable, Equatable, Hashable{
     
     var imageUrl: URL? {
         guard let url = imageUrlString else {return nil}
+        
         return URL.init(string: url)
     }
     
     var trackUrl: URL? {
-        return URL.init(string: trackUrlString)
+        URL.init(string: trackUrlString)
     }
 }
 
-extension TrackSong: Decodable{
-    
+extension TrackSong: Decodable {
     //It is optional for case when model's fileds are different
-    enum CodingKeys: String,  CodingKey{
-
+    enum CodingKeys: String, CodingKey {
         case trackTitle = "trackName"
         case artistTitle = "artistName"
         case imageUrlString = "artworkUrl100"

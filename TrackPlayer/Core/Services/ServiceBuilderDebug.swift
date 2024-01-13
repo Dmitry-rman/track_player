@@ -7,14 +7,12 @@
 
 import Foundation
 
-class ServiceBuilderDebug: ServiceBuilder{
-    
-    private unowned var stateChanger: StateChangeProtocol?
+class ServiceBuilderDebug: ServiceBuilder {
+    private unowned var stateChanger: IStateChange?
     
     let shouldLogNetworkRequests: Bool
     
-    init(shouldLogNetworkRequests: Bool, stateChanger: StateChangeProtocol) {
-        
+    init(shouldLogNetworkRequests: Bool, stateChanger: IStateChange) {
         self.shouldLogNetworkRequests = shouldLogNetworkRequests
         self.stateChanger = stateChanger
     }
@@ -29,29 +27,29 @@ class ServiceBuilderDebug: ServiceBuilder{
         SongServiceImplementation(baseUrl: self.baseUrl)
     }
     
-    private var _audioEngine: AudioEngineProtocol!
-    func getAudioEngine() -> AudioEngineProtocol{
-        
+    private var _audioEngine: IAudioEngine!
+    func getAudioEngine() -> IAudioEngine{
         if _audioEngine == nil {
             _audioEngine = AudioEngine()
         }
+        
         return _audioEngine
     }
     
     internal var _analytics: Analytics!
-    var analytics: Analytics{
+    var analytics: Analytics {
         if _analytics == nil {
             _analytics = DebugAnalytic()
         }
+        
         return _analytics
     }
     
     private var _favoriteStore: FavoritesStore!
-    func getFavoritesService() ->  any FavoritesStore{
-        
+    func getFavoritesService() ->  any FavoritesStore {
         if let favoriteStore = _favoriteStore {
             return favoriteStore
-        }else{
+        } else {
           _favoriteStore = FaforitesStoreImplementation(stateChanger: stateChanger)
             return _favoriteStore
         }

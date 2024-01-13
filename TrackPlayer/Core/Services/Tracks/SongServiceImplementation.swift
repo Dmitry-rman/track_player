@@ -8,8 +8,7 @@
 import Foundation
 import Combine
 
-class SongServiceImplementation{
-
+class SongServiceImplementation {
     let baseUrl: URL
     
     init(baseUrl: URL) {
@@ -17,10 +16,7 @@ class SongServiceImplementation{
     }
 }
 
-extension String: Error {}
-
 extension SongServiceImplementation: SongService {
-    
     func getSongs(byQuery query: String, limit: Int) -> AnyPublisher<[TrackSong], Error> {
         
         //API documentation
@@ -34,7 +30,6 @@ extension SongServiceImplementation: SongService {
         ]
         
         guard let url = urlComps?.url else {
-            
             return Fail(error: AppError.apiError(reason: "Failed url request!"))
                 .eraseToAnyPublisher()
         }
@@ -64,7 +59,6 @@ extension SongServiceImplementation: SongService {
     
     
     func loadRecentSongs() -> AnyPublisher<[TrackSong], Error> {
-        
         //Mock method
         return Just([])
             .setFailureType(to: Error.self)

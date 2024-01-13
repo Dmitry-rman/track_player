@@ -11,7 +11,6 @@ import SwiftUI
 
 /// Color assets
 enum ColorAssetName: String {
-    
     case accent
     
     case backgroundBasic
@@ -46,7 +45,6 @@ enum ColorAssetName: String {
 }
 
 extension Color {
-    
     /// Create color
     /// - Parameter name: color name
     init(assetsName name: ColorAssetName) {
@@ -56,7 +54,6 @@ extension Color {
 }
 
 extension UIColor {
-    
     /// Create color
     /// - Parameter name: color name
     convenience init?(assetsName name: ColorAssetName) {

@@ -10,7 +10,6 @@ import SwiftUI
 
 /// Контейнер для dependency injection
 final class DiContainer {
-    
     /// Конфигурация сборки
     ///
     /// - debug: отладка
@@ -46,7 +45,6 @@ final class DiContainer {
     
     /// Создаем строитель сервисов согласно текущей конфигурации сервисов
     fileprivate func createServiceBuilder() -> ServiceBuilder {
-        
         switch buildConfiguration{
         case .testing:
             return ServiceBuilderMock()
@@ -59,7 +57,6 @@ final class DiContainer {
     
     /// Пересоздаем строитель сервисов согласно текущей конфигурации сервисов, если это необходимо
     fileprivate func createServiceBuilderIfNeeded() {
-        
         // если строитель еще не определен, то просто создаем его
         guard Self.currentServiceBuilder != nil else {
             Self.currentServiceBuilder = createServiceBuilder()
@@ -72,21 +69,10 @@ final class DiContainer {
     }()
 }
 
-extension DiContainer: StateChangeProtocol{
-    
+extension DiContainer: IStateChange {
     func favoritsChanged(_ value: Int) {
-        
         appState.bulkUpdate({ state in
             state.userData.favoritsCount = value
         })
     }
 }
-
-#if DEBUG
-extension DiContainer {
-    
-    static var preview: DiContainer {
-        return DiContainer.init(buildConfiguration: .testing)
-    }
-}
-#endif

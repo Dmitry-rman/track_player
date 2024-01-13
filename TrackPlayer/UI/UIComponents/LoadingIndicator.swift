@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 
 struct LoadingIndicator: View {
-    
     @State private var rotationDegrees = 0.0
     
     private let size: CGSize

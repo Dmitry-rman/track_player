@@ -8,14 +8,12 @@
 import SwiftUI
 
 struct TrackListRow: View {
-    
     let track: TrackSong
     let isPlaying: Bool
     let selectAction: ()->()
     let playAction: ()->()
     
     var body: some View {
-        
         Button(action: selectAction,
                       label: {
             HStack{
@@ -26,17 +24,21 @@ struct TrackListRow: View {
                         .imageScale( isPlaying ? .large : .medium)
                 })
                 .frame(width: 33)
+                
                 VStack(alignment: .leading){
                     Text(track.trackTitle ?? String.pallete(.unknown))
                         .multilineTextAlignment(.leading)
                         .font(isPlaying ? .title3.bold() : .title3)
                         .foregroundColor(Color.init(assetsName: .textPrimary))
+                    
                     Text(track.artistTitle ?? String.pallete(.unknown))
                         .multilineTextAlignment(.leading)
                         .font(isPlaying ? .subheadline.bold() : .subheadline)
                         .foregroundColor(Color.init(assetsName: .textSecondary))
                 }
+                
                 Spacer()
+                
                 Image(sfSymbolName: .chevronRight)
                     .font(isPlaying ? .title2.bold() : .title2)
             }
@@ -47,7 +49,6 @@ struct TrackListRow: View {
 
 #if DEBUG
 struct TrackListRow_Previews: PreviewProvider {
-    
     static var previews: some View {
         TrackListRow(track: .mocked,
                      isPlaying: false,

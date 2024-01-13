@@ -8,26 +8,26 @@
 import SwiftUI
 
 struct PlayerView<ViewModel: PlayerViewModel>: View {
-    
     /// Here we should use StateObject to reduce flashing favorite button on updating view
     @StateObject var viewModel: ViewModel
-    //@ObservedObject var viewModel: ViewModel
+    
     let closeAnimation: Animation?
     
     @Binding var isClosed: Bool
     
-   // @ViewBuilder
     var body: some View {
-        
         VStack{
-            
             HStack(alignment: .center){
                 favoriteButton
                     .frame(width: 33, height: 33)
+                
                 playButton
                     .frame(width: 33, height: 33)
+                
                 titleView
+                
                 Spacer()
+                
                 closeButton.alignmentGuide(VerticalAlignment.center) { _ in 16 }
             }
             
@@ -40,13 +40,11 @@ struct PlayerView<ViewModel: PlayerViewModel>: View {
                 Text(viewModel.volume)
             }
             .disabled(!viewModel.trackExist)
-            
         }
         .frame(height: 72)
     }
     
-    private var playButton: some View{
-        
+    private var playButton: some View {
         Button(action: {
             viewModel.playTap()
         }) {
@@ -59,20 +57,20 @@ struct PlayerView<ViewModel: PlayerViewModel>: View {
     
     @ViewBuilder
     private var titleView: some View {
-        
         if viewModel.trackExist {
             HStack{
                 VStack(alignment: .leading){
                     Text(viewModel.songTitle)
                         .multilineTextAlignment(.leading)
                         .font(.callout)
+                    
                     Text(viewModel.artistTitle)
                         .multilineTextAlignment(.leading)
                         .font(.subheadline)
                         .foregroundColor(Color.secondary)
                 }
             }
-        }else{
+        } else {
             Text(viewModel.songTitle)
                 .font(.callout)
                 .foregroundColor(Color.init(assetsName: .textSecondary))
@@ -81,14 +79,14 @@ struct PlayerView<ViewModel: PlayerViewModel>: View {
     }
     
     private var closeButton: some View {
-        
         Button {
             viewModel.player.stop()
+            
             if let closeAnimation = closeAnimation{
                 withAnimation(closeAnimation){
                     self.isClosed = true
                 }
-            }else{
+            } else {
                 self.isClosed = true
             }
         } label: {
@@ -97,7 +95,6 @@ struct PlayerView<ViewModel: PlayerViewModel>: View {
     }
     
     private var favoriteButton: some View {
-        
         Button {
             viewModel.toggleFavorite()
         } label: {
@@ -109,21 +106,17 @@ struct PlayerView<ViewModel: PlayerViewModel>: View {
     }
     
     private var buttonColor: Color {
-        
         if viewModel.trackExist == true{
-            return  viewModel.player.isPlaying == false ? Color.init(assetsName: .accent) : Color.init(assetsName: .iconBasic)
-        }
-        else{
+            return viewModel.player.isPlaying == false ? Color.init(assetsName: .accent) : Color.init(assetsName: .iconBasic)
+        } else {
             return Color.init(assetsName: .buttonPrimaryBackgroundDisabled)
         }
     }
     
     private var favoriteColor: Color {
-        
         if viewModel.trackExist == true{
-            return  viewModel.isFavorited == false ? Color.init(assetsName: .accent) : Color.init(assetsName: .iconBasic)
-        }
-        else{
+            return viewModel.isFavorited == false ? Color.init(assetsName: .accent) : Color.init(assetsName: .iconBasic)
+        } else {
             return Color.init(assetsName: .buttonPrimaryBackgroundDisabled)
         }
     }

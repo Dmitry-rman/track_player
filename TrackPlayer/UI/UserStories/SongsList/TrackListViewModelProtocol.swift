@@ -7,9 +7,8 @@
 
 import Foundation
 
-protocol TrackListViewModelProtocol: BaseTrackListViewModelProtocol{
-    
-    var onShowPlayer: ((_ isShowed: Bool)->())? {get set}
+protocol TrackListViewModelProtocol: IBaseTrackListViewModel {
+    var onShowPlayer: ((_ isShowed: Bool)->())? { get set }
    
     var searchQuery: String {get set}
     var searching: Bool {get set}

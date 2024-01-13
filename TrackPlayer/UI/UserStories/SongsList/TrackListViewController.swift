@@ -10,15 +10,14 @@ import SwiftUI
 import Combine
 
 final class TrackListViewController<ViewModel: TrackListViewModelProtocol>: AppHostingController<TrackListView<ViewModel>> {
-    
     let viewModel: ViewModel
     
     private var cancellableSet = Set<AnyCancellable>()
     private weak var rightButton: UIBarButtonItem?
     
     override func setupController() {
-        
         super.setupController()
+        
         navigationItem.title = String.pallete(.songsListScreenTitle)
         
         let rightButton = UIBarButtonItem(title: "",
@@ -44,21 +43,17 @@ final class TrackListViewController<ViewModel: TrackListViewModelProtocol>: AppH
     
     @objc
     private func leftButtonTap(_ sender: Any) {
-        
         viewModel.output?.showAbout()
     }
     
     @objc
     private func rightButtonTap(_ sender: Any) {
-        
         viewModel.output?.showFavorites()
     }
     
     init(viewModel: ViewModel, rootView: TrackListView<ViewModel>) {
-        
         self.viewModel = viewModel
         super.init(rootView: rootView)
-      
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -66,7 +61,4 @@ final class TrackListViewController<ViewModel: TrackListViewModelProtocol>: AppH
     }
 }
 
-extension TrackListViewController: TrackListViewModuleInput{
-    
-    
-}
+extension TrackListViewController: TrackListViewModuleInput {}

@@ -9,8 +9,8 @@ import SwiftUI
 import Combine
 
 struct TrackListView<ViewModel: TrackListViewModelProtocol>: View {
-    
     @StateObject var viewModel: ViewModel
+    
     @State var isPlayerClosed: Bool = false
     @FocusState private var queryIsFocused: Bool
     
@@ -18,7 +18,6 @@ struct TrackListView<ViewModel: TrackListViewModelProtocol>: View {
     private let playerPopupAnimation: Animation = .easeInOut(duration: 0.2)
     
     var body: some View {
-        
         self.currentContent
             .onAppear{
                 viewModel.startScenario()
@@ -31,7 +30,6 @@ struct TrackListView<ViewModel: TrackListViewModelProtocol>: View {
                     withAnimation(playerPopupAnimation){
                         self.isPlayerClosed = !isShowed
                     }
-                    
                 }
             }
             .background(self.contentBackgroundColor)
@@ -39,7 +37,6 @@ struct TrackListView<ViewModel: TrackListViewModelProtocol>: View {
     
     @ViewBuilder
     private var currentContent: some View {
-        
         switch self.viewModel.stateMachine.state {
             
         case .content(let songs, let contentState):
@@ -74,21 +71,15 @@ struct TrackListView<ViewModel: TrackListViewModelProtocol>: View {
     
     @ViewBuilder
     func mainContent(songs: [TrackSong]?, error: Error? = nil) -> some View {
-        
         VStack(spacing: 0){
-            
             searchBar
                 .padding()
             
             if let tracks = songs{
-                
                 if tracks.count > 0 {
-                    
                     ScrollView{
-                        
                         LazyVStack(alignment: .leading, spacing: 0){
                             ForEach(tracks, id: \.id){ track in
-                                
                                 let isPlaying = viewModel.isPlayerPlayed && (track == viewModel.playingTrack)
                                 
                                 VStack(spacing: 0){
@@ -120,7 +111,7 @@ struct TrackListView<ViewModel: TrackListViewModelProtocol>: View {
                         .padding(.vertical)
                     }
                     
-                }else{
+                } else {
                     Text(String.pallete(.noTracksFound))
                         .font(.subheadline)
                         .foregroundColor(Color.init(assetsName: .textSecondary))
@@ -152,11 +143,11 @@ struct TrackListView<ViewModel: TrackListViewModelProtocol>: View {
     }
     
     @ViewBuilder
-    private var searchBar: some View{
-        
+    private var searchBar: some View {
         ZStack{
             Rectangle()
                 .foregroundColor(Color.gray.opacity(0.2))
+            
             HStack {
                 searchLoadingView
                 TextField(String.pallete(.searchTitle),
@@ -183,8 +174,7 @@ struct TrackListView<ViewModel: TrackListViewModelProtocol>: View {
     }
     
     @ViewBuilder
-    private var searchLoadingView: some View{
-        
+    private var searchLoadingView: some View {
         let size = 33.0
         
         if viewModel.searching == true {
@@ -201,7 +191,6 @@ struct TrackListView<ViewModel: TrackListViewModelProtocol>: View {
 
 #if DEBUG
 struct SongsListView_Previews: PreviewProvider {
-    
     static var previews: some View {
         NavigationView{
             TrackListView(viewModel: TrackListViewModel.init(state: .content(TrackSong.mockedSongs, .default), container: .preview, searchResultLimit: 25))

@@ -9,21 +9,20 @@ import SwiftUI
 import Combine
 
 struct TrackView<ViewModel: TrackViewModelProtocol>: View {
-    
     @StateObject var viewModel: ViewModel
     
     var body: some View {
-        
         VStack(alignment: .center, spacing: 8){
-            
             HStack(alignment: .center){
                 Spacer()
                     .frame(width: 33)
+                
                 Spacer()
                 Text(viewModel.trackTitle)
                     .multilineTextAlignment(.center)
                     .font(.title)
                 Spacer()
+                
                 Button(action: viewModel.closeAction) {
                     Image(sfSymbolName: .closeIcon)
                         .font(.title2)
@@ -34,6 +33,7 @@ struct TrackView<ViewModel: TrackViewModelProtocol>: View {
             }
             
             Spacer()
+            
             songImage
                 .aspectRatio(1.0, contentMode: .fit)
 
@@ -42,9 +42,11 @@ struct TrackView<ViewModel: TrackViewModelProtocol>: View {
                 .font(.subheadline)
                 .foregroundColor(Color.init(assetsName: .textSecondary))
                 .padding(.top, 20)
+            
             Spacer()
             favoriteButton
             Spacer()
+            
             playPanel
             
         }
@@ -80,7 +82,6 @@ struct TrackView<ViewModel: TrackViewModelProtocol>: View {
     }
     
     private var favoriteButton: some View {
-        
         Button {
             viewModel.toggleFavorite()
         } label: {
@@ -91,17 +92,16 @@ struct TrackView<ViewModel: TrackViewModelProtocol>: View {
     }
     
     private var favoriteColor: Color {
-        
-        return  viewModel.isFavorited == false ? Color.init(assetsName: .accent) : Color.init(assetsName: .iconBasic)
-    
+        viewModel.isFavorited == false ? Color.init(assetsName: .accent) : Color.init(assetsName: .iconBasic)
     }
     
     private var playPanel: some View{
-        
         HStack{
                 timeView(title: viewModel.timeString,
                          subtitle: String.pallete(.currentTime))
+            
                 Spacer()
+            
                 Button(action: {
                     if viewModel.player.isPlaying == true {
                         viewModel.player.pause()
@@ -114,18 +114,20 @@ struct TrackView<ViewModel: TrackViewModelProtocol>: View {
                         .foregroundColor(viewModel.player.isPlaying == false ? Color.init(assetsName: .accent) : Color.init(assetsName: .iconBasic))
                 }
                 .frame(width: 44, height: 44)
+            
                 Spacer()
+            
                 timeView(title: viewModel.leftTimeString,
                          subtitle: String.pallete(.leftTime) )
         }
     }
     
-    private func timeView(title: String, subtitle: String) -> some View{
-      
+    private func timeView(title: String, subtitle: String) -> some View {
         VStack{
             Text(title)
                 .font(.headline)
                 .foregroundColor(Color.init(assetsName: .textPrimary))
+            
             Text(subtitle)
                 .font(.subheadline)
                 .foregroundColor(Color.init(assetsName: .textSecondary))

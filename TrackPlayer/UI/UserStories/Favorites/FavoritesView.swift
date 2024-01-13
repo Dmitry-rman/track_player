@@ -8,14 +8,12 @@
 import SwiftUI
 
 struct FavoritesView<ViewModel: FavoritesViewModel>: View {
-    
     @StateObject var viewModel: ViewModel
     
     private let playerPopupAnimation: Animation = .easeInOut(duration: 0.2)
     private let contentBackgroundColor = Color(assetsName: .backgroundPrimary)
     
     var body: some View {
-        
         self.currentContent
             .onAppear(perform: {
                 viewModel.startScenario()
@@ -25,9 +23,7 @@ struct FavoritesView<ViewModel: FavoritesViewModel>: View {
     
     @ViewBuilder
     private var currentContent: some View {
-        
         switch self.viewModel.stateMachine.state {
-            
         case .content( _ , let contentState):
             switch contentState{
             case .loading:
@@ -54,16 +50,12 @@ struct FavoritesView<ViewModel: FavoritesViewModel>: View {
     
     @ViewBuilder
     func mainContent(error: Error? = nil) -> some View {
-        
         VStack(spacing: 0){
-            
             let tracks = viewModel.tracks
             
             if tracks.count > 0 {
-                
                 List{
                     ForEach(tracks){ track in
-                        
                         let isPlaying = viewModel.isPlayerPlayed && (track == viewModel.playingTrack)
                         
                         TrackListRow(track: track,
@@ -85,7 +77,7 @@ struct FavoritesView<ViewModel: FavoritesViewModel>: View {
                 .refreshable{
                     viewModel.reloadFavorites()
                 }
-            }else{
+            } else {
                 GeometryReader { reader in
                     ScrollView{
                         Text(String.pallete(.noFavoritesFound))
@@ -119,7 +111,6 @@ struct FavoritesView<ViewModel: FavoritesViewModel>: View {
 
 #if DEBUG
 struct FavoritesView_Previews: PreviewProvider {
-    
     static var previews: some View {
         FavoritesView(viewModel: .init(state: .content(TrackSong.mockedSongs, .default), container: .preview))
         .environment(\.colorScheme, .dark)

@@ -9,7 +9,6 @@ import AVFoundation
 import AVFAudio
 
 protocol SoundPlayer{
-    
     func play(url: URL?, fromBegin: Bool)
     func pause()
     func resume()
@@ -27,7 +26,6 @@ protocol SoundPlayer{
 }
 
 class AVSoundPlayer: SoundPlayer{
-    
     private var audioPlayer: AVPlayer?
     private var observer: NSKeyValueObservation?
     
@@ -41,7 +39,6 @@ class AVSoundPlayer: SoundPlayer{
     }
     
     init() {
-        
         NotificationCenter.default.addObserver(self,
                                           selector:  #selector(playerDidFinishPlaying(note:)),
                                           name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
@@ -62,7 +59,7 @@ class AVSoundPlayer: SoundPlayer{
         audioPlayer?.volume = value * 0.01
     }
     
-    var duration: Int?{
+    var duration: Int? {
         if let item =  self.audioPlayer?.currentItem{
             if item.duration != .indefinite {
                 return Int(item.duration.seconds)
@@ -74,35 +71,33 @@ class AVSoundPlayer: SoundPlayer{
         }
     }
     
-    var isLoaded: Bool{
+    var isLoaded: Bool {
         return self.audioPlayer?.status == .readyToPlay
     }
     
-    func play(url: URL?, fromBegin: Bool = true){
-        
+    func play(url: URL?, fromBegin: Bool = true) {
         if trackUrl == url, fromBegin == false{
             resume()
-        }
-        else if let url = url {
+        } else if let url = url {
                 let item = AVPlayerItem(url: url)
                 
                 self.audioPlayer = AVPlayer(playerItem: item)
-                self.audioPlayer?.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(1, preferredTimescale: 1),
-                                                          queue: DispatchQueue.main,
-                                                          using: {[weak self] (time) in
-                    guard let player = self?.audioPlayer else {return}
-                    
-                    if player.currentItem?.status == .readyToPlay {
-                        let currentTime = CMTimeGetSeconds(player.currentTime())
-                        let secs = Int(currentTime)
-                        self?.timeChanged?(secs)
+                self.audioPlayer?.addPeriodicTimeObserver(
+                    forInterval: CMTimeMakeWithSeconds(1, preferredTimescale: 1),
+                    queue: DispatchQueue.main,
+                    using: { [weak self] (time) in
+                        guard let player = self?.audioPlayer else {return}
+                        
+                        if player.currentItem?.status == .readyToPlay {
+                            let currentTime = CMTimeGetSeconds(player.currentTime())
+                            let secs = Int(currentTime)
+                            self?.timeChanged?(secs)
+                        }
                     }
-                }
                 )
-            
-            
-               self.observer?.invalidate()
-               // Register as an observer of the player item's status property
+
+                self.observer?.invalidate()
+                // Register as an observer of the player item's status property
              
                 self.observer = item.observe(\.status, options:  [.new, .old],
                                                     changeHandler: { [weak self] (playerItem, change) in
@@ -125,7 +120,7 @@ class AVSoundPlayer: SoundPlayer{
         isPlayingCahnged?(false)
     }
     
-    func resume(){
+    func resume() {
         if trackUrl != nil {
             self.audioPlayer?.play()
             isPlayingCahnged?(true)

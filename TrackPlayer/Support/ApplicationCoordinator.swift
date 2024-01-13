@@ -10,20 +10,17 @@ import Combine
 
 /// App UI Coordinator
 final class ApplicationCoordinator: NavigationCoordinator {
-    
     private let diContainer: DiContainer
     private weak var songListViewInput: TrackListViewModuleInput?
     private var stateCancellable: AnyCancellable?
     
     init(diContainer: DiContainer, container: NavigationContainer) {
-        
         self.diContainer = diContainer
         super.init(container: container)
     }
     
     @discardableResult
     override func start(animated: Bool) -> UIViewController {
-        
         let module =  TrackListViewModule(output: self, container: diContainer)
         container?.pushViewController(module.view, animated: animated)
         songListViewInput = module.input
@@ -35,7 +32,6 @@ final class ApplicationCoordinator: NavigationCoordinator {
     
     /// Loading state
     func loadState(){
-        
         stateCancellable = self.diContainer.serviceBuilder.getFavoritesService()
             .getFavoritesCount()
             .sink { result in
@@ -52,9 +48,11 @@ final class ApplicationCoordinator: NavigationCoordinator {
             }
     }
     
+    // MARK: - private
+    
     private func showTrackView(track: TrackSong){
-        
         let player: TrackPlayer
+        
         if diContainer.player.playingTrack?.id == track.id{
             player = diContainer.player
         }else{
@@ -65,54 +63,44 @@ final class ApplicationCoordinator: NavigationCoordinator {
                                     player: player,
                                     output: self,
                                     container: self.diContainer)
+        
         container?.present(module.view, animated: true)
     }
-    
 }
 
-extension ApplicationCoordinator: BaseTrackListViewOutput{
-    
+// MARK: - extensions
 
-}
+extension ApplicationCoordinator: BaseTrackListViewOutput {}
 
-extension ApplicationCoordinator: TrackListViewModuleOutput{
-    
-    
+extension ApplicationCoordinator: TrackListViewModuleOutput {
     func searchListDidSelectTrack(_ track: TrackSong) {
         showTrackView(track: track)
     }
     
     func showAbout(){
-        
         let module = AboutViewModule(output: self, container: self.diContainer)
         container?.present(module.view, animated: true)
     }
     
     func showFavorites(){
-        
         let module = FavoritesViewModule(output: self, container: self.diContainer)
         container?.pushViewController(module.view, animated: true)
     }
-    
 }
 
-extension ApplicationCoordinator: SongViewModuleOutput{
-    
+extension ApplicationCoordinator: SongViewModuleOutput {
     func songViewDidClosed() {
         container?.dismiss(animated: true)
     }
 }
 
-extension ApplicationCoordinator: AboutViewModuleOutput{
-    
+extension ApplicationCoordinator: AboutViewModuleOutput {
     func aboutDidClosed() {
-        
         container?.dismiss(animated: true)
     }
 }
 
-extension ApplicationCoordinator: FavoritesViewModuleOutput{
-    
+extension ApplicationCoordinator: FavoritesViewModuleOutput {
     func didSelectFavoritTrack(_ track: TrackSong) {
         showTrackView(track: track)
     }

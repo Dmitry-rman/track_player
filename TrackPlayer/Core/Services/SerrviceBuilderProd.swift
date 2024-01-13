@@ -8,9 +8,7 @@
 import Foundation
 
 
-class ServiceBuilderProd: ServiceBuilderDebug{
-   
-    
+class ServiceBuilderProd: ServiceBuilderDebug {
     //MARK: - ServiceBuilder
     
     override var baseUrl: URL {
@@ -18,7 +16,6 @@ class ServiceBuilderProd: ServiceBuilderDebug{
     }
     
     override var analytics: Analytics {
-        
         if _analytics == nil {
             //Here we can put array of analytics.
             //For example, debug, amplitude implamentation, firebase, e.t.c

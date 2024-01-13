@@ -7,13 +7,11 @@
 
 import Foundation
 
-enum AppError: Error, LocalizedError{
-    
+enum AppError: Error, LocalizedError {
     case apiError(reason: String)
     case unknown
     
     var errorDescription: String?{
-        
         switch self{
         case .apiError(let reason):
             return reason

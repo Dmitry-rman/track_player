@@ -7,23 +7,19 @@
 
 import AVFoundation
 
-protocol AudioEngineProtocol{
-    
+protocol IAudioEngine {
     func createPlayer() -> AVSoundPlayer
-    
     func initAudioSession() throws
 }
 
-class AudioEngine: AudioEngineProtocol{
-    
+class AudioEngine: IAudioEngine {
     private var _isAudioSessionInitialized: Bool = false
     
-    func createPlayer() -> AVSoundPlayer{
+    func createPlayer() -> AVSoundPlayer {
          AVSoundPlayer()
     }
     
-    func initAudioSession() throws{
-        
+    func initAudioSession() throws {
         if  _isAudioSessionInitialized == true{
             return
         }

@@ -7,13 +7,11 @@
 
 import UIKit
 
-protocol AboutViewModuleOutput: AnyObject{
-    
+protocol AboutViewModuleOutput: AnyObject {
     func aboutDidClosed()
 }
 
-struct AboutViewModule: ViewModuleProtocol{
-    
+struct AboutViewModule: ViewModuleProtocol {
     private var viewController: AboutViewController
     
     /// Visual representation of module
@@ -22,7 +20,6 @@ struct AboutViewModule: ViewModuleProtocol{
     }
     
     init(output: AboutViewModuleOutput, container: DiContainer) {
-        
         viewController = AboutViewController(rootView: AboutView(output: output))
     }
 }

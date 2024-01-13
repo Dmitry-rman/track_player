@@ -10,19 +10,17 @@ import Foundation
 
 /// Real User Data Service implementation
 class FaforitesStoreImplementation: FavoritesStore {
-    
     private let _serviceDelayImitation = 0.25
-    private unowned var stateChanger: StateChangeProtocol?
+    private unowned var stateChanger: IStateChange?
     private var favorites = Set<TrackSong>()
     
-    init(stateChanger: StateChangeProtocol?) {
-        
+    init(stateChanger: IStateChange?) {
         self.stateChanger = stateChanger
     }
     
     func getFavoritesCount() -> AnyPublisher<Int, Error> {
-        
         let result = favorites.count
+        
         return Just(result)
             .setFailureType(to: Error.self)
             .delay(for: .seconds(_serviceDelayImitation), scheduler: RunLoop.main)
@@ -31,10 +29,10 @@ class FaforitesStoreImplementation: FavoritesStore {
     }
     
     func isTrackFavorited(_ track: TrackSong) -> AnyPublisher<Bool, Never> {
-        
         let result =  favorites.contains{
             $0.id == track.id
         }
+        
         return Just(result)
             .delay(for: .seconds(_serviceDelayImitation), scheduler: RunLoop.main)
             .receive(on: RunLoop.main)
@@ -42,8 +40,7 @@ class FaforitesStoreImplementation: FavoritesStore {
     }
     
     ///Add track to favorites
-    func addTrackToFavorits(_ track: TrackSong) -> AnyPublisher<Bool, Error>{
-        
+    func addTrackToFavorits(_ track: TrackSong) -> AnyPublisher<Bool, Error> {
         let result = favorites.insert(track).inserted
         
         return Just(result)
@@ -64,8 +61,7 @@ class FaforitesStoreImplementation: FavoritesStore {
     }
     
     ///Remove track from favorite
-    func removeTracksFromFavorites(_ tracks:  [TrackSong]) -> AnyPublisher<Bool, Error>{
-        
+    func removeTracksFromFavorites(_ tracks:  [TrackSong]) -> AnyPublisher<Bool, Error> {
         var result: Bool = (tracks.count > 0)
         tracks.forEach { track in
             result = result && (favorites.remove(track) != nil)
@@ -85,9 +81,8 @@ class FaforitesStoreImplementation: FavoritesStore {
             .eraseToAnyPublisher()
     }
     
-    func getFavorites() -> AnyPublisher<[TrackSong], Error>{
-        
-        return Just(Array(favorites))
+    func getFavorites() -> AnyPublisher<[TrackSong], Error> {
+         Just(Array(favorites))
             .setFailureType(to: Error.self)
             .delay(for: .seconds(_serviceDelayImitation), scheduler: RunLoop.main)
             .receive(on: RunLoop.main)

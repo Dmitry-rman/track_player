@@ -8,8 +8,7 @@
 import Foundation
 
 ///Debug analytic implementation
-public class DebugAnalytic: Analytics{
-    
+public class DebugAnalytic: Analytics {
     public func logEvent(_ event: CustomStringConvertible, properties: [String : Any]?) {
         debugPrint("log event \(event.description)")
     }

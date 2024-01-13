@@ -8,19 +8,17 @@
 import Foundation
 
 #if DEBUG
-
 /// Songs mocks
 extension TrackSong{
-    
-    static var mocked: TrackSong{
+    static var mocked: TrackSong {
         TrackSong(trackTitle: "Song 1",
                   artistTitle: "Artist 1",
                   imageUrlString: "https://google.com/song_images?id=1",
                   trackUrlString: "https://google.com/songs?id=1")
     }
     
-    static var mockedSongs: [TrackSong]{
-        return [
+    static var mockedSongs: [TrackSong] {
+         [
             TrackSong(trackTitle: "Song 1",
                       artistTitle: "Artist 1",
                       imageUrlString: "https://google.com/song_images?id=1",
