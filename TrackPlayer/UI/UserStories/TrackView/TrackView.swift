@@ -13,44 +13,31 @@ struct TrackView<ViewModel: TrackViewModelProtocol>: View {
     
     var body: some View {
         VStack(alignment: .center, spacing: 8){
-            HStack(alignment: .center){
+            topPanelView
+            
+            Group {
                 Spacer()
-                    .frame(width: 33)
                 
-                Spacer()
                 Text(viewModel.trackTitle)
+                    .font(.title.weight(.medium))
+                
+                songImage
+                    .aspectRatio(1.0, contentMode: .fit)
+                
+                Text(viewModel.artistTitle)
                     .multilineTextAlignment(.center)
-                    .font(.title)
+                    .font(.subheadline)
+                    .foregroundColor(Color.init(assetsName: .textSecondary))
+                    .padding(.top, 20)
+                
+                Spacer()
+                favoriteButton
                 Spacer()
                 
-                Button(action: viewModel.closeAction) {
-                    Image(sfSymbolName: .closeIcon)
-                        .font(.title2)
-                        .padding(.all, 4)
-                        .frame(width: 33)
-                }
-                .padding(.all, 8)
+                playPanel
             }
-            
-            Spacer()
-            
-            songImage
-                .aspectRatio(1.0, contentMode: .fit)
-
-            Text(viewModel.artistTitle)
-                .multilineTextAlignment(.center)
-                .font(.subheadline)
-                .foregroundColor(Color.init(assetsName: .textSecondary))
-                .padding(.top, 20)
-            
-            Spacer()
-            favoriteButton
-            Spacer()
-            
-            playPanel
-            
+            .padding()
         }
-        .padding()
         .background(Color(assetsName: .backgroundPrimary))
         .navigationBarHidden(true)
         .onAppear(){
@@ -59,7 +46,6 @@ struct TrackView<ViewModel: TrackViewModelProtocol>: View {
     }
     
     private var songImage: some View {
-        
         AsyncImage(url: viewModel.imageUrl){ phase in
             if let image = phase.image {
                 image // Displays the loaded image.
@@ -79,6 +65,14 @@ struct TrackView<ViewModel: TrackViewModelProtocol>: View {
                 }
             }
         }
+    }
+    
+    private var topPanelView: some View {
+        CloseToolbar(
+            buttonType: .close(plain: true),
+            onDismiss: viewModel.closeAction
+        )
+        .padding(.all, .xSmall)
     }
     
     private var favoriteButton: some View {

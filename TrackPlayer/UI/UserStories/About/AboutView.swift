@@ -8,7 +8,13 @@
 import SwiftUI
 
 struct AboutView: View {
-    weak var output: AboutViewModuleOutput?
+    private weak var output: AboutViewModuleOutput?
+    private let title: String?
+    
+    init(output: AboutViewModuleOutput? = nil, title: String?) {
+        self.output = output
+        self.title = title
+    }
     
     private var versionString: String {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
@@ -16,42 +22,49 @@ struct AboutView: View {
     }
     
     var body: some View {
-        VStack(spacing: 16){
-            HStack{
-                Spacer()
-                
-                Button(String.pallete(.closeButton)) {
-                    output?.aboutDidClosed()
+        VStack(spacing: .medium) {
+            topPanelView
+            
+            Group {
+                VStack {
+                    Spacer()
+                    Text(String.pallete(.appDescription))
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(Color.init(assetsName: .textPrimary))
+                        .font(.system(.caption))
+                        .layoutPriority(2)
+                    Spacer()
                 }
-                .buttonStyle(.borderedProminent)
+                
+                Text(String.pallete(.songsListScreenTitle))
+                    .font(.title)
+                    .foregroundColor(Color.init(assetsName: .textPrimary))
+                
+                Text(self.versionString)
+                    .font(.title3)
+                    .foregroundColor(Color.init(assetsName: .textSecondary))
+                
+                Spacer()
             }
-            .frame(height: 44)
-            
-            Spacer()
-            Text(String.pallete(.appDescription))
-                .multilineTextAlignment(.center)
-                .foregroundColor(Color.init(assetsName: .textPrimary))
-            Spacer()
-            
-            Text(String.pallete(.songsListScreenTitle))
-                .font(.title)
-                .foregroundColor(Color.init(assetsName: .textPrimary))
-            
-            Text(self.versionString)
-                .font(.title3)
-                .foregroundColor(Color.init(assetsName: .textSecondary))
-            
-            Spacer()
+            .padding()
         }
-        .padding()
         .background(Color(assetsName: .backgroundPrimary))
+    }
+    
+    private var topPanelView: some View {
+        CloseToolbar(title: title,
+                     buttonType: .closeIcon,
+                     leadingAlignment: true) {
+            output?.aboutDidClosed()
+        }
+        .padding(.all, .xSmall)
     }
 }
 
 #if DEBUG
 struct AboutView_Previews: PreviewProvider {
     static var previews: some View {
-        AboutView()
+        AboutView(title: "About title example")
             .environment(\.colorScheme, .dark)
     }
 }

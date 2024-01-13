@@ -78,11 +78,9 @@ final class TrackListViewModel: BaseTrackListViewModel, TrackListViewModelProtoc
                         })
                         .eraseToAnyPublisher()
                 }
-                .sink { [weak self] error in
-                    
+                .sink { [weak self] error in    
                     guard let self = self else {return}
                     
-                    debugPrint(error)
                     if let error = error as? Error{
                         self.stateMachine.setState(.content((self.tracks), .error(error)))
                     }

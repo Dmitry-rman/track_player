@@ -39,7 +39,6 @@
 		0A0C1BE429B36A3D007D24DC /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0C1BE329B36A3D007D24DC /* Strings.swift */; };
 		0A0C1BE829B36B5D007D24DC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A0C1BE729B36B5D007D24DC /* Localizable.strings */; };
 		0A0C1BEA29B38825007D24DC /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0C1BE929B38824007D24DC /* Colors.swift */; };
-		0A0C1BED29B388FC007D24DC /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0C1BEC29B388FC007D24DC /* LoadingIndicator.swift */; };
 		0A0C1BEF29B390F6007D24DC /* TrackListViewModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0C1BEE29B390F6007D24DC /* TrackListViewModule.swift */; };
 		0A0C1BF129B3913F007D24DC /* ViewModuleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0C1BF029B3913F007D24DC /* ViewModuleProtocol.swift */; };
 		0A0C1BF529B39636007D24DC /* NavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0C1BF429B39636007D24DC /* NavigationCoordinator.swift */; };
@@ -73,6 +72,15 @@
 		0AF47D8D2B52516D001606D1 /* IStateChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF47D8C2B52516D001606D1 /* IStateChange.swift */; };
 		0AF47D8F2B525190001606D1 /* DiContainer+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF47D8E2B525190001606D1 /* DiContainer+Preview.swift */; };
 		0AF47D932B52553C001606D1 /* IBaseTrackListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF47D922B52553C001606D1 /* IBaseTrackListViewModel.swift */; };
+		0AF47D962B5259D3001606D1 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF47D952B5259D2001606D1 /* View+.swift */; };
+		0AF47D982B525A16001606D1 /* VStack+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF47D972B525A16001606D1 /* VStack+.swift */; };
+		0AF47D9A2B525A35001606D1 /* View+OnFirstAppear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF47D992B525A35001606D1 /* View+OnFirstAppear.swift */; };
+		0AF47D9C2B525A4A001606D1 /* UIFont+Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF47D9B2B525A4A001606D1 /* UIFont+Styles.swift */; };
+		0AF47D9E2B525A73001606D1 /* Paddings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF47D9D2B525A73001606D1 /* Paddings.swift */; };
+		0AF47DA02B525F26001606D1 /* AppLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF47D9F2B525F26001606D1 /* AppLoadingIndicator.swift */; };
+		0AF47DA22B525F3A001606D1 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF47DA12B525F3A001606D1 /* LoadingIndicator.swift */; };
+		0AF47DA42B525FDF001606D1 /* CloseToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF47DA32B525FDF001606D1 /* CloseToolbar.swift */; };
+		0AF47DA72B526203001606D1 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF47DA52B525FFD001606D1 /* ButtonStyles.swift */; };
 		0AF49AE529BF6EC2008D39E5 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49AE429BF6EC2008D39E5 /* AboutView.swift */; };
 		0AF49AE729BF72F5008D39E5 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49AE629BF72F5008D39E5 /* AboutViewController.swift */; };
 		0AF49AE929BF73CF008D39E5 /* AboutViewModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49AE829BF73CF008D39E5 /* AboutViewModule.swift */; };
@@ -137,7 +145,6 @@
 		0A0C1BE329B36A3D007D24DC /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		0A0C1BE729B36B5D007D24DC /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		0A0C1BE929B38824007D24DC /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		0A0C1BEC29B388FC007D24DC /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		0A0C1BEE29B390F6007D24DC /* TrackListViewModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListViewModule.swift; sourceTree = "<group>"; };
 		0A0C1BF029B3913F007D24DC /* ViewModuleProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModuleProtocol.swift; sourceTree = "<group>"; };
 		0A0C1BF429B39636007D24DC /* NavigationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCoordinator.swift; sourceTree = "<group>"; };
@@ -172,6 +179,15 @@
 		0AF47D8C2B52516D001606D1 /* IStateChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IStateChange.swift; sourceTree = "<group>"; };
 		0AF47D8E2B525190001606D1 /* DiContainer+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiContainer+Preview.swift"; sourceTree = "<group>"; };
 		0AF47D922B52553C001606D1 /* IBaseTrackListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBaseTrackListViewModel.swift; sourceTree = "<group>"; };
+		0AF47D952B5259D2001606D1 /* View+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
+		0AF47D972B525A16001606D1 /* VStack+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VStack+.swift"; sourceTree = "<group>"; };
+		0AF47D992B525A35001606D1 /* View+OnFirstAppear.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+OnFirstAppear.swift"; sourceTree = "<group>"; };
+		0AF47D9B2B525A4A001606D1 /* UIFont+Styles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Styles.swift"; sourceTree = "<group>"; };
+		0AF47D9D2B525A73001606D1 /* Paddings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Paddings.swift; sourceTree = "<group>"; };
+		0AF47D9F2B525F26001606D1 /* AppLoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppLoadingIndicator.swift; sourceTree = "<group>"; };
+		0AF47DA12B525F3A001606D1 /* LoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoadingIndicator.swift; path = ../../../../autogarant28/Autogarant28/UIComponents/LoadingIndicator.swift; sourceTree = "<group>"; };
+		0AF47DA32B525FDF001606D1 /* CloseToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloseToolbar.swift; sourceTree = "<group>"; };
+		0AF47DA52B525FFD001606D1 /* ButtonStyles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		0AF49AE429BF6EC2008D39E5 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		0AF49AE629BF72F5008D39E5 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		0AF49AE829BF73CF008D39E5 /* AboutViewModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewModule.swift; sourceTree = "<group>"; };
@@ -379,6 +395,7 @@
 			isa = PBXGroup;
 			children = (
 				0A0C1BDD29B3638A007D24DC /* Localized.swift */,
+				0AF47D9D2B525A73001606D1 /* Paddings.swift */,
 				0A0C1BE329B36A3D007D24DC /* Strings.swift */,
 				0A0C1BE129B36933007D24DC /* Images.swift */,
 				0A0C1BE929B38824007D24DC /* Colors.swift */,
@@ -399,13 +416,17 @@
 		0A0C1BEB29B388EB007D24DC /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				0AF47D942B5259BA001606D1 /* Extension */,
+				0A4ECAC429B533FF007999A6 /* PlayerView */,
 				0A0C1BF029B3913F007D24DC /* ViewModuleProtocol.swift */,
-				0A0C1BEC29B388FC007D24DC /* LoadingIndicator.swift */,
 				0A0C1BF829B39795007D24DC /* AppHostingViewController.swift */,
+				0AF47DA12B525F3A001606D1 /* LoadingIndicator.swift */,
+				0AF47DA32B525FDF001606D1 /* CloseToolbar.swift */,
+				0AF47D9F2B525F26001606D1 /* AppLoadingIndicator.swift */,
+				0AF47DA52B525FFD001606D1 /* ButtonStyles.swift */,
 				0A0C1BF429B39636007D24DC /* NavigationCoordinator.swift */,
 				0A0C1BFC29B39CA2007D24DC /* CoordinatorContainerLinks.swift */,
 				0A0C1BF629B39662007D24DC /* Coordinator.swift */,
-				0A4ECAC429B533FF007999A6 /* PlayerView */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -486,6 +507,17 @@
 				0AF47D8A2B524EDB001606D1 /* String+Error.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		0AF47D942B5259BA001606D1 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				0AF47D972B525A16001606D1 /* VStack+.swift */,
+				0AF47D9B2B525A4A001606D1 /* UIFont+Styles.swift */,
+				0AF47D992B525A35001606D1 /* View+OnFirstAppear.swift */,
+				0AF47D952B5259D2001606D1 /* View+.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		0AF49AE329BF6EB0008D39E5 /* About */ = {
@@ -573,7 +605,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1410;
-				LastUpgradeCheck = 1410;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					0A0C1B7529B32BF8007D24DC = {
 						CreatedOnToolsVersion = 14.1;
@@ -639,12 +671,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AF47DA02B525F26001606D1 /* AppLoadingIndicator.swift in Sources */,
 				0A0C1BB529B33094007D24DC /* TrackView.swift in Sources */,
 				0A0C1BDE29B3638A007D24DC /* Localized.swift in Sources */,
 				0AF47D8B2B524EDB001606D1 /* String+Error.swift in Sources */,
 				0A0C1BBF29B332CA007D24DC /* ViewStateChangeCondition.swift in Sources */,
 				0A0C1C0829B47704007D24DC /* SoundPlayer.swift in Sources */,
 				0AD26BCA29BF5AEC005222FA /* FaforitesStoreImplementation.swift in Sources */,
+				0AF47DA72B526203001606D1 /* ButtonStyles.swift in Sources */,
 				0A0C1BC029B332CA007D24DC /* ViewState.swift in Sources */,
 				0A0C1BC829B33429007D24DC /* ServiceBilder.swift in Sources */,
 				0AB0E34529BE656C00424C6A /* AppState.swift in Sources */,
@@ -655,6 +689,7 @@
 				0A4ECAC329B523E1007999A6 /* PlayerViewModel.swift in Sources */,
 				0AA1632B29C302B0000120C9 /* UserData.swift in Sources */,
 				0A0C1BA829B32CB8007D24DC /* SongsService.swift in Sources */,
+				0AF47DA42B525FDF001606D1 /* CloseToolbar.swift in Sources */,
 				0A0C1C0629B3E81E007D24DC /* TrackViewController.swift in Sources */,
 				0AF49AF829BF9719008D39E5 /* BaseTrackListViewModel.swift in Sources */,
 				0A4ECABF29B51C8E007999A6 /* PlayerView.swift in Sources */,
@@ -678,18 +713,21 @@
 				0A0C1BD529B33994007D24DC /* Constants.swift in Sources */,
 				0A0C1BC129B332CA007D24DC /* ViewStateMachine.swift in Sources */,
 				0A0C1C0429B3E77C007D24DC /* TrackViewModule.swift in Sources */,
+				0AF47D9E2B525A73001606D1 /* Paddings.swift in Sources */,
 				0A0C1BF729B39662007D24DC /* Coordinator.swift in Sources */,
 				0A0C1BCA29B33516007D24DC /* ServiceBuilderMock.swift in Sources */,
 				0A0C1BEA29B38825007D24DC /* Colors.swift in Sources */,
 				0AF47D932B52553C001606D1 /* IBaseTrackListViewModel.swift in Sources */,
 				0A0C1BB129B32FC3007D24DC /* SongServiceImplementation.swift in Sources */,
+				0AF47D9C2B525A4A001606D1 /* UIFont+Styles.swift in Sources */,
 				0A0C1BF929B39795007D24DC /* AppHostingViewController.swift in Sources */,
 				0AF47D8F2B525190001606D1 /* DiContainer+Preview.swift in Sources */,
 				0AF49AE729BF72F5008D39E5 /* AboutViewController.swift in Sources */,
+				0AF47D982B525A16001606D1 /* VStack+.swift in Sources */,
 				0A0C1BFF29B39DEE007D24DC /* SceneDelegate.swift in Sources */,
 				0A0C1BE229B36933007D24DC /* Images.swift in Sources */,
+				0AF47D9A2B525A35001606D1 /* View+OnFirstAppear.swift in Sources */,
 				0A0C1BD129B337E5007D24DC /* HubAnalytics.swift in Sources */,
-				0A0C1BED29B388FC007D24DC /* LoadingIndicator.swift in Sources */,
 				0AA1633129C365B3000120C9 /* Publisher+.swift in Sources */,
 				0AF49AEC29BF7978008D39E5 /* FavoritesView.swift in Sources */,
 				0A0C1BD729B33A0D007D24DC /* SerrviceBuilderProd.swift in Sources */,
@@ -700,6 +738,7 @@
 				0A0C1BC429B33354007D24DC /* DiContainer.swift in Sources */,
 				0A0C1BB329B33085007D24DC /* TrackListView.swift in Sources */,
 				0A0C1BF129B3913F007D24DC /* ViewModuleProtocol.swift in Sources */,
+				0AF47DA22B525F3A001606D1 /* LoadingIndicator.swift in Sources */,
 				0A0C1BEF29B390F6007D24DC /* TrackListViewModule.swift in Sources */,
 				0AF49AF629BF9590008D39E5 /* TrackListRow.swift in Sources */,
 				0A0C1BD929B35CF8007D24DC /* DelayedWorkPerformer.swift in Sources */,
@@ -707,6 +746,7 @@
 				0A0C1C0F29B4DDE0007D24DC /* FailedDecodable.swift in Sources */,
 				0A0C1BB729B330A9007D24DC /* TrackViewModel.swift in Sources */,
 				0A4ECABD29B51049007999A6 /* TrackViewModelProtocol.swift in Sources */,
+				0AF47D962B5259D3001606D1 /* View+.swift in Sources */,
 				0AF49AF029BF79F7008D39E5 /* FavoritesViewController.swift in Sources */,
 				0AB0E33D29B7D91100424C6A /* AudioEngine.swift in Sources */,
 			);
@@ -781,6 +821,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -841,6 +882,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

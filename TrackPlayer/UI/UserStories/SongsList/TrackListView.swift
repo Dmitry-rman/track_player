@@ -45,7 +45,8 @@ struct TrackListView<ViewModel: TrackListViewModelProtocol>: View {
                 ZStack {
                     mainContent(songs: songs)
                         .disabled(true)
-                    LoadingIndicator()
+                    
+                    AppLoadingIndicator()
                 }
             case .error(let error):
                 mainContent(songs: songs, error: error)
@@ -56,8 +57,10 @@ struct TrackListView<ViewModel: TrackListViewModelProtocol>: View {
         case .loading:
             ZStack{
                 self.contentBackgroundColor
+                
                 VStack{
                     LoadingIndicator()
+                    
                     Text(String.pallete(.startLoading))
                         .font(.callout)
                         .foregroundColor(Color(assetsName: .accent))
@@ -178,8 +181,7 @@ struct TrackListView<ViewModel: TrackListViewModelProtocol>: View {
         let size = 33.0
         
         if viewModel.searching == true {
-            LoadingIndicator(size: .init(width: size,
-                                         height: size))
+            LoadingIndicator(size: size)
         }else {
             Image(sfSymbolName: .search)
                 .frame(width: size,
