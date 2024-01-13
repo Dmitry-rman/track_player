@@ -10,19 +10,17 @@ import Combine
 
 ///Вью модель экрана песни
 final class TrackViewModel: TrackViewModelProtocol{
-    
     @Published private(set) var isFavorited: Bool = false
-    @Published private(set) var player: TrackPlayer{
+    @Published private(set) var player: TrackPlayer {
         didSet{
             subscribeToPlayerChanges()
         }
     }
     
     private var cancellableSet = Set<AnyCancellable>()
-    private let container: DiContainer
+    private let diContainer: DiContainer
     
     var trackTitle: String {
-        
         switch stateMachine.state{
         case .content(let track, _):
             return (track.trackTitle  ?? String.pallete(.unknown))
@@ -32,7 +30,6 @@ final class TrackViewModel: TrackViewModelProtocol{
     }
     
     var artistTitle: String {
-        
         switch stateMachine.state{
         case .content(let track, _):
             return "\(String.pallete(.artistTitle)) \(track.artistTitle ?? String.pallete(.unknown))"
@@ -42,7 +39,6 @@ final class TrackViewModel: TrackViewModelProtocol{
     }
     
     var imageUrl: URL?{
-        
         switch stateMachine.state{
         case .content(let track, _):
             return track.imageUrl
@@ -52,7 +48,6 @@ final class TrackViewModel: TrackViewModelProtocol{
     }
     
     var songUrl: URL?{
-        
         switch stateMachine.state{
         case .content(let track, _):
             return track.trackUrl
@@ -78,10 +73,9 @@ final class TrackViewModel: TrackViewModelProtocol{
     }
     
     init(state: ViewState<TrackSong>, player: TrackPlayer, container: DiContainer){
-        
         self.songService = container.serviceBuilder.getSongsServie()
         self.analytics = container.serviceBuilder.analytics
-        self.container = container
+        self.diContainer = container
         self.player = player
         self.stateMachine = ViewStateMachine(state)
         
@@ -93,8 +87,7 @@ final class TrackViewModel: TrackViewModelProtocol{
     }
     
     private func subscribeToPlayerChanges(){
-        
-        self.container.appState
+        self.diContainer.appState
             .flatMap { [weak self] state -> AnyPublisher<Bool, Never> in
                 
                 guard let self = self else {
@@ -103,7 +96,7 @@ final class TrackViewModel: TrackViewModelProtocol{
                 
                 switch self.stateMachine.state{
                 case .content(let track, _):
-                    return self.container.serviceBuilder.getFavoritesService()
+                    return self.diContainer.serviceBuilder.getFavoritesService()
                         .isTrackFavorited(track)
                         .eraseToAnyPublisher()
                 default:
@@ -121,29 +114,23 @@ final class TrackViewModel: TrackViewModelProtocol{
             .sinkStore(in: &cancellableSet)
     }
     
-    func startScenario(){
-        
-        guard !isScenarioStarted else { return }
-        isScenarioStarted = true
-        
+    func onFirstAppear() {
         subscribeToPlayerChanges()
     }
     
     func closeAction(){
-        
         //Example for closing action by Coordinator
         self.output?.songViewDidClosed()
     }
     
     func playTap(){
-        
         var selectedTrack: TrackSong?
         
         switch stateMachine.state{
         case .content(let track, _):
             selectedTrack = track
-            if player !== container.player{
-               player = container.player
+            if player !== diContainer.player {
+               player = diContainer.player
             }
             player.playTrack(track)
         default:
@@ -161,7 +148,6 @@ final class TrackViewModel: TrackViewModelProtocol{
     }
     
     var leftTimeString: String {
-        
         guard let duration = player.duration else {return ""}
         
         let seconds = duration - player.time
@@ -169,21 +155,19 @@ final class TrackViewModel: TrackViewModelProtocol{
     }
     
     var timeString: String {
-        
         let seconds = player.time
         return String(format: "%02d:%02d", seconds/60, seconds%60) as String//"\(secs/60):\(secs%60)"
     }
     
     func toggleFavorite() {
-        
         switch self.stateMachine.state{
         case .content(let track, _):
             if isFavorited {
-                container.serviceBuilder.getFavoritesService()
+                diContainer.serviceBuilder.getFavoritesService()
                     .removeTracksFromFavorites([track])
                     .sinkStore(in: &cancellableSet)
             }else{
-                container.serviceBuilder.getFavoritesService()
+                diContainer.serviceBuilder.getFavoritesService()
                     .addTrackToFavorits(track)
                     .sinkStore(in: &cancellableSet)
             }

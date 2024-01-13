@@ -12,7 +12,7 @@ protocol TrackViewModelProtocol: ObservableObject{
     /// UI state machine
     var stateMachine: ViewStateMachine<TrackSong> {get}
     
-    func startScenario()
+    func onFirstAppear()
     
     var trackTitle: String {get}
     var artistTitle: String {get}

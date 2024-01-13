@@ -40,9 +40,7 @@ struct TrackView<ViewModel: TrackViewModelProtocol>: View {
         }
         .background(Color(assetsName: .backgroundPrimary))
         .navigationBarHidden(true)
-        .onAppear(){
-            viewModel.startScenario()
-        }
+        .onFirstAppear(perform: viewModel.onFirstAppear)
     }
     
     private var songImage: some View {

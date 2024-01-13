@@ -52,7 +52,7 @@ class BaseTrackListViewModel: IBaseTrackListViewModel {
         
     }
     
-    func startScenario() {
+    func onFirstAppear() {
         do{
             try self.container.serviceBuilder.getAudioEngine().initAudioSession()
         }catch{

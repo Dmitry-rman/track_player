@@ -8,12 +8,10 @@
 import UIKit
 
 protocol FavoritesViewModuleOutput: BaseTrackListViewOutput{
-    
    func didSelectFavoritTrack(_ track: TrackSong)
 }
 
 struct FavoritesViewModule: ViewModuleProtocol{
-    
     private var viewController: FavoritesViewController<FavoritesViewModel>
     
     /// Visual representation of module
@@ -22,13 +20,12 @@ struct FavoritesViewModule: ViewModuleProtocol{
     }
     
     init(output: FavoritesViewModuleOutput, container: DiContainer) {
-        
         let viewModel = Self.createViewModel(output: output, container: container)
         viewController = FavoritesViewController(viewModel: viewModel,
                                                  rootView: FavoritesView(viewModel: viewModel))
     }
     
     private static func createViewModel(output: FavoritesViewModuleOutput, container: DiContainer) ->  FavoritesViewModel{
-        return FavoritesViewModel(output: output, container: container)
+         FavoritesViewModel(output: output, container: container)
     }
 }

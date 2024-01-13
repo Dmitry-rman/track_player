@@ -9,13 +9,11 @@ import Combine
 import Foundation
 
 protocol FavoritesViewModelProtocol: IBaseTrackListViewModel{
-    
     func removeTrack(at offsets: IndexSet)
     func reloadFavorites()
 }
 
 final class FavoritesViewModel: BaseTrackListViewModel, FavoritesViewModelProtocol{
-
     private weak var output: FavoritesViewModuleOutput?
     
     private var loadFavoritesPublisher: AnyPublisher<[TrackSong], Error>{
@@ -23,10 +21,9 @@ final class FavoritesViewModel: BaseTrackListViewModel, FavoritesViewModelProtoc
     }
     
     convenience init(output: FavoritesViewModuleOutput, container: DiContainer){
-        
         self.init(state: .empty, container: container)
-        self.output = output
-        
+       
+        self.output = output 
         container.appState
             .flatMap{[weak self] result -> AnyPublisher<[TrackSong], Never> in
                 
@@ -49,26 +46,19 @@ final class FavoritesViewModel: BaseTrackListViewModel, FavoritesViewModelProtoc
             .store(in: &cancellableSet)
     }
     
-    override func startScenario() {
-        
-        guard !isScenarioStarted else { return }
-        isScenarioStarted = true
-        
-        super.startScenario()
+    override func onFirstAppear() {
+        super.onFirstAppear()
         
         self.analytics.logEvent(AppEventAnalytics.favorites_screen_visited)
-        
         //self.stateMachine.setState(.loading)
     }
     
     override func selectTrack(_ track: TrackSong) {
-        
         super.selectTrack(track)
         output?.didSelectFavoritTrack(track)
     }
     
     func reloadFavorites() {
-        
         loadFavoritesPublisher
             .sink { [weak self] error in
                 debugPrint(error)
@@ -82,9 +72,6 @@ final class FavoritesViewModel: BaseTrackListViewModel, FavoritesViewModelProtoc
     }
     
     func removeTrack(at offsets: IndexSet) {
-        
-        debugPrint("remove \(offsets)")
-        
         switch stateMachine.state{
         case .content(let tracks, _):
             

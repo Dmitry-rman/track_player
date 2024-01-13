@@ -13,7 +13,7 @@ protocol IBaseTrackListViewModel: ObservableObject {
     /// UI state machine
     var stateMachine: ViewStateMachine<[TrackSong]?> {get}
     
-    func startScenario()
+    func onFirstAppear()
     
     var playingTrack: TrackSong? {get}
     var isPlayerPlayed: Bool  {get set}
@@ -25,6 +25,4 @@ protocol IBaseTrackListViewModel: ObservableObject {
     func errorMessage(error: Error?) -> String?
 }
 
-protocol BaseTrackListViewOutput: AnyObject {
-    
-}
+protocol BaseTrackListViewOutput: AnyObject {}

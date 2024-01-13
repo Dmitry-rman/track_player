@@ -8,11 +8,9 @@
 import Foundation
 
 final class TrackViewController<ViewModel: TrackViewModelProtocol>: AppHostingController<TrackView<ViewModel>> {
-  
     var viewModel: ViewModel?
     
     override func setupController() {
-        
         super.setupController()
         
         //For example only in this App.
@@ -21,7 +19,6 @@ final class TrackViewController<ViewModel: TrackViewModelProtocol>: AppHostingCo
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        
         super.viewWillDisappear(animated)
         self.navigationController?.isNavigationBarHidden = false
     }

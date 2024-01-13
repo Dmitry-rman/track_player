@@ -8,11 +8,9 @@
 import Foundation
 
 final class FavoritesViewController<ViewModel: FavoritesViewModel>: AppHostingController<FavoritesView<ViewModel>>{
-    
     let viewModel: ViewModel
     
     init(viewModel: ViewModel, rootView: FavoritesView<ViewModel>) {
-        
         self.viewModel = viewModel
         super.init(rootView: rootView)
     }

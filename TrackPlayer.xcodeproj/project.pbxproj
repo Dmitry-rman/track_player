@@ -336,9 +336,8 @@
 		0A0C1BB829B330AF007D24DC /* TrackView */ = {
 			isa = PBXGroup;
 			children = (
-				0A0C1BB429B33094007D24DC /* TrackView.swift */,
-				0A0C1BB629B330A9007D24DC /* TrackViewModel.swift */,
-				0A4ECABC29B51049007999A6 /* TrackViewModelProtocol.swift */,
+				0AF47DA92B52CC25001606D1 /* View */,
+				0AF47DA82B52CC1A001606D1 /* ViewModel */,
 				0A0C1C0329B3E77C007D24DC /* TrackViewModule.swift */,
 				0A0C1C0529B3E81E007D24DC /* TrackViewController.swift */,
 			);
@@ -440,7 +439,6 @@
 				0A0C1BDC29B36279007D24DC /* SongsList */,
 				0AF49AF729BF9719008D39E5 /* BaseTrackListViewModel.swift */,
 				0AF47D922B52553C001606D1 /* IBaseTrackListViewModel.swift */,
-				0AF49AF529BF9590008D39E5 /* TrackListRow.swift */,
 			);
 			path = UserStories;
 			sourceTree = "<group>";
@@ -518,6 +516,24 @@
 				0AF47D952B5259D2001606D1 /* View+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		0AF47DA82B52CC1A001606D1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0A0C1BB629B330A9007D24DC /* TrackViewModel.swift */,
+				0A4ECABC29B51049007999A6 /* TrackViewModelProtocol.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0AF47DA92B52CC25001606D1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0A0C1BB429B33094007D24DC /* TrackView.swift */,
+				0AF49AF529BF9590008D39E5 /* TrackListRow.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		0AF49AE329BF6EB0008D39E5 /* About */ = {

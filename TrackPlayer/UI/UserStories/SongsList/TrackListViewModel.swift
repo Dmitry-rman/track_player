@@ -19,21 +19,21 @@ final class TrackListViewModel: BaseTrackListViewModel, TrackListViewModelProtoc
     private(set) weak var output: TrackListViewModuleOutput?
     
     convenience init(output: TrackListViewModuleOutput,
-                     container: DiContainer,
+                     diContainer: DiContainer,
                      searchResultLimit: Int = 25) {
         
         self.init(state: .empty,
-                  container: container,
+                  diContainer: diContainer,
                   searchResultLimit: searchResultLimit)
         self.output = output
     }
     
     init(
         state: ViewState<[TrackSong]?>,
-        container: DiContainer,
+        diContainer: DiContainer,
         searchResultLimit: Int) {
             self.searchResultLimit = searchResultLimit
-            super.init(state: state, container: container)
+            super.init(state: state, container: diContainer)
             
             switch state {
             case .content(let list, _):
@@ -99,17 +99,12 @@ final class TrackListViewModel: BaseTrackListViewModel, TrackListViewModelProtoc
     
     //MARK: - SongsListViewModelProtocol
     
-    override func startScenario() {
-        guard !isScenarioStarted else { return }
-        
-        isScenarioStarted = true
-        
-        super.startScenario()
+    override func onFirstAppear() {
+        super.onFirstAppear()
         
         self.analytics.logEvent(AppEventAnalytics.main_screen_visited)
         self.stateMachine.setState(.loading)
         loadRecent()
-        
         // searchQuery = "Abba"
     }
     

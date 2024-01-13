@@ -15,9 +15,7 @@ struct FavoritesView<ViewModel: FavoritesViewModel>: View {
     
     var body: some View {
         self.currentContent
-            .onAppear(perform: {
-                viewModel.startScenario()
-            })
+            .onFirstAppear(perform: viewModel.onFirstAppear)
             .background(self.contentBackgroundColor)
     }
     

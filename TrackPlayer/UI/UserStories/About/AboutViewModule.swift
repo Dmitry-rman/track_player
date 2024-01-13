@@ -20,6 +20,7 @@ struct AboutViewModule: ViewModuleProtocol {
     }
     
     init(output: AboutViewModuleOutput, container: DiContainer) {
-        viewController = AboutViewController(rootView: AboutView(output: output, title: String.pallete(.aboutButtonTitle)))
+        let screen = AboutView(output: output, title: String.pallete(.aboutButtonTitle))
+        viewController = AboutViewController(rootView: screen)
     }
 }

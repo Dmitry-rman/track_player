@@ -19,10 +19,10 @@ struct TrackListView<ViewModel: TrackListViewModelProtocol>: View {
     
     var body: some View {
         self.currentContent
-            .onAppear{
-                viewModel.startScenario()
+            .onFirstAppear(){
+                viewModel.onFirstAppear()
+                
                 viewModel.onShowPlayer = { isShowed in
-                    
                     if isShowed == true && isPlayerClosed == false{
                         return
                     }
