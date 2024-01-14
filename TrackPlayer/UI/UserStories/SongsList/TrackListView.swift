@@ -195,7 +195,7 @@ struct TrackListView<ViewModel: TrackListViewModelProtocol>: View {
 struct SongsListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView{
-            TrackListView(viewModel: TrackListViewModel.init(state: .content(TrackSong.mockedSongs, .default), container: .preview, searchResultLimit: 25))
+            TrackListView(viewModel: TrackListViewModel.init(state: .content(TrackSong.mockedSongs, .default), diContainer: .preview, searchResultLimit: 25))
             //.environment(\.colorScheme, .dark)
             //   SongsListView(viewModel: SongsListViewModel.init(state: .loading, container: .preview))
         }

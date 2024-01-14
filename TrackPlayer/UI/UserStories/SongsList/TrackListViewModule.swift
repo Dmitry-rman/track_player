@@ -41,6 +41,6 @@ struct TrackListViewModule: ViewModuleProtocol {
     
     private static func createViewModel(output: TrackListViewModuleOutput, container: DiContainer) -> TrackListViewModel
     {
-        TrackListViewModel(output: output, container: container)
+        TrackListViewModel(output: output, diContainer: container)
     }
 }
