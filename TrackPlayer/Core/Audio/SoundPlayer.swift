@@ -39,10 +39,12 @@ class AVSoundPlayer: SoundPlayer{
     }
     
     init() {
-        NotificationCenter.default.addObserver(self,
-                                          selector:  #selector(playerDidFinishPlaying(note:)),
-                                          name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
-                                          object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector:  #selector(playerDidFinishPlaying(note:)),
+            name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
+            object: self
+        )
     }
     
     deinit{
